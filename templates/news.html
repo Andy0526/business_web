@@ -1,0 +1,169 @@
+{% extends "news_header.html" %}
+
+
+{% block body %}
+
+    <style type="text/css">
+        #cy_div {
+            height:400px;
+        }
+
+        #cy_div a {
+            position: absolute;
+            color: #fff;
+        }
+
+        #cy_div a:hover {
+            background: black;
+            border-radius: 5px;
+        }
+    </style>
+
+    <script src="{{ url_for("static",filename='js/cy.js') }}"></script>
+
+
+
+
+    <!--div class="container" style="margin-top: 80px;background:#428bca">
+
+            <div id="cy_div">
+                <a href="http://finance.people.com.cn/money/n/2015/0718/c42877-27324285.html" target="_blank"><span style="font-size: 44px !important;">央行等十部委</span></a>
+                <a href="http://finance.people.com.cn/money/n/2015/0718/c42877-27324285.html" target="_blank"><span style="font-size: 44px !important;">指导意见</span></a>
+                <a href="http://mt.sohu.com/20160105/n433550476.shtml" target="_blank"><span style="font-size: 40px !important;">成交额首破万亿</span></a>
+
+                <a href="http://money.163.com/15/1114/03/B8BPEG0N00253B0H.html" target="_blank"><span style="font-size: 36px !important;">"双11"</span></a>
+                <a href="http://money.163.com/15/1114/03/B8BPEG0N00253B0H.html" target="_blank"><span style="font-size: 36px !important;">同比增近三倍</span></a>
+
+                <a href="http://www.360doc.com/content/15/0121/12/20625606_442540370.shtml" target="_blank"><span style="font-size: 32px !important;">大公国际</span></a>
+                <a href="http://www.360doc.com/content/15/0121/12/20625606_442540370.shtml" target="_blank"><span style="font-size: 32px !important;">P2P黑名单</span></a>
+
+
+                <a href="http://dy.qq.com/article.htm?id=20151218A04R4000" target="_blank"><span style="font-size: 28px !important;">宜人贷</span></a>
+                <a href="http://dy.qq.com/article.htm?id=20151218A04R4000" target="_blank"><span style="font-size: 28px !important;">上市第一股</span></a>
+
+                <a href="http://www.pig66.com/weixintoutiao/caijingmi/2015-11-06/183011.html" target="_blank"><span style="font-size: 26px !important;">北京</span></a>
+                <a href="http://www.pig66.com/weixintoutiao/caijingmi/2015-11-06/183011.html" target="_blank"><span style="font-size: 26px !important;">“中国网贷第一城”</span></a>
+
+
+                <a href="http://mt.sohu.com/20150706/n416254621.shtml" target="_blank"><span style="font-size: 24px !important;">世界互联网大会</span></a>
+
+                <a href="http://paper.people.com.cn/mszk/html/2015-02/09/content_1533391.htm" target="_blank"><span style="font-size: 22px !important;">P2P行业协会</span></a>
+
+                <a href="http://money.163.com/15/1209/08/BACNAA2G00252H36.html" target="_blank"><span style="font-size: 20px !important;">e租宝</span></a>
+                <a href="http://money.163.com/15/1209/08/BACNAA2G00252H36.html" target="_blank"><span style="font-size: 20px !important;">违法经营</span></a>
+
+                <a href="http://mingin.baijia.baidu.com/article/236643" target="_blank"><span style="font-size: 18px !important;">翼龙贷</span></a>
+                <a href="http://mingin.baijia.baidu.com/article/236643" target="_blank"><span style="font-size: 18px !important;">央视标王</span></a>
+
+
+
+        </div>
+    </div-->
+
+    <div class="container" style="margin-top: 10px">
+
+        <ol class="breadcrumb" id="行业相关">
+            <li class="active" >行业相关</li>
+        </ol>
+
+        <div class="row">
+
+            <div class="col-sm-6">
+                <div class="list-group">
+                    <a href="#" class="list-group-item active">
+                        p2p观察网
+                    </a>
+                    <a href= "/news/行业相关/p2p观察网/P2P到了最危险的时候了吗？" class="list-group-item">P2P到了最危险的时候了吗？</a>
+                    <a href="#" class="list-group-item">经侦式监管恐引发网贷挤兑，撤离要趁早</a>
+                    <a href="#" class="list-group-item">戳穿P2P平台风险准备金的七个谎言</a>
+                    <a href="#" class="list-group-item">早报：政协委员谈互金发展；互金协会信息试报送；网贷行业进入存量发展阶段</a>
+                    <a href="#" class="list-group-item">两会委员看互金：一些企业在发疯，但好的一面也要肯定</a>
+                    <a  href="/news/行业相关/p2p观察网" class="list-group-item">更多</a>
+                </div>
+            </div><!-- /.col-sm-4 -->
+
+            <div class="col-sm-6">
+                <div class="list-group">
+                    <a href="#" class="list-group-item active">
+                        和讯网
+                    </a>
+                    <a href="#" class="list-group-item">P2P到了最危险的时候了吗？</a>
+                    <a href="#" class="list-group-item">经侦式监管恐引发网贷挤兑，撤离要趁早</a>
+                    <a href="#" class="list-group-item">戳穿P2P平台风险准备金的七个谎言</a>
+                    <a href="#" class="list-group-item">早报：政协委员谈互金发展；互金协会信息试报送；网贷行业进入存量发展阶段</a>
+                    <a href="#" class="list-group-item">两会委员看互金：一些企业在发疯，但好的一面也要肯定</a>
+                    <a href="#" class="list-group-item">更多</a>
+                </div>
+            </div><!-- /.col-sm-4 -->
+
+            <div class="col-sm-6">
+                <div class="list-group">
+                    <a href="#" class="list-group-item active">
+                        金融之家
+                    </a>
+                    <a href="#" class="list-group-item">P2P到了最危险的时候了吗？</a>
+                    <a href="#" class="list-group-item">经侦式监管恐引发网贷挤兑，撤离要趁早</a>
+                    <a href="#" class="list-group-item">戳穿P2P平台风险准备金的七个谎言</a>
+                    <a href="#" class="list-group-item">早报：政协委员谈互金发展；互金协会信息试报送；网贷行业进入存量发展阶段</a>
+                    <a href="#" class="list-group-item">两会委员看互金：一些企业在发疯，但好的一面也要肯定</a>
+                    <a href="#" class="list-group-item">更多</a>
+                </div>
+            </div><!-- /.col-sm-4 -->
+
+            <div class="col-sm-6">
+                <div class="list-group">
+                    <a href="#" class="list-group-item active">
+                        网贷之家
+                    </a>
+                    <a href="#" class="list-group-item">P2P到了最危险的时候了吗？</a>
+                    <a href="#" class="list-group-item">经侦式监管恐引发网贷挤兑，撤离要趁早</a>
+                    <a href="#" class="list-group-item">戳穿P2P平台风险准备金的七个谎言</a>
+                    <a href="#" class="list-group-item">早报：政协委员谈互金发展；互金协会信息试报送；网贷行业进入存量发展阶段</a>
+                    <a href="#" class="list-group-item">两会委员看互金：一些企业在发疯，但好的一面也要肯定</a>
+                    <a href="#" class="list-group-item">更多</a>
+                </div>
+            </div><!-- /.col-sm-4 -->
+
+        </div>
+
+
+
+        <ol class="breadcrumb" id="政策天地">
+            <li class="active">政策天地</li>
+        </ol>
+        <div class="row">
+
+            <div class="col-sm-6">
+                <div class="list-group">
+                    <a href="#" class="list-group-item active">
+                        网贷之家
+                    </a>
+                    <a href= "news/政策天地/网贷之家/122" class="list-group-item">P2P到了最危险的时候了吗？</a>
+                    <a href="#" class="list-group-item">经侦式监管恐引发网贷挤兑，撤离要趁早</a>
+                    <a href="#" class="list-group-item">戳穿P2P平台风险准备金的七个谎言</a>
+                    <a href="#" class="list-group-item">早报：政协委员谈互金发展；互金协会信息试报送；网贷行业进入存量发展阶段</a>
+                    <a href="#" class="list-group-item">两会委员看互金：一些企业在发疯，但好的一面也要肯定</a>
+                    <a href="#" class="list-group-item">更多</a>
+                </div>
+            </div><!-- /.col-sm-4 -->
+
+            <div class="col-sm-6">
+                <div class="list-group">
+                    <a href="#" class="list-group-item active">
+                        和讯网
+                    </a>
+                    <a href="#" class="list-group-item">P2P到了最危险的时候了吗？</a>
+                    <a href="#" class="list-group-item">经侦式监管恐引发网贷挤兑，撤离要趁早</a>
+                    <a href="#" class="list-group-item">戳穿P2P平台风险准备金的七个谎言</a>
+                    <a href="#" class="list-group-item">早报：政协委员谈互金发展；互金协会信息试报送；网贷行业进入存量发展阶段</a>
+                    <a href="#" class="list-group-item">两会委员看互金：一些企业在发疯，但好的一面也要肯定</a>
+                    <a href="#" class="list-group-item">更多</a>
+                </div>
+            </div><!-- /.col-sm-4 -->
+        </div>
+
+
+
+    </div>
+
+{% endblock %}

@@ -1,0 +1,703 @@
+{% extends "layout.html" %}
+
+{% block title %} 行业数据 {% endblock %}
+{% block head %}
+    <!-- Static navbar -->
+    <nav class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar"
+                        aria-expanded="false" aria-controls="navbar">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="#"><p style="font-weight: 900">网贷专家</p></a>
+            </div>
+            <div id="navbar" class="navbar-collapse collapse">
+                <ul class="nav navbar-nav">
+                    <li><a href="#">首页</a></li>
+                    <li><a href="news">新闻</a></li>
+                    <li><a href="detail">平台详情</a></li>
+                    <li class="active"><a href="data">行业数据</a></li>
+                    <li><a href="search">图谱搜索</a></li>
+                    <li><a href="invest">投资顾问</a></li>
+                </ul>
+            </div><!--/.nav-collapse -->
+        </div>
+    </nav>
+{% endblock %}
+
+{% block body %}
+
+    <link type="text/css" rel="stylesheet" href="{{ url_for("static",filename='css/dashboard.css') }}">
+
+    <div class="container-fluid">
+        <div class="row">
+
+            <!-- 左侧导航栏 开始-->
+            <div class="col-sm-3 col-md-2 sidebar">
+                <ul class="nav nav-sidebar">
+                    <li class="active"><a href="#">图表导航 <span class="sr-only">(current)</span></a></li>
+                    <li><a href="#industry_badplatform">问题平台数量</a></li>
+                    <li><a href="#industry_hot_people">投资借款人数</a></li>
+                    <li><a href="#industry_hot_money">投资借款金额</a></li>
+                    <li><a href="#industry_interest">综合利率</a></li>
+                    <li><a href="#industry_areas_cjl">各省成交量</a></li>
+                    <li><a href="#industry_areas">各省份平台每月情况</a></li>
+                    <li><a href="#industry_class">各类型平台每月情况</a></li>
+                </ul>
+            </div>
+            <!-- 左侧导航栏 结束-->
+
+
+            <!-- 图表 js-->
+            <script src="{{ url_for("static",filename='js/echarts.min.js') }}"></script>
+             <!-- 图表显示-->
+            <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+
+                <!-- 问题平台数据显示 开始-->
+                <div id="industry_badplatform" style="width: 100%; height:650px;padding-top: 80px"></div>
+                <script type="text/javascript">
+                    var industry_badplatform_chart = echarts.init(document.getElementById('industry_badplatform'));
+                    var industry_badplatform_timeData = [
+                        '2015年3月', '2015年4月', '2015年5月', '2015年6月', '2015年7月', '2015年8月',
+                        '2015年9月', '2015年10月', '2015年11月', '2015年12月', '2016年1月', '2016年2月'
+                    ];
+                    industry_badplatform_timeData = industry_badplatform_timeData.map(function (str) {
+                        return str.replace('20', '');
+                    });
+                    industry_badplatform_option = {
+                        title: {
+                            text: '问题平台数量统计图',
+                            subtext: '数据来自网络',
+                            x: 'center'
+                        },
+                        toolbox: {
+                            feature: {
+                                saveAsImage: {}
+                            }
+                        },
+                        tooltip: {
+                            trigger: 'axis',
+                            formatter: function (params) {
+                                return params[0].name + '<br/>'
+                                        + params[0].seriesName + ' : ' + params[0].value + ' 个<br/>';
+                            },
+                            axisPointer: {
+                                animation: false
+                            }
+                        },
+                        legend: {
+                            data: ['新增量', '累积量'],
+                            x: 'left'
+                        },
+                        dataZoom: [
+                            {
+                                show: true,
+                                realtime: true,
+                                start: 30,
+                                end: 70,
+                                xAxisIndex: [0, 1]
+                            },
+                            {
+                                type: 'inside',
+                                realtime: true,
+                                start: 30,
+                                end: 70,
+                                xAxisIndex: [0, 1]
+                            }
+                        ],
+                        grid: [{
+                            left: 50,
+                            right: 50,
+                            height: '30%'
+                        }, {
+                            left: 50,
+                            right: 50,
+                            top: '55%',
+                            height: '30%'
+                        }],
+                        xAxis: [
+                            {
+                                type: 'category',
+                                boundaryGap: false,
+                                axisLine: {onZero: true},
+                                data: industry_badplatform_timeData
+                            },
+                            {
+                                gridIndex: 1,
+                                type: 'category',
+                                boundaryGap: false,
+                                axisLine: {onZero: true},
+                                data: industry_badplatform_timeData,
+                                position: 'top'
+                            }
+                        ],
+                        yAxis: [
+                            {
+                                name: '新增量(个)',
+                                type: 'value'
+                            },
+                            {
+                                gridIndex: 1,
+                                name: '累积量(个)',
+                                type: 'value',
+                                inverse: true
+                            }
+                        ],
+                        series: [
+                            {
+                                name: '新增量',
+                                type: 'line',
+                                symbolSize: 8,
+                                itemStyle: {
+                                    emphasis: {}
+                                },
+                                hoverAnimation: false,
+                                data: [
+                                    74, 88, 106, 79, 47, 55, 81, 109, 125, 59, 52, 56
+                                ]
+                            },
+                            {
+                                name: '累积量',
+                                type: 'line',
+                                xAxisIndex: 1,
+                                yAxisIndex: 1,
+                                symbolSize: 8,
+                                itemStyle: {
+                                    emphasis: {}
+                                },
+                                hoverAnimation: false,
+                                data: [
+                                    1425, 1351, 1263, 1157, 1078, 1031, 976, 895, 786, 661, 602, 550
+                                ]
+                            }
+                        ]
+                    };
+                    industry_badplatform_chart.setOption(industry_badplatform_option);
+                </script>
+                <!-- 问题平台数据显示 结束-->
+
+
+                <!-- 投资借款人数情况 开始 -->
+                <div id="industry_hot_people" style="width: 100%; height:650px;padding-top: 80px"></div>
+                <script type="text/javascript">
+                    var industry_hot_people_chart = echarts.init(document.getElementById('industry_hot_people'));
+                    industry_hot_people_option = {
+                        title: {
+                            text: '投资借款人数走势图'
+                        },
+                        tooltip: {
+                            trigger: 'axis'
+                        },
+                        legend: {
+                            data: ['借款人数', '投资人数']
+                        },
+                        toolbox: {
+                            feature: {
+                                saveAsImage: {}
+                            }
+                        },
+                        grid: {
+                            left: '3%',
+                            right: '4%',
+                            bottom: '3%',
+                            containLabel: true
+                        },
+                        xAxis: [
+                            {
+                                type: 'category',
+                                boundaryGap: false,
+                                data: [
+                                    '2015/1/1', '2015/2/1', '2015/3/1', '2015/4/1', '2015/5/1', '2015/6/1',
+                                    '2015/7/1', '2015/8/1', '2015/9/1', '2015/10/1', '2015/11/1', '2015/12/1'
+                                ]
+                            }
+                        ],
+                        yAxis: [
+                            {
+                                name: '人数(万人)',
+                                type: 'value'
+                            }
+                        ],
+                        series: [
+                            {
+                                name: '借款人数',
+                                type: 'line',
+                                stack: '总量',
+                                label: {
+                                    normal: {
+                                        show: true,
+                                        position: 'top'
+                                    }
+                                },
+                                areaStyle: {normal: {}},
+                                data: [19.1, 16.18, 18.17, 22.69, 27.84, 33.04, 44.13, 54.94, 56.91, 58.09, 71.94, 78.49]
+                            },
+                            {
+                                name: '投资人数',
+                                type: 'line',
+                                stack: '总量',
+                                label: {
+                                    normal: {
+                                        show: true,
+                                        position: 'top'
+                                    }
+                                },
+                                areaStyle: {normal: {}},
+                                data: [88.22, 80.86, 96.16, 113, 126.79, 154.36, 179.31, 204.28, 240.41, 247.34, 300.62, 298.02]
+                            }
+                        ]
+                    };
+                    industry_hot_people_chart.setOption(industry_hot_people_option);
+                </script>
+                <!-- 投资借款人数情况 结束 -->
+
+
+                <!-- 人均投资借款金额走势图 开始 -->
+                <div id="industry_hot_money" style="width: 100%; height:650px;padding-top: 80px"></div>
+                <script type="text/javascript">
+                    var industry_hot_money_chart = echarts.init(document.getElementById('industry_hot_money'));
+                    industry_hot_money_option = {
+                        title: {
+                            text: '人均投资借款金额走势图'
+                        },
+                        tooltip: {
+                            trigger: 'axis'
+                        },
+                        legend: {
+                            data: ['人均投资', '人均借款']
+                        },
+                        toolbox: {
+                            feature: {
+                                saveAsImage: {}
+                            }
+                        },
+                        grid: {
+                            left: '3%',
+                            right: '4%',
+                            bottom: '3%',
+                            containLabel: true
+                        },
+                        xAxis: [
+                            {
+                                type: 'category',
+                                boundaryGap: false,
+                                data: [
+                                    '2015/1/1', '2015/2/1', '2015/3/1', '2015/4/1', '2015/5/1', '2015/6/1',
+                                    '2015/7/1', '2015/8/1', '2015/9/1', '2015/10/1', '2015/11/1', '2015/12/1'
+                                ]
+                            }
+                        ],
+                        yAxis: [
+                            {
+                                name: '金额(元)',
+                                type: 'value'
+                            }
+                        ],
+                        series: [
+                            {
+                                name: '人均投资',
+                                type: 'line',
+                                stack: '总量',
+                                label: {
+                                    normal: {
+                                        show: true,
+                                        position: 'top'
+                                    }
+                                },
+                                areaStyle: {normal: {}},
+                                data: [40559, 41446, 51227, 48801, 48081, 42729,
+                                    46015, 47710, 47913, 48374, 44282, 44878]
+                            },
+                            {
+                                name: '人均借款',
+                                type: 'line',
+                                stack: '总量',
+                                label: {
+                                    normal: {
+                                        show: true,
+                                        position: 'top'
+                                    }
+                                },
+                                areaStyle: {normal: {}},
+                                data: [20559, 21446, 31227, 28801, 28081, 22729,
+                                    26015, 27710, 27913, 28374, 34282, 24878]
+                            }
+                        ]
+                    };
+                    industry_hot_money_chart.setOption(industry_hot_money_option);
+                </script>
+                <!-- 人均投资借款金额走势图 结束 -->
+
+
+                <!-- 综合利率走势图 开始-->
+
+                <div id="industry_interest" style="width: 100%; height:650px;padding-top: 80px"></div>
+                <script type="text/javascript">
+                    var industry_interest_chart = echarts.init(document.getElementById('industry_interest'));
+                    industry_interest_option = {
+                        title: {
+                            text: '综合利率走势图'
+                        },
+                        tooltip: {
+                            trigger: 'axis'
+                        },
+                        legend: {
+                            data: ['综合利率']
+                        },
+                        toolbox: {
+                            feature: {
+                                saveAsImage: {}
+                            }
+                        },
+                        grid: {
+                            left: '3%',
+                            right: '4%',
+                            bottom: '3%',
+                            containLabel: true
+                        },
+                        xAxis: [
+                            {
+                                type: 'category',
+                                boundaryGap: false,
+                                data: [
+                                    '2015/3/1', '2015/4/1', '2015/5/1', '2015/6/1', '2015/7/1', '2015/8/1', '2015/9/1', '2015/10/1', '2015/11/1', '2015/12/1'
+                                ]
+                            }
+                        ],
+                        yAxis: [
+                            {
+                                name: '百分比(%)',
+                                type: 'value'
+                            }
+                        ],
+                        series: [
+                            {
+                                name: '综合利率',
+                                type: 'line',
+                                stack: '总量',
+                                label: {
+                                    normal: {
+                                        show: true,
+                                        position: 'top'
+                                    }
+                                },
+                                areaStyle: {normal: {}},
+                                data: [15.02, 14.46, 14.57, 13.58, 12.98, 12.63, 12.38, 12.25, 12.45]
+                            }
+                        ]
+                    };
+                    industry_interest_chart.setOption(industry_interest_option);
+                </script>
+                <!-- 综合利率走势图 结束-->
+
+
+                <!--区域情况 开始 -->
+                <script src="{{ url_for("static",filename='js/china.js') }}"></script>
+                <br>
+                <div id="industry_areas_cjl" style="width: 100%; height:650px;padding-top: 80px"></div>
+                <script type="text/javascript">
+                    var industry_areas_cjl_chart = echarts.init(document.getElementById('industry_areas_cjl'));
+                    industry_areas_cjl_option = {
+                        title: {
+                            text: '各省成交量',
+                            left: 'center'
+                        },
+                        tooltip: {
+                            trigger: 'item'
+                        },
+                        legend: {
+                            orient: 'vertical',
+                            left: 'left',
+                            data: ['成交量']
+                        },
+                        visualMap: {
+                            min: 0,
+                            max: 400,
+                            left: 'left',
+                            top: 'bottom',
+                            text: ['高', '低'],           // 文本，默认为数值文本
+                            calculable: true
+                        },
+                        toolbox: {
+                            show: true,
+                            orient: 'vertical',
+                            left: 'right',
+                            top: 'center',
+                            feature: {
+                                mark: {show: true},
+                                dataView: {show: true, readOnly: false},
+                                restore: {show: true},
+                                saveAsImage: {show: true}
+                            }
+                        },
+                        series: [
+                            {
+                                name: '成交量',
+                                type: 'map',
+                                mapType: 'china',
+                                roam: false,
+                                itemStyle: {
+                                    normal: {label: {show: true}},
+                                    emphasis: {label: {show: true}}
+                                },
+                                data: [
+                                    {name: '广东', value: 369.5},
+                                    {name: '北京', value: 305.74},
+                                    {name: '上海', value: 142.42},
+                                    {name: '浙江', value: 137.42},
+                                    {name: '山东', value: 43.6},
+                                    {name: '江苏', value: 26.55},
+                                    {name: '四川', value: 26.27},
+                                    {name: '湖北', value: 12.31}
+                                ]
+                            }
+                        ]
+                    };
+                    industry_areas_cjl_chart.setOption(industry_areas_cjl_option);
+                </script>
+                 <!--区域情况 结束 -->
+
+
+                <!-- 各省份平台每月情况汇总表 开始 -->
+                <div id="industry_areas" style="width: 100%; height:650px;padding-top: 80px">
+
+                    <h2 style="text-align: center">各省份平台每月情况汇总表</h2>
+
+                    <!-- 下拉选择器 开始 -->
+                    <div class="dropdown" style="margin-top: -40px;margin-bottom: 10px">
+                        <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenu1"
+                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                            数据日期
+                            <span class="caret"></span>
+                        </button>
+                        <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+                            <li><a href="#">2015年1月</a></li>
+                            <li><a href="#">2015年2月</a></li>
+                            <li><a href="#">2015年3月</a></li>
+                            <li><a href="#">2015年4月</a></li>
+                        </ul>
+                    </div>
+                    <!-- 下拉选择器 结束 -->
+
+                    <table class="table table-striped">
+                        <thead>
+                        <tr></tr>
+                        <tr>
+                            <th>省份</th>
+                            <th>成交量</th>
+                            <th>成交量环比增长</th>
+                            <th>平台数环比增长</th>
+                            <th>问题平台数量</th>
+                            <th>累计问题平台数量</th>
+                            <th>贷款余额</th>
+                            <th>综合利率</th>
+                            <th>平均借款期限</th>
+                            <th>投资人数</th>
+                            <th>借款人数</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <td>1</td>
+                            <td>2</td>
+                            <td>4</td>
+                            <td>5</td>
+                            <td>6</td>
+                            <td>7</td>
+                            <td>8</td>
+                            <td>9</td>
+                            <td>10</td>
+                            <td>11</td>
+                            <td>12</td>
+                        </tr>
+                        <tr>
+                            <td>2</td>
+                            <td>2</td>
+                            <td>3</td>
+                            <td>5</td>
+                            <td>6</td>
+                            <td>7</td>
+                            <td>8</td>
+                            <td>9</td>
+                            <td>10</td>
+                            <td>11</td>
+                            <td>12</td>
+                        </tr>
+                        <tr>
+                            <td>3</td>
+                            <td>3</td>
+                            <td>4</td>
+                            <td>5</td>
+                            <td>6</td>
+                            <td>7</td>
+                            <td>8</td>
+                            <td>9</td>
+                            <td>10</td>
+                            <td>11</td>
+                            <td>12</td>
+                        </tr>
+                        <tr>
+                            <td>4</td>
+                            <td>2</td>
+                            <td>4</td>
+                            <td>5</td>
+                            <td>6</td>
+                            <td>7</td>
+                            <td>8</td>
+                            <td>9</td>
+                            <td>10</td>
+                            <td>11</td>
+                            <td>12</td>
+                        </tr>
+                        <tr>
+                            <td>5</td>
+                            <td>2</td>
+                            <td>3</td>
+                            <td>5</td>
+                            <td>6</td>
+                            <td>7</td>
+                            <td>8</td>
+                            <td>9</td>
+                            <td>10</td>
+                            <td>11</td>
+                            <td>12</td>
+                        </tr>
+                        <tr>
+                            <td>6</td>
+                            <td>2</td>
+                            <td>3</td>
+                            <td>4</td>
+                            <td>5</td>
+                            <td>6</td>
+                            <td>7</td>
+                            <td>9</td>
+                            <td>10</td>
+                            <td>11</td>
+                            <td>12</td>
+                        </tr>
+                        <tr>
+                            <td>7</td>
+                            <td>2</td>
+                            <td>3</td>
+                            <td>4</td>
+                            <td>5</td>
+                            <td>6</td>
+                            <td>7</td>
+                            <td>8</td>
+                            <td>10</td>
+                            <td>11</td>
+                            <td>12</td>
+                        </tr>
+                        <tr>
+                            <td>8</td>
+                            <td>2</td>
+                            <td>4</td>
+                            <td>5</td>
+                            <td>6</td>
+                            <td>7</td>
+                            <td>8</td>
+                            <td>9</td>
+                            <td>10</td>
+                            <td>11</td>
+                            <td>12</td>
+                        </tr>
+                        <tr>
+                            <td>9</td>
+                            <td>2</td>
+                            <td>3</td>
+                            <td>5</td>
+                            <td>6</td>
+                            <td>7</td>
+                            <td>8</td>
+                            <td>9</td>
+                            <td>10</td>
+                            <td>11</td>
+                            <td>12</td>
+                        </tr>
+                        <tr>
+                            <td>10</td>
+                            <td>2</td>
+                            <td>3</td>
+                            <td>5</td>
+                            <td>6</td>
+                            <td>7</td>
+                            <td>8</td>
+                            <td>9</td>
+                            <td>10</td>
+                            <td>11</td>
+                            <td>12</td>
+                        </tr>
+
+                        </tbody>
+                    </table>
+                </div>
+                <!-- 各省份平台每月情况汇总表 结束 -->
+
+
+                <!-- 各类型平台每月情况汇总表 开始 -->
+                <div id="industry_class" style="width: 100%; height:650px;padding-top: 80px">
+                    <h2 style="text-align: center">各类型平台每月情况汇总表</h2>
+                    <table class="table table-striped">
+                        <thead>
+                        <tr></tr>
+                        <tr>
+                            <th>类型</th>
+                            <th>成交量</th>
+                            <th>成交量环比增长</th>
+                            <th>运营平台数量</th>
+                            <th>平台数环比增长</th>
+                            <th>问题平台数量</th>
+                            <th>累计问题平台数量</th>
+                            <th>贷款余额</th>
+                            <th>综合利率</th>
+                            <th>平均借款期限</th>
+                            <th>当月投资人数</th>
+                            <th>借款人数</th>
+                        </tr>
+                        </thead>
+                        <tr>
+                            <td>1</td>
+                            <td>2</td>
+                            <td>3</td>
+                            <td>4</td>
+                            <td>5</td>
+                            <td>6</td>
+                            <td>7</td>
+                            <td>8</td>
+                            <td>9</td>
+                            <td>10</td>
+                            <td>11</td>
+                            <td>12</td>
+                        </tr>
+
+                        <tr>
+                            <td>1</td>
+                            <td>2</td>
+                            <td>3</td>
+                            <td>4</td>
+                            <td>5</td>
+                            <td>6</td>
+                            <td>7</td>
+                            <td>8</td>
+                            <td>9</td>
+                            <td>10</td>
+                            <td>11</td>
+                            <td>12</td>
+                        </tr>
+                    </table>
+                </div>
+                <!-- 各类型平台每月情况汇总表 结束 -->
+
+
+            </div>
+        </div>
+    </div>
+
+
+{% endblock %}
+
+
