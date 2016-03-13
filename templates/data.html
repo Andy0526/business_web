@@ -2,29 +2,19 @@
 
 {% block title %} 行业数据 {% endblock %}
 {% block head %}
-    <!-- Static navbar -->
     <nav class="navbar navbar-inverse navbar-fixed-top">
         <div class="container">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar"
-                        aria-expanded="false" aria-controls="navbar">
-                    <span class="sr-only">Toggle navigation</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                <a class="navbar-brand" href="#"><p style="font-weight: 900">网贷专家</p></a>
-            </div>
             <div id="navbar" class="navbar-collapse collapse">
+                <a class="navbar-brand"><p style="font-weight: 900;color:white;">网贷专家</p></a>
                 <ul class="nav navbar-nav">
-                    <li><a href="#">首页</a></li>
-                    <li><a href="news">新闻</a></li>
-                    <li><a href="detail">平台详情</a></li>
-                    <li class="active"><a href="data">行业数据</a></li>
-                    <li><a href="search">图谱搜索</a></li>
-                    <li><a href="invest">投资顾问</a></li>
+                    <li><a href="/home">首页</a></li>
+                    <li><a href="/news">资讯</a></li>
+                    <li><a href="/detail">平台详情</a></li>
+                    <li class="active"><a href="/data#industry_badplatform">行业数据</a></li>
+                    <li><a href="/search">图谱搜索</a></li>
+                    <li><a href="/invest">投资顾问</a></li>
                 </ul>
-            </div><!--/.nav-collapse -->
+            </div>
         </div>
     </nav>
 {% endblock %}
@@ -39,7 +29,7 @@
             <!-- 左侧导航栏 开始-->
             <div class="col-sm-3 col-md-2 sidebar">
                 <ul class="nav nav-sidebar">
-                    <li class="active"><a href="#">图表导航 <span class="sr-only">(current)</span></a></li>
+                    <li class="active"><a>图表导航 <span class="sr-only">(current)</span></a></li>
                     <li><a href="#industry_badplatform">问题平台数量</a></li>
                     <li><a href="#industry_hot_people">投资借款人数</a></li>
                     <li><a href="#industry_hot_money">投资借款金额</a></li>
@@ -58,7 +48,7 @@
             <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
 
                 <!-- 问题平台数据显示 开始-->
-                <div id="industry_badplatform" style="width: 100%; height:650px;padding-top: 80px"></div>
+                <div id="industry_badplatform" style="width: 85%; height:600px;padding-top: 90px;margin: 0 auto"></div>
                 <script type="text/javascript">
                     var industry_badplatform_chart = echarts.init(document.getElementById('industry_badplatform'));
                     var industry_badplatform_timeData = [
@@ -182,7 +172,7 @@
 
 
                 <!-- 投资借款人数情况 开始 -->
-                <div id="industry_hot_people" style="width: 100%; height:650px;padding-top: 80px"></div>
+                <div id="industry_hot_people" style="width: 85%; height:600px;padding-top: 90px;margin: 0 auto"></div>
                 <script type="text/javascript">
                     var industry_hot_people_chart = echarts.init(document.getElementById('industry_hot_people'));
                     industry_hot_people_option = {
@@ -257,7 +247,7 @@
 
 
                 <!-- 人均投资借款金额走势图 开始 -->
-                <div id="industry_hot_money" style="width: 100%; height:650px;padding-top: 80px"></div>
+                <div id="industry_hot_money" style="width: 85%; height:600px;padding-top: 90px;margin: 0 auto"></div>
                 <script type="text/javascript">
                     var industry_hot_money_chart = echarts.init(document.getElementById('industry_hot_money'));
                     industry_hot_money_option = {
@@ -335,7 +325,7 @@
 
                 <!-- 综合利率走势图 开始-->
 
-                <div id="industry_interest" style="width: 100%; height:650px;padding-top: 80px"></div>
+                <div id="industry_interest" style="width: 85%; height:600px;padding-top: 90px;margin: 0 auto"></div>
                 <script type="text/javascript">
                     var industry_interest_chart = echarts.init(document.getElementById('industry_interest'));
                     industry_interest_option = {
@@ -398,7 +388,7 @@
                 <!--区域情况 开始 -->
                 <script src="{{ url_for("static",filename='js/china.js') }}"></script>
                 <br>
-                <div id="industry_areas_cjl" style="width: 100%; height:650px;padding-top: 80px"></div>
+                <div id="industry_areas_cjl" style="width: 85%; height:600px;padding-top: 90px;margin: 0 auto"></div>
                 <script type="text/javascript">
                     var industry_areas_cjl_chart = echarts.init(document.getElementById('industry_areas_cjl'));
                     industry_areas_cjl_option = {
@@ -463,7 +453,7 @@
 
 
                 <!-- 各省份平台每月情况汇总表 开始 -->
-                <div id="industry_areas" style="width: 100%; height:650px;padding-top: 80px">
+                <div id="industry_areas" style="width: 85%; height:600px;padding-top: 90px;margin: 0 auto">
 
                     <h2 style="text-align: center">各省份平台每月情况汇总表</h2>
 
@@ -639,7 +629,7 @@
 
 
                 <!-- 各类型平台每月情况汇总表 开始 -->
-                <div id="industry_class" style="width: 100%; height:650px;padding-top: 80px">
+                <div id="industry_class" style="width: 85%; height:600px;padding-top: 90px;margin: 0 auto">
                     <h2 style="text-align: center">各类型平台每月情况汇总表</h2>
                     <table class="table table-striped">
                         <thead>

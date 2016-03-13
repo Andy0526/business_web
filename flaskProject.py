@@ -4,9 +4,10 @@ from flask import Flask, render_template, request, jsonify
 app = Flask(__name__)
 
 
+# 主页
 @app.route('/')
 def default():
-    return render_template("test.html")
+    return render_template("home.html")
 
 
 # 主页
