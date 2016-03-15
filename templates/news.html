@@ -3,63 +3,211 @@
 
 {% block body %}
 
-    <style type="text/css">
-
-        #cy_div {
-            width: 400px;;
-            height:400px;
-        }
-
-        #cy_div a {
-            position: absolute;
-            color: #fff;
-        }
-
-        #cy_div a:hover {
-            background: black;
-            border-radius: 5px;
-        }
-    </style>
-
-    <script src="{{ url_for("static",filename='js/cy.js') }}"></script>
+    <div class="container" style="margin-top: 50px">
 
 
 
+            <!-- 新闻框 -->
+                <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
+                    <ol class="carousel-indicators">
+                        <li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
+                        <li data-target="#carousel-example-generic" data-slide-to="1"></li>
+                        <li data-target="#carousel-example-generic" data-slide-to="2"></li>
+                    </ol>
+                    <div class="carousel-inner" role="listbox">
+                        <div class="item active">
+                            <img src="{{ url_for("static",filename='img/bg_news_1.jpg') }}" style="width:1140px; height:500px;margin: 0 auto"  alt="1">
+                            <div class="container">
+                                <div class="carousel-caption">
+                                    <h2>1经侦式监管恐引发网贷挤兑，撤离要趁早</h2>
+                                    <p>经侦式监经侦式监管恐引管恐引发网贷挤兑，撤离发网贷挤兑，撤离要趁早管恐引发网贷挤兑，撤离要趁早</p>
+                                    <p><a class="btn btn-lg btn-primary" href="#" role="button">查看详情</a></p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="item">
+                            <img src="{{ url_for("static",filename='img/bg_news_2.jpg') }}" style="width:1140px; height:500px;margin: 0 auto"  alt="1">
+                            <div class="container">
+                                <div class="carousel-caption">
+                                    <h2>2经侦式监管恐引发网贷挤兑，撤离要趁早</h2>
+                                    <p>经侦式监经侦式监管恐引管恐引发网贷挤兑，撤离发网贷挤兑，撤离要趁早管恐引发网贷挤兑，撤离要趁早</p>
+                                    <p><a class="btn btn-lg btn-primary" href="#" role="button">查看详情</a></p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="item">
+                            <img src="{{ url_for("static",filename='img/bg_news_3.jpg') }}" style="width:1140px; height:500px;margin: 0 auto"  alt="1">
+                            <div class="container">
+                                <div class="carousel-caption">
+                                    <h2>3经侦式监管恐引发网贷挤兑，撤离要趁早</h2>
+                                    <p>经侦式监经侦式监管恐引管恐引发网贷挤兑，撤离发网贷挤兑，撤离要趁早管恐引发网贷挤兑，撤离要趁早</p>
+                                    <p><a class="btn btn-lg btn-primary" href="#" role="button">查看详情</a></p>
+                                </div>
+                            </div>
+                        </div>
+                    <a class="left carousel-control" href="#carousel-example-generic" role="button" data-slide="prev">
+                        <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+                        <span class="sr-only">Previous</span>
+                    </a>
+                    <a class="right carousel-control" href="#carousel-example-generic" role="button" data-slide="next">
+                        <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+                        <span class="sr-only">Next</span>
+                    </a>
+                </div>
 
-    <!--div class="container-fulid" style="margin-top: 80px;">
-            <div id="cy_div" style="background:#428bca;margin-right: 20px">
-                <a href="http://finance.people.com.cn/money/n/2015/0718/c42877-27324285.html" target="_blank"><span style="font-size: 44px !important;">央行等十部委</span></a>
-                <a href="http://finance.people.com.cn/money/n/2015/0718/c42877-27324285.html" target="_blank"><span style="font-size: 44px !important;">指导意见</span></a>
-                <a href="http://mt.sohu.com/20160105/n433550476.shtml" target="_blank"><span style="font-size: 40px !important;">成交额首破万亿</span></a>
-
-                <a href="http://money.163.com/15/1114/03/B8BPEG0N00253B0H.html" target="_blank"><span style="font-size: 36px !important;">"双11"</span></a>
-                <a href="http://money.163.com/15/1114/03/B8BPEG0N00253B0H.html" target="_blank"><span style="font-size: 36px !important;">同比增近三倍</span></a>
-
-                <a href="http://www.360doc.com/content/15/0121/12/20625606_442540370.shtml" target="_blank"><span style="font-size: 32px !important;">大公国际</span></a>
-                <a href="http://www.360doc.com/content/15/0121/12/20625606_442540370.shtml" target="_blank"><span style="font-size: 32px !important;">P2P黑名单</span></a>
-
-
-                <a href="http://dy.qq.com/article.htm?id=20151218A04R4000" target="_blank"><span style="font-size: 28px !important;">宜人贷</span></a>
-                <a href="http://dy.qq.com/article.htm?id=20151218A04R4000" target="_blank"><span style="font-size: 28px !important;">上市第一股</span></a>
-
-                <a href="http://www.pig66.com/weixintoutiao/caijingmi/2015-11-06/183011.html" target="_blank"><span style="font-size: 26px !important;">北京</span></a>
-                <a href="http://www.pig66.com/weixintoutiao/caijingmi/2015-11-06/183011.html" target="_blank"><span style="font-size: 26px !important;">“中国网贷第一城”</span></a>
+        <br>
+        <div class="row" >
+            <!--
+                    <div class="col-md-8">
+              <div class="list-group" >
+                    <a href="#" class="list-group-item active">
+                        行业热点
+                    </a>
+                    <a href= "/news/新闻/p2p观察网/P2P到了最危险的时候了吗？" class="list-group-item">P2P到了最危险的时候了吗？</a>
+                    <a href="#" class="list-group-item">经侦式监管恐引发网贷挤兑，撤离要趁早</a>
+                    <a href="#" class="list-group-item">戳穿P2P平台风险准备金的七个谎言</a>
+                    <a href="#" class="list-group-item">早报：政协委员谈互金发展；互金协会信息试报送；网贷行业进入存量发展阶段</a>
+                    <a href="#" class="list-group-item">戳穿P2P平台风险准备金的七个谎言</a>
+                    <a href="#" class="list-group-item">早报：政协委员谈互金发展；互金协会信息试报送；网贷行业进入存量发展阶段</a>
+                    <a href="#" class="list-group-item">两会委员看互金：一些企业在发疯，但好的一面也要肯定</a>
+                   <a href="#" class="list-group-item">早报：政协委员谈互金发展；互金协会信息试报送；网贷行业进入存量发展阶段</a>
 
 
-                <a href="http://mt.sohu.com/20150706/n416254621.shtml" target="_blank"><span style="font-size: 24px !important;">世界互联网大会</span></a>
+                </div>
+            </div>-->
 
-                <a href="http://paper.people.com.cn/mszk/html/2015-02/09/content_1533391.htm" target="_blank"><span style="font-size: 22px !important;">P2P行业协会</span></a>
-
-                <a href="http://money.163.com/15/1209/08/BACNAA2G00252H36.html" target="_blank"><span style="font-size: 20px !important;">e租宝</span></a>
-                <a href="http://money.163.com/15/1209/08/BACNAA2G00252H36.html" target="_blank"><span style="font-size: 20px !important;">违法经营</span></a>
-
-                <a href="http://mingin.baijia.baidu.com/article/236643" target="_blank"><span style="font-size: 18px !important;">翼龙贷</span></a>
-                <a href="http://mingin.baijia.baidu.com/article/236643" target="_blank"><span style="font-size: 18px !important;">央视标王</span></a>
+            <div class="col-md-4">
+                <div class="panel panel-primary" style="background-image: url({{ url_for("static",filename='img/bg_cy.jpg') }}" >
+                    <div class="panel-heading">今日热点&nbsp;&nbsp;&nbsp;&nbsp;
+                        <span id="cy_tody_select"></span></div>
+                    <div class="panel-body" id="cy_tody" style="height:328px;">
+                    </div>
+                </div>
+            </div>
+              <div class="col-md-4">
+                <div class="panel panel-primary" style="background-image: url({{ url_for("static",filename='img/bg_cy.jpg') }}" >
+                    <div class="panel-heading">本周热点&nbsp;&nbsp;&nbsp;&nbsp;
+                        <span id="cy_tody_select"></span></div>
+                    <div class="panel-body" id="cy_tody" style="height:328px;">
+                    </div>
+                </div>
+            </div>
+              <div class="col-md-4">
+                <div class="panel panel-primary" style="background-image: url({{ url_for("static",filename='img/bg_cy.jpg') }}" >
+                    <div class="panel-heading">本月热点&nbsp;&nbsp;&nbsp;&nbsp;
+                        <span id="cy_tody_select"></span></div>
+                    <div class="panel-body" id="cy_tody" style="height:328px;">
+                    </div>
+                </div>
+            </div>
 
         </div>
-    </div-->
 
-    <div class="container" style="margin-top: 70px">
+        <script src="{{ url_for("static",filename='js/d3.v3.min.js') }}"></script>
+        <script src="{{ url_for("static",filename='js/d3.layout.cloud.js') }}"></script>
+    <script>
+    var fill = d3.scale.category20();
+   var word_data = [
+{text:'纽交所',rate:0.591224,url:'/home'},
+{text:'宜人贷',rate:0.57686,url:'/home'},
+{text:'上市',rate:0.374144,url:'/home'},
+{text:'大大',rate:0.367951,url:'/home'},
+{text:'三农',rate:0.357485,url:'/home'},
+{text:'唐宁',rate:0.329171,url:'/home'},
+{text:'责任编辑',rate:0.317821,url:'/home'},
+{text:'第一股',rate:0.28271,url:'/home'},
+{text:'美元',rate:0.274988,url:'/home'},
+{text:'资本',rate:0.268866,url:'/home'},
+{text:'融业',rate:0.264587,url:'/home'},
+{text:'公告',rate:0.257072,url:'/home'},
+{text:'发行价',rate:0.249023,url:'/home'},
+{text:'首日',rate:0.249023,url:'/home'},
+{text:'e租宝',rate:0.246582,url:'/home'},
+{text:'打击',rate:0.238366,url:'/home'},
+{text:'破发',rate:0.233459,url:'/home'},
+{text:'宜信',rate:0.218986,url:'/home'},
+{text:'大量',rate:0.215865,url:'/home'},
+{text:'登陆',rate:0.215664,url:'/home'},
+{text:'坚决',rate:0.206241,url:'/home'},
+{text:'非法',rate:0.205318,url:'/home'},
+{text:'铜掌柜',rate:0.202331,url:'/home'},
+{text:'集资',rate:0.202314,url:'/home'},
+{text:'赵然',rate:0.186767,url:'/home'},
+{text:'退赔',rate:0.186767,url:'/home'},
+{text:'海外',rate:0.173975,url:'/home'},
+{text:'成功',rate:0.171652,url:'/home'},
+{text:'PPT',rate:0.171203,url:'/home'},
+{text:'资本市场',rate:0.168678,url:'/home'},
+{text:'爆料',rate:0.167088,url:'/home'},
+{text:'存在',rate:0.162283,url:'/home'},
+{text:'集团',rate:0.159361,url:'/home'},
+{text:'速报',rate:0.155639,url:'/home'},
+{text:'早报',rate:0.155639,url:'/home'},
+{text:'HZ002',rate:0.155639,url:'/home'},
+{text:'转型',rate:0.15531,url:'/home'},
+{text:'暂停',rate:0.154002,url:'/home'},
+{text:'用户',rate:0.153971,url:'/home'},
+{text:'美国',rate:0.15044,url:'/home'},
+{text:'事件',rate:0.149045,url:'/home'},
+{text:'累计',rate:0.146712,url:'/home'},
+{text:'拆标',rate:0.144943,url:'/home'},
+{text:'LendingClub',rate:0.143219,url:'/home'},
+{text:'老牌',rate:0.143219,url:'/home'},
+{text:'内部',rate:0.143219,url:'/home'},
+{text:'影响',rate:0.142751,url:'/home'},
+{text:'股价',rate:0.14159,url:'/home'},
+{text:'申彤',rate:0.140075,url:'/home'},
+{text:'某宝',rate:0.140075,url:'/home'},
+{text:'个标',rate:0.140075,url:'/home'},
+{text:'泛亚',rate:0.139568,url:'/home'},
+{text:'来看',rate:0.139301,url:'/home'},
+{text:'涉嫌',rate:0.138486,url:'/home'},
+{text:'使用',rate:0.137494,url:'/home'},
+{text:'路演',rate:0.137494,url:'/home'},
+{text:'融资额',rate:0.137494,url:'/home'},
+{text:'带走',rate:0.136209,url:'/home'},
+{text:'消费',rate:0.135958,url:'/home'}
+  ];
+
+
+  d3.layout.cloud().size([560, 560])
+      .words(word_data)
+      .on("end", draw)
+
+      .start();
+
+  function draw(words) {
+    d3.select("#cy_tody").append("svg")
+        .attr("height", 328)
+      .append("g")
+        .attr("transform", "translate(160,160)")
+      .selectAll("text")
+        .data(words)
+      .enter().append("text")
+        .style("font-size", function(d) { return (Math.round(d.rate*10)*6) + "px"; })
+        .style("font-family", "Arial")
+        .style("fill", function(d, i) { return fill(i); })
+        .attr("text-anchor", "middle")
+        .attr("transform", function(d) {
+          return "translate(" + [d.x, d.y] + ")rotate(" +(~~(Math.random() * 6) - 3) * 4 + ")";
+        })
+        .text(function(d) { return d.text; })
+		.on("click",function(d,i){
+				window.location.href= d.url;
+		 }).on("mouseover",function(d,i){
+				d3.select(this).attr("cursor","pointer");
+				d3.select(this).attr("font-weight","bolder");
+                $("#cy_tody_select").text(d3.select(this).text());
+		 })
+		 .on("mouseout",function(d,i){
+				d3.select(this).attr("cursor","auto");
+				d3.select(this).attr("font-weight","normal");
+                $("#cy_tody_select").text("");
+		 });;
+  }
+</script>
+
+
 
         <ol class="breadcrumb" id="新闻">
             <li class="active" >新闻</li>
@@ -193,5 +341,5 @@
             </div><!-- /.col-sm-4 -->
         </div>
     </div>
-
+  </div>
 {% endblock %}
