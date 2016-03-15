@@ -151,4 +151,4 @@ def json_data2(cur, ri, sor, sp):
 
 
 if __name__ == '__main__':
-    app.run()
+    app.run(host="0.0.0.0", port=8086)
