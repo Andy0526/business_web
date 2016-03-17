@@ -77,27 +77,27 @@
             </div>-->
 
             <div class="col-md-4">
-                <div class="panel panel-primary" style="background-image: url({{ url_for("static",filename='img/bg_cy.jpg') }}" >
+                <div  class="panel panel-primary" style="background-image: url({{ url_for("static",filename='img/bg_cy.jpg') }}" >
                     <div class="panel-heading">今日热点&nbsp;&nbsp;&nbsp;&nbsp;
                         <span id="cy_tody_select"></span></div>
-                    <div class="panel-body" id="cy_tody" style="width:328px;height:328px;">
-                    </div>
+                    <svg class="panel-body" id="cy_tody" style="width:328px;height:328px;">
+                    </svg>
                 </div>
             </div>
               <div class="col-md-4">
                 <div class="panel panel-primary" style="background-image: url({{ url_for("static",filename='img/bg_cy.jpg') }}" >
                     <div class="panel-heading">本周热点&nbsp;&nbsp;&nbsp;&nbsp;
                         <span id="cy_tody_select"></span></div>
-                    <div class="panel-body" id="cy_tody" style="width:328px;height:328px;">
-                    </div>
+                    <svg class="panel-body" id="cy_tody" style="width:328px;height:328px;">
+                    </svg>
                 </div>
             </div>
               <div class="col-md-4">
                 <div class="panel panel-primary" style="background-image: url({{ url_for("static",filename='img/bg_cy.jpg') }}" >
                     <div class="panel-heading">本月热点&nbsp;&nbsp;&nbsp;&nbsp;
                         <span id="cy_tody_select"></span></div>
-                    <div class="panel-body" id="cy_tody" style="width:328px;height:328px;">
-                    </div>
+                    <svg class="panel-body" id="cy_tody" style="width:328px;height:328px;">
+                    </svg>
                 </div>
             </div>
 
@@ -173,13 +173,11 @@
   d3.layout.cloud().size([500, 500])
       .words(word_data)
       .on("end", draw)
-
       .start();
 
   function draw(words) {
-    d3.select("#cy_tody").append("svg")
-        .attr("height", "100%")
-             .attr("width", "100%")
+    d3.select("#cy_tody").style({height:328,with:328})
+            .html("svg")
       .append("g")
         .attr("transform", "translate(164,164)")
       .selectAll("text")
