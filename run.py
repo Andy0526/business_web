@@ -78,6 +78,26 @@ def news_source(p2p_news_type, p2p_news_source):
     return render_template("news_source.html", data_info=data_info)
 
 
+# 显示平台信息
+@app.route('/detail/<platform_id>', methods=['GET'])
+def detail_info(platform_id):
+    # TODO 根据platform_id 返回信息
+    data_info = {
+        'platform_id': platform_id,
+        'platform_name': u'陆金所',
+        'platform_type': u'信用贷',
+        'platform_status': u'running',
+        'company': u'所属公司',
+        'need_invest': u'123',
+        'prospect_earn': u'21%~45%',
+        'Risk_weight': 2,
+        'source': u'来源',
+        'source_url': u'来源链接',
+        'gmt_create': u'2015-12-07 12:12'
+    }
+    return render_template('detail_info.html', data_info=data_info)
+
+
 @app.route('/news', methods=['GET'])
 def news():
     return render_template("news.html")

@@ -1,0 +1,35 @@
+{% extends "detail_header.html" %}
+
+{% block body %}
+
+        <!-- 显示导航栏 -->
+    <div class="container" style="margin-top: 70px" >
+        <ol class="breadcrumb">
+            <li><a href="/detail">平台详情</a></li>
+            <li class="active">{{ data_info.platform_name }}</li>
+        </ol>
+    </div>
+
+    <!-- 显示内容 -->
+    <div class="container" >
+        <div class="row">
+            <div class="col-sm-12  col-sm-offset-0">
+                <div class="jumbotron">
+                    <p>{{ data_info.platform_id}}</p>
+                    <p>{{ data_info.platform_name}}</p>
+                    <p>{{ data_info.platform_type}}</p>
+                    <p>{{ data_info.platform_status}}</p>
+                    <p>{{ data_info.company}}</p>
+                    <p>{{ data_info.need_invest}}</p>
+                    <p>{{ data_info.prospect_earn}}</p>
+                    <p>{{ data_info.Risk_weight}}</p>
+                    <p>{{ data_info.source}}</p>
+                    <p>{{ data_info.source_url}}</p>
+                    <p>{{ data_info.gmt_creat}}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+{% endblock %}

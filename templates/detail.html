@@ -1,25 +1,4 @@
-{% extends "layout.html" %}
-
-{% block title %} 平台详情 {% endblock %}
-
-
-{% block head %}
-    <nav class="navbar navbar-inverse navbar-fixed-top">
-        <div class="container">
-            <div id="navbar" class="navbar-collapse collapse">
-                <a class="navbar-brand"><p style="font-weight: 900;color:white;">网贷专家</p></a>
-                <ul class="nav navbar-nav">
-                    <li><a href="/home">首页</a></li>
-                    <li><a href="/news">资讯</a></li>
-                    <li class="active"><a href="/detail">平台详情</a></li>
-                    <li><a href="/data#industry_badplatform">行业数据</a></li>
-                    <li><a href="/search">图谱搜索</a></li>
-                    <li><a href="/invest">投资顾问</a></li>
-                </ul>
-            </div>
-        </div>
-    </nav>
-{% endblock %}
+{% extends "detail_info.html" %}
 
 {% block body %}
 
@@ -47,15 +26,13 @@
                 <tr></tr>
                 <tr>
                     <th>#</th>
-                    <th>
-                        平台名称
-                    </th>
+                    <th>平台名称</th>
                     <th>评级</th>
                     <th>平均收益</th>
                     <th>上线时间</th>
                     <th>平台背景</th>
                     <th>
-                     <div class="dropdown" >
+                        <div class="dropdown" >
                                 人气指数
                            <span  class="dropdown-toggle" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
                                 <span class="caret"></span>
@@ -65,7 +42,6 @@
                                 <li><a>递减排序</a></li>
                             </ul>
                         </div>
-
                     </th>
                     <th>
                      <div class="dropdown" >
@@ -100,7 +76,7 @@
                 <tbody>
                 <tr>
                     <td>1</td>
-                    <td>陆金所</td>
+                    <td>  <a href= "/detail/paltform_id" >陆金所</a></td>
                     <td>A</td>
                     <td>6.82%</td>
                     <td>2012-03-02</td>
