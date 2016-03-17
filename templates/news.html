@@ -170,7 +170,7 @@
   ];
 
 
-  d3.layout.cloud().size([560, 560])
+  d3.layout.cloud().size([500, 500])
       .words(word_data)
       .on("end", draw)
 
@@ -178,9 +178,10 @@
 
   function draw(words) {
     d3.select("#cy_tody").append("svg")
-        .attr("height", 328)
+        .attr("height", "100%")
+             .attr("width", "100%")
       .append("g")
-        .attr("transform", "translate(160,160)")
+        .attr("transform", "translate(164,164)")
       .selectAll("text")
         .data(words)
       .enter().append("text")
