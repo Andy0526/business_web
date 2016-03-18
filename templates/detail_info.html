@@ -2,7 +2,7 @@
 
 {% block body %}
 
-        <!-- 显示导航栏 -->
+    <!-- 显示导航栏 -->
     <div class="container" style="margin-top: 70px" >
         <ol class="breadcrumb">
             <li><a href="/detail">平台详情</a></li>
@@ -12,22 +12,68 @@
 
     <!-- 显示内容 -->
     <div class="container" >
+
+
+        <h1 >
+            <img src="{{ url_for("static",filename='img/detail.png') }}" style="width:48px;height:48px;">
+            {{ data_info.platform_name }}</h1>
+        <hr>
+
         <div class="row">
-            <div class="col-sm-12  col-sm-offset-0">
-                <div class="jumbotron">
-                    <p>{{ data_info.platform_id}}</p>
-                    <p>{{ data_info.platform_name}}</p>
-                    <p>{{ data_info.platform_type}}</p>
-                    <p>{{ data_info.platform_status}}</p>
-                    <p>{{ data_info.company}}</p>
-                    <p>{{ data_info.need_invest}}</p>
-                    <p>{{ data_info.prospect_earn}}</p>
-                    <p>{{ data_info.Risk_weight}}</p>
-                    <p>{{ data_info.source}}</p>
-                    <p>{{ data_info.source_url}}</p>
-                    <p>{{ data_info.gmt_creat}}</p>
+
+            <div class="col-sm-12 ">
+                <div class="panel panel-info">
+
+                    <div class="panel-heading">
+                        <h3 class="panel-title">基本信息</h3>
+                    </div>
+
+                    <div class="panel-body">
+
+                        <dl class="dl-horizontal" style="font-size: larger">
+                            <dt>类型</dt><dd>{{ data_info.platform_type}}</dd>
+                            <dt>公司</dt><dd>{{ data_info.company}}</dd>
+                            <dt>状态</dt><dd>{{ data_info.platform_status}}</dd>
+                            <dt>最少投资</dt><dd>{{ data_info.need_invest}}</dd>
+                            <dt>预期收益</dt><dd>{{ data_info.prospect_earn}}</dd>
+                            <dt>来源</dt><dd>{{ data_info.source}}</dd>
+                            <dt>链接</dt><dd>{{ data_info.source_url}}</dd>
+                        </dl>
+
+                    </div>
                 </div>
             </div>
+
+            <div class="col-sm-12 ">
+                <div class="panel panel-info">
+
+                    <div class="panel-heading">
+                        <h3 class="panel-title">运行情况</h3>
+                    </div>
+
+                    <div class="panel-body">
+
+
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-sm-12 ">
+                <div class="panel panel-info">
+
+                    <div class="panel-heading">
+                        <h3 class="panel-title">用户评论</h3>
+                    </div>
+
+                    <div class="panel-body">
+
+
+                    </div>
+                </div>
+            </div>
+
+
+
         </div>
     </div>
 

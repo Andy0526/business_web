@@ -93,7 +93,6 @@ def detail_info(platform_id):
         'Risk_weight': 2,
         'source': u'来源',
         'source_url': u'来源链接',
-        'gmt_create': u'2015-12-07 12:12'
     }
     return render_template('detail_info.html', data_info=data_info)
 
