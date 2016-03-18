@@ -38,6 +38,11 @@ def news_detail(p2p_news_type, p2p_news_source, p2p_news_id):
     return render_template("news_info.html", data_info=data_info)
 
 
+@app.route('/news', methods=['GET'])
+def news():
+    return render_template("news.html")
+
+
 # 显示新闻详细的信息，p2p_news_type是新闻类型，p2p_news_source是来源
 # 例如：/news/行业相关/p2p观察网
 @app.route('/news/<p2p_news_type>/<p2p_news_source>', methods=['GET'])
@@ -97,11 +102,6 @@ def detail_info(platform_id):
     return render_template('detail_info.html', data_info=data_info)
 
 
-@app.route('/news', methods=['GET'])
-def news():
-    return render_template("news.html")
-
-
 @app.route('/detail')
 def detail():
     return render_template("detail.html")
@@ -110,6 +110,14 @@ def detail():
 @app.route('/data')
 def data():
     return render_template("data.html")
+
+
+@app.route('/search/<key_word>', methods=['GET'])
+def search_info(key_word):
+    data_info = {
+        'key_word':key_word
+    }
+    return render_template("search_info.html",data_info=data_info)
 
 
 @app.route('/search')
