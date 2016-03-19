@@ -8,6 +8,9 @@ var cloudRadians = Math.PI / 180,
     cw = 1 << 11 >> 5,
     ch = 1 << 11;
 
+
+
+
 module.exports = function() {
   var size = [256, 256],
       text = cloudText,
@@ -22,7 +25,7 @@ module.exports = function() {
       timeInterval = Infinity,
       event = dispatch("word", "end"),
       timer = null,
-      random = Math.random,
+
       cloud = {},
       canvas = cloudCanvas;
 
@@ -55,6 +58,20 @@ module.exports = function() {
     return cloud;
 
     function step() {
+
+      Math.seed = 13;
+Math.seededRandom = function(max, min) {
+    max = max || 1;
+    min = min || 0;
+
+    Math.seed = (Math.seed * 9301 + 49297) % 233280;
+    var rnd = Math.seed / 233280.0;
+
+    return min + rnd * (max - min);
+};
+  random = Math.seededRandom;
+
+
       var start = Date.now();
       while (Date.now() - start < timeInterval && ++i < n && timer) {
         var d = data[i];
@@ -100,6 +117,8 @@ module.exports = function() {
   }
 
   function place(board, tag, bounds) {
+
+
     var perimeter = [{x: 0, y: 0}, {x: size[0], y: size[1]}],
         startX = tag.x,
         startY = tag.y,

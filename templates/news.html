@@ -13,14 +13,15 @@
                         <li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
                         <li data-target="#carousel-example-generic" data-slide-to="1"></li>
                         <li data-target="#carousel-example-generic" data-slide-to="2"></li>
+                         <li data-target="#carousel-example-generic" data-slide-to="3"></li>
                     </ol>
                     <div class="carousel-inner" role="listbox">
                         <div class="item active">
                             <img src="{{ url_for("static",filename='img/bg_news_1.jpg') }}" style="width:1140px; height:500px;margin: 0 auto"  alt="1">
                             <div class="container">
                                 <div class="carousel-caption">
-                                    <h2>1经侦式监管恐引发网贷挤兑，撤离要趁早</h2>
-                                    <p>经侦式监经侦式监管恐引管恐引发网贷挤兑，撤离发网贷挤兑，撤离要趁早管恐引发网贷挤兑，撤离要趁早</p>
+                                    <h1>1经侦式监管恐引发网贷挤兑</h1>
+                                    <h4>经侦式监经侦式监管恐引管恐引发网贷挤兑，撤离发撤离要趁早撤离发撤离要趁早</h4>
                                     <p><a class="btn btn-lg btn-primary" href="#" role="button">查看详情</a></p>
                                 </div>
                             </div>
@@ -28,9 +29,9 @@
                         <div class="item">
                             <img src="{{ url_for("static",filename='img/bg_news_2.jpg') }}" style="width:1140px; height:500px;margin: 0 auto"  alt="1">
                             <div class="container">
-                                <div class="carousel-caption">
-                                    <h2>2经侦式监管恐引发网贷挤兑，撤离要趁早</h2>
-                                    <p>经侦式监经侦式监管恐引管恐引发网贷挤兑，撤离发网贷挤兑，撤离要趁早管恐引发网贷挤兑，撤离要趁早</p>
+                                  <div class="carousel-caption">
+                                    <h1>2经侦式监管恐引发网贷挤兑</h1>
+                                    <h4>经侦式监经侦式监管恐引管恐引发网贷挤兑，撤离发撤离要趁早撤离发撤离要趁早</h4>
                                     <p><a class="btn btn-lg btn-primary" href="#" role="button">查看详情</a></p>
                                 </div>
                             </div>
@@ -38,9 +39,19 @@
                         <div class="item">
                             <img src="{{ url_for("static",filename='img/bg_news_3.jpg') }}" style="width:1140px; height:500px;margin: 0 auto"  alt="1">
                             <div class="container">
-                                <div class="carousel-caption">
-                                    <h2>3经侦式监管恐引发网贷挤兑，撤离要趁早</h2>
-                                    <p>经侦式监经侦式监管恐引管恐引发网贷挤兑，撤离发网贷挤兑，撤离要趁早管恐引发网贷挤兑，撤离要趁早</p>
+                                   <div class="carousel-caption">
+                                    <h1>3经侦式监管恐引发网贷挤兑</h1>
+                                    <h4>经侦式监经侦式监管恐引管恐引发网贷挤兑，撤离发撤离要趁早撤离发撤离要趁早</h4>
+                                    <p><a class="btn btn-lg btn-primary" href="#" role="button">查看详情</a></p>
+                                </div>
+                            </div>
+                        </div>
+                            <div class="item">
+                            <img src="{{ url_for("static",filename='img/bg_news_4.jpg') }}" style="width:1140px; height:500px;margin: 0 auto"  alt="1">
+                            <div class="container">
+                                    <div class="carousel-caption">
+                                    <h1>4经侦式监管恐引发网贷挤兑</h1>
+                                    <h4>经侦式监经侦式监管恐引管恐引发网贷挤兑，撤离发撤离要趁早撤离发撤离要趁早</h4>
                                     <p><a class="btn btn-lg btn-primary" href="#" role="button">查看详情</a></p>
                                 </div>
                             </div>
@@ -77,36 +88,38 @@
             </div>-->
 
             <div class="col-md-4">
-                <div  class="panel panel-primary" style="background-image: url({{ url_for("static",filename='img/bg_cy.jpg') }}" >
+                <div  class="panel panel-primary"
+                      style="background-image: url({{ url_for('static',filename='img/bg_cy.jpg') }}" >
                     <div class="panel-heading">今日热点&nbsp;&nbsp;&nbsp;&nbsp;
                         <span id="cy_tody_select"></span></div>
-                    <svg class="panel-body" id="cy_tody" style="width:328px;height:328px;">
-                    </svg>
+                    <div  id="cy_tody" style="width:358px;">
+                    </div>
                 </div>
             </div>
               <div class="col-md-4">
-                <div class="panel panel-primary" style="background-image: url({{ url_for("static",filename='img/bg_cy.jpg') }}" >
+                <div class="panel panel-primary"    style="background-image: url({{ url_for('static',filename='img/bg_cy.jpg') }}" >
                     <div class="panel-heading">本周热点&nbsp;&nbsp;&nbsp;&nbsp;
                         <span id="cy_tody_select"></span></div>
-                    <svg class="panel-body" id="cy_tody" style="width:328px;height:328px;">
-                    </svg>
+                    <div  id="cy_tody2" style="width:358px">
+                    </div>
                 </div>
             </div>
               <div class="col-md-4">
-                <div class="panel panel-primary" style="background-image: url({{ url_for("static",filename='img/bg_cy.jpg') }}" >
+                <div class="panel panel-primary"    style="background-image: url({{ url_for('static',filename='img/bg_cy.jpg') }}" >
                     <div class="panel-heading">本月热点&nbsp;&nbsp;&nbsp;&nbsp;
                         <span id="cy_tody_select"></span></div>
-                    <svg class="panel-body" id="cy_tody" style="width:328px;height:328px;">
-                    </svg>
+                     <div  id="cy_tody3" style="width:358px">
+                    </div>
                 </div>
             </div>
 
         </div>
 
+                     <script src="{{ url_for("static",filename='js/multext.js') }}"></script>
         <script src="{{ url_for("static",filename='js/d3.v3.min.js') }}"></script>
         <script src="{{ url_for("static",filename='js/d3.layout.cloud.js') }}"></script>
     <script>
-    var fill = d3.scale.category20();
+
    var word_data = [
 {text:'纽交所',rate:0.591224,url:'/home'},
 {text:'宜人贷',rate:0.57686,url:'/home'},
@@ -147,63 +160,193 @@
 {text:'转型',rate:0.15531,url:'/home'},
 {text:'暂停',rate:0.154002,url:'/home'},
 {text:'用户',rate:0.153971,url:'/home'},
-{text:'美国',rate:0.15044,url:'/home'},
-{text:'事件',rate:0.149045,url:'/home'},
-{text:'累计',rate:0.146712,url:'/home'},
-{text:'拆标',rate:0.144943,url:'/home'},
-{text:'LendingClub',rate:0.143219,url:'/home'},
-{text:'老牌',rate:0.143219,url:'/home'},
-{text:'内部',rate:0.143219,url:'/home'},
-{text:'影响',rate:0.142751,url:'/home'},
-{text:'股价',rate:0.14159,url:'/home'},
-{text:'申彤',rate:0.140075,url:'/home'},
-{text:'某宝',rate:0.140075,url:'/home'},
-{text:'个标',rate:0.140075,url:'/home'},
-{text:'泛亚',rate:0.139568,url:'/home'},
-{text:'来看',rate:0.139301,url:'/home'},
-{text:'涉嫌',rate:0.138486,url:'/home'},
-{text:'使用',rate:0.137494,url:'/home'},
-{text:'路演',rate:0.137494,url:'/home'},
-{text:'融资额',rate:0.137494,url:'/home'},
-{text:'带走',rate:0.136209,url:'/home'},
-{text:'消费',rate:0.135958,url:'/home'}
+{text:'美国',rate:0.15044,url:'/home'}
   ];
 
+    var width = 358;
+    var height =300;
 
-  d3.layout.cloud().size([500, 500])
-      .words(word_data)
-      .on("end", draw)
-      .start();
+   var base_x = width /2-5;
+   var base_y = height/2;
 
-  function draw(words) {
-    d3.select("#cy_tody").style({height:328,with:328})
-            .html("svg")
-      .append("g")
-        .attr("transform", "translate(164,164)")
-      .selectAll("text")
-        .data(words)
-      .enter().append("text")
-        .style("font-size", function(d) { return (Math.round(d.rate*10)*6) + "px"; })
-        .style("font-family", "Arial")
-        .style("fill", function(d, i) { return fill(i); })
-        .attr("text-anchor", "middle")
-        .attr("transform", function(d) {
-          return "translate(" + [d.x, d.y] + ")rotate(" +(~~(Math.random() * 6) - 3) * 4 + ")";
-        })
-        .text(function(d) { return d.text; })
-		.on("click",function(d,i){
-				window.location.href= d.url;
-		 }).on("mouseover",function(d,i){
-				d3.select(this).attr("cursor","pointer");
-				d3.select(this).attr("font-weight","bolder");
-                $("#cy_tody_select").text(d3.select(this).text());
-		 })
-		 .on("mouseout",function(d,i){
-				d3.select(this).attr("cursor","auto");
-				d3.select(this).attr("font-weight","normal");
-                $("#cy_tody_select").text("");
-		 });
-  }
+
+     var fill = d3.scale.category20();
+
+    var svg = d3.select("#cy_tody") // svg
+            .append("svg")
+            .attr("width",width)
+            .attr("height",height);
+
+      var svg2 = d3.select("#cy_tody2") // svg
+            .append("svg")
+            .attr("width",width)
+            .attr("height",height);
+
+   var svg3 = d3.select("#cy_tody3") // svg
+            .append("svg")
+            .attr("width",width)
+            .attr("height",height);
+
+    d3.layout.cloud().size([width, height])
+            .words(word_data)
+            .padding(10)
+            .on("end", draw)
+            .start();
+
+
+
+
+   function draw(words) {
+        svg.append("g")
+                .attr("transform", "translate("+base_x+","+base_y+")")
+                .selectAll("text")
+                .data(words)
+                .enter()
+                .append("text")
+                .style("font-size", function(d) { return (Math.round(d.rate*60))+2 + "px"; })
+                .style("fill", function(d, i) { return fill(i); })
+                .attr("transform", function(d) {
+
+                    var tx = d.x;
+                    var ty = d.y;
+                    var char_size = Math.round(d.rate*60);
+
+                    var rates = [1.6,1.5,1.4,1,3,1.2,1.1];
+                    for(var i =0;i<rates.length;++i) {
+                         var rate = rates[i];
+                        if (Math.abs(d.x * rate) < width / 2 -char_size*2){
+                            tx *= rate;
+                            break;
+                        }
+                    }
+
+                    for(var i =0;i<rates.length;++i){
+                         var rate = rates[i];
+                         if(Math.abs(d.y*rate)<height/2-char_size) {
+                             ty *= rate;
+                             break;
+                         }
+                    }
+
+
+                    return "translate(" + [tx, ty] + ")";
+
+
+                })
+                .text(function(d) { return d.text; })
+                .on("click",function(d,i){
+                    window.location.href= d.url;
+                })
+                .on("mouseover",function(d,i){
+                    d3.select(this).attr("cursor","pointer");
+                    d3.select(this).attr("font-weight","bolder");
+                    $("#cy_tody_select").text(d3.select(this).text());
+                })
+                .on("mouseout",function(d,i){
+                    d3.select(this).attr("cursor","auto");
+                    d3.select(this).attr("font-weight","normal");
+                    $("#cy_tody_select").text("");
+                });
+
+
+          svg2.append("g")
+                .attr("transform", "translate("+width/2+","+height/2+")")
+                .selectAll("text")
+                .data(words)
+                .enter()
+                .append("text")
+                .style("font-size", function(d) { return (Math.round(d.rate*60))+2 + "px"; })
+                .style("fill", function(d, i) { return fill(i); })
+                .attr("transform", function(d) {
+                       var tx = d.x;
+                    var ty = d.y;
+                    var char_size = Math.round(d.rate*60);
+
+                    var rates = [1.6,1.5,1.4,1,3,1.2,1.1];
+                    for(var i =0;i<rates.length;++i) {
+                         var rate = rates[i];
+                        if (Math.abs(d.x * rate) < width / 2 -char_size*2){
+                            tx *= rate;
+                            break;
+                        }
+                    }
+
+                    for(var i =0;i<rates.length;++i){
+                         var rate = rates[i];
+                         if(Math.abs(d.y*rate)<height/2-char_size) {
+                             ty *= rate;
+                             break;
+                         }
+                    }
+
+
+                    return "translate(" + [tx, ty] + ")";
+                })
+                .text(function(d) { return d.text; })
+                .on("click",function(d,i){
+                    window.location.href= d.url;
+                })
+                .on("mouseover",function(d,i){
+                    d3.select(this).attr("cursor","pointer");
+                    d3.select(this).attr("font-weight","bolder");
+                    $("#cy_tody_select").text(d3.select(this).text());
+                })
+                .on("mouseout",function(d,i){
+                    d3.select(this).attr("cursor","auto");
+                    d3.select(this).attr("font-weight","normal");
+                    $("#cy_tody_select").text("");
+                });
+
+
+
+          svg3.append("g")
+                .attr("transform", "translate("+width/2+","+height/2+")")
+                .selectAll("text")
+                .data(words)
+                .enter()
+                .append("text")
+                .style("font-size", function(d) { return (Math.round(d.rate*60))+2 + "px"; })
+                .style("fill", function(d, i) { return fill(i); })
+                .attr("transform", function(d) {
+                       var tx = d.x;
+                    var ty = d.y;
+                    var char_size = Math.round(d.rate*60);
+
+                    var rates = [1.6,1.5,1.4,1,3,1.2,1.1];
+                    for(var i =0;i<rates.length;++i) {
+                         var rate = rates[i];
+                        if (Math.abs(d.x * rate) < width / 2 -char_size*2){
+                            tx *= rate;
+                            break;
+                        }
+                    }
+
+                    for(var i =0;i<rates.length;++i){
+                         var rate = rates[i];
+                         if(Math.abs(d.y*rate)<height/2-char_size) {
+                             ty *= rate;
+                             break;
+                         }
+                    }
+
+
+                    return "translate(" + [tx, ty] + ")";
+                })
+                .text(function(d) { return d.text; })
+                .on("click",function(d,i){
+                    window.location.href= d.url;
+                })
+                .on("mouseover",function(d,i){
+                    d3.select(this).attr("cursor","pointer");
+                    d3.select(this).attr("font-weight","bolder");
+                    $("#cy_tody_select").text(d3.select(this).text());
+                })
+                .on("mouseout",function(d,i){
+                    d3.select(this).attr("cursor","auto");
+                    d3.select(this).attr("font-weight","normal");
+                    $("#cy_tody_select").text("");
+                });
+    }
 </script>
 
 
