@@ -1,0 +1,56 @@
+{% extends "info_header.html" %}
+
+{% block body %}
+
+    <script>
+        // 页面加载后
+        $(document).ready(function(){
+            // 处理文本中的换行和空格
+            var content =  $("#content").text();
+            content = content.replace(new RegExp("#n#","gm"),"<br>");
+            content = content.replace(new RegExp("#r#","gm"),"");
+            content = content.replace(new RegExp(" ","gm"),"&nbsp;")
+            $("#content").html(content);
+
+            type = $("#type").text();
+            if (type == 'news')
+                $("#type").text("新闻")
+            else if (type == 'policy')
+                $("#type").text("政策")
+            else if (type == 'opinion')
+                $("#type").text("观点")
+            else if (type == 'ugc')
+                $("#type").text("用户评论")
+        });
+    </script>
+
+    <!-- 显示导航栏 -->
+    <div class="container" style="margin-top: 70px" >
+        <ol class="breadcrumb">
+             <li><a href="/info">资讯</a></li>
+            <li><a href="/info/{{ data_info.type }}" id="type">{{ data_info.type }}</a></li>
+             <li class="active">{{ data_info.title}}</li>
+            </ol>
+    </div>
+
+      <!-- 显示新闻内容 -->
+    <div class="container" >
+        <div class="row">
+            <div class="col-sm-12  col-sm-offset-0">
+                <div class="jumbotron">
+                    <h2 id="title">{{ data_info.title}}</h2>
+                    <hr>
+                    <p >
+                        作者：<span id="author">{{ data_info.author }}</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        日期：<span id="date">{{ data_info.item_pub_time }}</span><br>
+                        网址：<a  id ="url" href="{{ data_info.url }}" target="_blank">{{ data_info.url }}</a>
+                    </p>
+
+                    <p id="content" style="margin-top: 0px">{{ data_info.content }}</p>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

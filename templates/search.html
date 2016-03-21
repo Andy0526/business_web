@@ -7,7 +7,7 @@
         <div style="text-align: center"><img src="{{ url_for("static",filename='img/search_logo.png') }}"></div>
 
         <div class="input-group" style="width: 500px;margin: 5px auto;">
-            <input id ="search_key" type="text" class="form-control" placeholder="请输入关键字" style="height: 40px">
+            <input id ="search_key" type="text" class="form-control" placeholder="请输入关键字(支持示例：网贷、陆金所)" style="height: 40px">
                      <span class="input-group-btn">
                          <button id ="search_btn" class="btn btn-success" type="button" style="height: 40px">关于一下</button>
                       </span>
@@ -21,10 +21,9 @@
 
             $(document).ready(function(){
 
-                draw_relation_graph("关键词");
+                //draw_relation_graph("关键词");
 
                 $("#search_btn").click(function(){
-
 
                     svg.selectAll("*").remove();
                     var key_word = $("#search_key")[0].value;
@@ -45,50 +44,30 @@
             function draw_relation_graph(key_word){
 
                 // TODO 根据关键字获得相关搜索
-
-               var items = [
-                       {
-                          "name": key_word ,
-                           "url":"/search/"+key_word
-                       },
-                   {
-                      "name":key_word+"1",
-                       "url":"/search/"+key_word+"1"
-                   },
-                         {
-                      "name":key_word+"2",
-                       "url":"/search/"+key_word+"2"
-                   },
-                         {
-                        "name":key_word+"3",
-                       "url":"/search/"+key_word+"3"
-                   },  {
-                       "name":key_word+"4",
-                       "url":"/search/"+key_word+"4"
-                   },  {
-                       "name":key_word+"5",
-                       "url":"/search/"+key_word+"5"
-                   },
-                        {
-                         "name":key_word+"6",
-                       "url":"/search/"+key_word+"6"
-                   },
-                         {
-                         "name":key_word+"7",
-                       "url":"/search/"+key_word+"7"
-                   },
-                         {
-                         "name":key_word+"8",
-                       "url":"/search/"+key_word+"8"
-                   },  {
-                        "name":key_word+"9",
-                       "url":"/search/"+key_word+"9"
-                   },  {
-                        "name":key_word+"10",
-                       "url":"/search/"+key_word+"10"
-                   }
-
-                 ]
+                  var items ;
+                if(key_word == '网贷') {
+                    items = [
+                        {name:"网贷",},
+                        {name:"P2P"},
+                        {name:"互联网金融"},
+                        {name:"债权转让"},
+                        {name:"P2B"},
+                        {name:"高收益"},
+                        {name:"高风险"}
+                    ]
+                }else if(key_word == '陆金所'){
+                    items = [
+                         {name:"陆金所"},
+                         {name:"平安集团"},
+                         {name:"lu.com"},
+                         {name:"上海陆家嘴国际金融资产交易市场股份有限公司"},
+                         {name:"P2P"},
+                         {name:"lufax"},
+                         {name:"董事长 计葵生"},
+                         {name:"稳盈-安业"}
+                    ]
+                }else
+                        return;
 
                 var nodes = items;
 
@@ -142,7 +121,7 @@
                         .text(function(d){
                             return d.name;
                         }).on("click",function(d,i){
-			            	window.location.href= d.url;
+			            	window.location.href= "/search/"+ d.name;
 		                 }).on("mouseover",function(d,i){
 				d3.select(this).attr("cursor","pointer");
 				d3.select(this).attr("font-weight","bolder");
@@ -153,8 +132,6 @@
 				d3.select(this).attr("font-weight","normal");
 
 		 });;
-
-
 
                 force.on("tick", function(){	//对于每一个时间间隔
 

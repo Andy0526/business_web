@@ -21,8 +21,8 @@
 
         <div class="row">
 
-            <div class="col-sm-12 ">
-                <div class="panel panel-info">
+            <div class="col-sm-5 " >
+                <div class="panel panel-info" style="height:300px ">
 
                     <div class="panel-heading">
                         <h3 class="panel-title">基本信息</h3>
@@ -31,21 +31,22 @@
                     <div class="panel-body">
 
                         <dl class="dl-horizontal" style="font-size: larger">
-                            <dt>类型</dt><dd>{{ data_info.platform_type}}</dd>
-                            <dt>公司</dt><dd>{{ data_info.company}}</dd>
-                            <dt>状态</dt><dd>{{ data_info.platform_status}}</dd>
-                            <dt>最少投资</dt><dd>{{ data_info.need_invest}}</dd>
-                            <dt>预期收益</dt><dd>{{ data_info.prospect_earn}}</dd>
-                            <dt>来源</dt><dd>{{ data_info.source}}</dd>
-                            <dt>链接</dt><dd>{{ data_info.source_url}}</dd>
+                            <dt>评级</dt><dd>{{ data_info.platform_rank}}</dd>
+                            <dt>人气指数</dt><dd>{{ data_info.platform_index}}</dd>
+                            <dt>平均收益</dt><dd>{{ data_info.platform_earn}}</dd>
+                            <dt>平台背景</dt><dd>{{ data_info.platform_background}}</dd>
+                            <dt>上线时间</dt><dd>{{ data_info.platform_time}}</dd>
+                            <dt>平均利率</dt><dd>{{ data_info.platform_rate}}</dd>
+                            <dt>成交量</dt><dd>{{ data_info.platform_volume}}</dd>
+                            <dt>平均借款期限</dt><dd>{{ data_info.platform_borrowing_period}}</dd>
+                            <dt>累计待还金额</dt><dd>{{ data_info.platform_need_return}}</dd>
                         </dl>
-
                     </div>
                 </div>
             </div>
 
-            <div class="col-sm-12 ">
-                <div class="panel panel-info">
+            <div class="col-sm-7 " >
+                <div class="panel panel-info" style="height:300px ">
 
                     <div class="panel-heading">
                         <h3 class="panel-title">运行情况</h3>
