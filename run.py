@@ -68,12 +68,12 @@ def info_type_list(type,size):
         if reader.line_num == 1:
             continue
         type_item = dict()
-        type_item['item_id'] = line[0]
-        type_item['author'] = line[4]
-        type_item['title'] = line[5]
+        type_item['item_id'] = line[0].decode('utf-8')
+        type_item['author'] = line[4].decode('utf-8')
+        type_item['title'] = line[5].decode('utf-8')
         if type == 'ugc':
-            type_item['content'] = line[6]
-        type_item['item_pub_time'] = line[7]
+            type_item['content'] = line[6].decode('utf-8')
+        type_item['item_pub_time'] = line[7].decode('utf-8')
         type_list.append(type_item)
         num += 1
         if num >= max_num:
