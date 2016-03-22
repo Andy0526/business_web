@@ -2,84 +2,137 @@
 
 {% block body %}
 
-    <script>
-        // 页面加载后
-        /* $(document).ready(function () {
-         // 处理文本中的换行和空格
-         $(".panel-body").each(
-         function () {
-         var content = $(this).text();
-         content = content.replace(new RegExp("#n#", "gm"), "<br>");
-         content = content.replace(new RegExp(" ", "gm"), "&nbsp;")
-         $(this).html(content);
-         }
-         )
-         });*/
-    </script>
 
     <!-- 显示导航栏 -->
     <div class="container" style="margin-top: 70px">
 
         <ol class="breadcrumb">
-            <li><a href="/info">资讯</a></li>
-            <li id="type" class="active">{{ type }}</li>
+            <li><a href="/info" >资讯</a></li>
+            <li id="type"  class="active">{{ type }}</li>
         </ol>
 
-
-        <div id="show" class="list-group" style="margin-top: -5px">
-
+        <div class="row">
+            <div class="col-md-12" >
+                <p class="text-primary">
+                    <strong><span id="num_info"></span></strong>
+                </p>
+            </div>
         </div>
+
+        <div id="show" class="list-group" style="margin-top: 5px">
+        </div>
+
+        <div class="row" >
+            <div class="col-md-12" >
+
+                <ul id="pages" class="pagination" >
+                </ul>
+            </div>
+        </div>
+
         <script>
-            // 加载数据
+
+            var rowCount = 50;
+            var current = 0;
+            var type;
+
             // 加载数据
             $(document).ready(function () {
-                var type = $("#type").text();
-                $.getJSON("/info/" + type + "/list/60", function (data) {
-                    $('#show').html("");
-                    for (var i = 0; i < data.type_list.length; ++i) {
-                        var item = data.type_list[i];
-                           if (type == 'ugc') {
-                                    $('#show').append(
-                                        "<a href='/info/" + type + "/" + item.item_id + "' class='list-group-item'>" +
-                                        "<div class='row'>" +
-                                        "<div class='col-md-9'>" +
-                                             "<strong>Q: </strong>&nbsp&nbsp" + item.title + "</div>" +
-                                        "</div>" +
-                                        "<div class='row' style='margin-top:5px'>" +
-                                        "<div class='col-md-9' style='white-space:nowrap;overflow:hidden;text-overflow:ellipsis;'>" +
-                                            "<strong>A: </strong>&nbsp&nbsp" + item.content + "</div>" +
-                                         "<div class='col-md-1'>" + item.author + "</div>" +
-                                        "<div class='col-md-2'>" + item.item_pub_time + "</div>" +
-                                        "</div>" +
-                                        "</a>"
-                                    );
-                                } else {
-                               $('#show').append(
-                                       "<a href='/info/" + type + "/" + item.item_id + "' class='list-group-item'>" +
-                                       "<div class='row'>" +
-                                       "<div class='col-md-8'>" + item.title + "</div>" +
-                                       "<div class='col-md-2'>" + item.author + "</div>" +
-                                       "<div class='col-md-2'>" + item.item_pub_time + "</div>" +
-                                       "</div>" +
-                                       "</a>"
-                               );
-                           }
-                    }
-                });
 
                 type = $("#type").text();
+                // 重命名
                 if (type == 'news')
                     $("#type").text("新闻")
                 else if (type == 'policy')
                     $("#type").text("政策")
                 else if (type == 'opinion')
-                   $("#type").text("观点")
+                    $("#type").text("观点")
                 else if (type == 'ugc')
-                   $("#type").text("用户评论")
+                    $("#type").text("用户评论")
 
+                // 导航栏
+                $.getJSON("/info/" + type + "/list/size", function (data) {
+                    $('#num_info').text('每页最多 '+rowCount+'条，共 '+data.list_size+'条')
+                    // 计算页数
+                    var pages = Math.floor(data.list_size/rowCount);
+                    if( (data.list_size %rowCount) > 0)
+                        pages += 1;
+                    // 添加导航栏
+                    for(var i =0;i<pages;++i){
+                        if(i==0)
+                            $('#pages').append("<li class='active mynav' >" + "<a>" +(i+1)+ "</a></li>")
+                        else
+                            $('#pages').append("<li class='mynav'><a>"+(i+1)+"</a></li>")
+                    }
+                    // 添加点击事件
+                    $(".mynav").click(reget_list);
+                });
+
+                // 显示
+                $.getJSON("/info/" + type + "/list/current="+current+"&rowCount="+rowCount, function (data) {
+                    show_list(data);
+                });
             });
+
+            // 重新刷新数据
+            function reget_list(){
+                var url = "/info/" + type + "/list/current="+($(this).text()-1)+"&rowCount="+rowCount;
+                $.getJSON(url, function (data) {
+                    show_list(data);
+                });
+                $(".mynav").attr("class", "mynav");
+                $(this).attr("class", "mynav active");
+
+            }
+
+            // 显示数据
+            function show_list(data){
+                $('#show').html("");
+                for (var i = 0; i < data.type_list.length; ++i) {
+                    var item = data.type_list[i];
+                    if (type == 'ugc') {
+                        $('#show').append(
+                                "<a href='/info/" + type + "/" + item.item_id + "' class='list-group-item'>" +
+                                "<div class='row'>" +
+                                "<div class='col-md-9'>" +
+                                "<strong>Q: </strong>&nbsp&nbsp" + item.title + "</div>" +
+                                "</div>" +
+                                "<div class='row' style='margin-top:5px'>" +
+                                "<div class='col-md-9' style='white-space:nowrap;overflow:hidden;text-overflow:ellipsis;'>" +
+                                "<strong>A: </strong>&nbsp&nbsp" + item.content + "</div>" +
+                                "<div class='col-md-1' style='white-space:nowrap;overflow:hidden;text-overflow:ellipsis;'>" + item.author + "</div>" +
+                                "<div class='col-md-2' style='white-space:nowrap;overflow:hidden;text-overflow:ellipsis;'>" + item.item_pub_time + "</div>" +
+                                "</div>" +
+                                "</a>"
+                        );
+                    } else if(type == 'opinion'){
+                        var content =  item.content
+                        content = content.replace(new RegExp("#n#","gm"),"")
+                        content = content.replace(new RegExp("#r#","gm"),"")
+                        content = content.replace(new RegExp(" ","gm"),"")
+                        $('#show').append(
+                                "<a href='/info/" + type + "/" + item.item_id + "' class='list-group-item'>" +
+                                "<div class='row'>" +
+                                "<div class='col-md-7' style='white-space:nowrap;overflow:hidden;text-overflow:ellipsis;'>" + content + "</div>" +
+                                "<div class='col-md-2 col-md-offset-1'style='white-space:nowrap;overflow:hidden;text-overflow:ellipsis;'>" + item.author + "</div>" +
+                                "<div class='col-md-2' style='white-space:nowrap;overflow:hidden;text-overflow:ellipsis;'>" + item.item_pub_time + "</div>" +
+                                "</div>" +
+                                "</a>"
+                        );
+                    }else {
+                        $('#show').append(
+                                "<a href='/info/" + type + "/" + item.item_id + "' class='list-group-item'>" +
+                                "<div class='row'>" +
+                                "<div class='col-md-8' style='white-space:nowrap;overflow:hidden;text-overflow:ellipsis;'>" + item.title + "</div>" +
+                                "<div class='col-md-2' style='white-space:nowrap;overflow:hidden;text-overflow:ellipsis;'>" + item.author + "</div>" +
+                                "<div class='col-md-2' style='white-space:nowrap;overflow:hidden;text-overflow:ellipsis;'>" + item.item_pub_time + "</div>" +
+                                "</div>" +
+                                "</a>"
+                        );
+                    }
+                }
+            }
         </script>
     </div>
-
 
 {% endblock %}

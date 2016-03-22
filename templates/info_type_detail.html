@@ -33,7 +33,7 @@
             </ol>
     </div>
 
-      <!-- 显示新闻内容 -->
+    <!-- 显示新闻内容 -->
     <div class="container" >
         <div class="row">
             <div class="col-sm-12  col-sm-offset-0">
@@ -41,7 +41,12 @@
                     <h2 id="title">{{ data_info.title}}</h2>
                     <hr>
                     <p >
-                        作者：<span id="author">{{ data_info.author }}</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        {% if data_info.type == "ugc" %}
+                            回复
+                        {% else %}
+                            作者
+                        {% endif %}
+                            ：<span id="author">{{ data_info.author }}</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                         日期：<span id="date">{{ data_info.item_pub_time }}</span><br>
                         网址：<a  id ="url" href="{{ data_info.url }}" target="_blank">{{ data_info.url }}</a>
                     </p>

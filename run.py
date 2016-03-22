@@ -3,6 +3,9 @@ from flask import Flask, render_template, request, jsonify
 import json
 import csv
 import sys
+
+reload(sys)
+sys.setdefaultencoding('utf-8')
 csv.field_size_limit(sys.maxsize)
 
 app = Flask(__name__)
@@ -68,10 +71,10 @@ def info_type_list(type,size):
         if reader.line_num == 1:
             continue
         type_item = dict()
-        type_item['item_id'] = line[0].decode('utf-8')
+        type_item['item_id'] = reader.line_num
         type_item['author'] = line[4].decode('utf-8')
         type_item['title'] = line[5].decode('utf-8')
-        if type == 'ugc':
+        if type == 'ugc' or type == 'opinion':
             type_item['content'] = line[6].decode('utf-8')
         type_item['item_pub_time'] = line[7].decode('utf-8')
         type_list.append(type_item)
@@ -83,20 +86,70 @@ def info_type_list(type,size):
     return jsonify(data_info)
 
 
+# 分页获取 current=0&rowCount=15
+@app.route('/info/<type>/list/current=<int:cur>&rowCount=<int:rows>', methods=['GET'])
+def info_type_list_sub(type, cur, rows):
+    reader = csv.reader(file('static/data/'+type+'.csv', 'rb'))
+    type_list = list()
+    start_num = cur * rows
+    end_num = (cur + 1) * rows
+    num = 0
+    for line in reader:
+        if reader.line_num == 1:
+            continue
+        if (num >= start_num) and (num < end_num):
+            type_item = dict()
+            type_item['item_id'] = reader.line_num
+            type_item['author'] = line[4].decode('utf-8')
+            type_item['title'] = line[5].decode('utf-8')
+            if type == 'ugc' or type == 'opinion':
+                type_item['content'] = line[6].decode('utf-8')
+            type_item['item_pub_time'] = line[7].decode('utf-8')
+            type_list.append(type_item)
+        num += 1
+        if num > end_num:
+            break
+
+    data_info = {
+        "type_list": type_list
+    }
+    return jsonify(data_info)
+
+
+# 获取指定个数新闻列表
+@app.route('/info/<type>/list/size', methods=['GET'])
+def info_type_list_size(type):
+    reader = csv.reader(file('static/data/'+type+'.csv', 'rb'))
+    list_size = 0
+    for line in reader:
+        if reader.line_num == 1:
+            continue
+        list_size += 1
+    data_info = {"list_size": list_size}
+    return jsonify(data_info)
+
+
 # 显示新闻详细的信息
-@app.route('/info/<type>/<id>', methods=['GET'])
+@app.route('/info/<type>/<int:id>', methods=['GET'])
 def info_news_detail(type,id):
     reader = csv.reader(file('static/data/'+type+'.csv', 'rb'))
     for line in reader:
         if reader.line_num == 1:
             continue
-        if id == line[0]:
+        if id == reader.line_num:
             news_item = dict()
             news_item['type'] = type
             news_item['item_id'] = line[0].decode('utf-8')
             news_item['url'] = line[3].decode('utf-8')
             news_item['author'] = line[4].decode('utf-8')
             news_item['title'] = line[5].decode('utf-8')
+            if type == 'opinion' :
+                 content = line[6].decode('utf-8')
+                 content = content.replace("#n#", "")
+                 content = content.replace("#r#", "")
+                 content = content.replace(" ", "")
+                 content = content[0:20]+"..."
+                 news_item['title'] = content
             news_item['content'] = line[6].decode('utf-8')
             news_item['item_pub_time'] = line[7].decode('utf-8')
             return render_template('info_type_detail.html', data_info=news_item)

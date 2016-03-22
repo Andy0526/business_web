@@ -231,7 +231,21 @@
                                         "</div>" +
                                         "</a>"
                                     );
-                                } else {
+                                }else if(type == 'opinion'){
+                                     var content =  items[i].content
+                                     content = content.replace(new RegExp("#n#","gm"),"")
+                                     content = content.replace(new RegExp("#r#","gm"),"")
+                                     content = content.replace(new RegExp(" ","gm"),"")
+                                     $('#show').append(
+                                        "<a href='/info/" + type + "/" + items[i].item_id + "' class='list-group-item'>" +
+                                        "<div class='row'>" +
+                                        "<div class='col-md-7' style='white-space:nowrap;overflow:hidden;text-overflow:ellipsis;'>" + content + "</div>" +
+                                        "<div class='col-md-2 col-md-offset-1'>" + items[i].author + "</div>" +
+                                        "<div class='col-md-2'>" + items[i].item_pub_time + "</div>" +
+                                        "</div>" +
+                                        "</a>"
+                                    );
+                                }else {
                                     $('#show').append(
                                         "<a href='/info/" + type + "/" + items[i].item_id + "' class='list-group-item'>" +
                                         "<div class='row'>" +
