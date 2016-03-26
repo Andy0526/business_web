@@ -3,7 +3,6 @@ from flask import Flask, render_template, request, jsonify
 import json
 import csv
 import sys
-
 reload(sys)
 sys.setdefaultencoding('utf-8')
 csv.field_size_limit(sys.maxsize)
@@ -190,30 +189,41 @@ def detail_platforms():
     data_info = {
         'platforms': platforms
     }
-    return jsonify(data_info);
+    return jsonify(data_info)
+
+
+# 获取某一平台信息
+@app.route('/detail/platform/<platform_name>/info', methods=['GET'])
+def detail_platform(platform_name):
+    # TODO platform_name 返回信息
+    platforms_json = json.load(open('static/data/platforms.json', 'r'))
+    for platform_json in platforms_json:
+        if platform_name == platform_json[u'平台']:
+            platform_dict = dict()
+            platform_dict['platform_name'] = platform_json[u'平台']
+            platform_dict['platform_rank'] = platform_json[u'评级']
+            platform_dict['platform_index'] = platform_json[u'人气指数']
+            platform_dict['platform_earn'] = platform_json[u'平均收益']
+            platform_dict['platform_background'] = platform_json[u'平台背景']
+            platform_dict['platform_time'] = platform_json[u'上线时间']
+            platform_dict['platform_rate'] = platform_json[u'平均利率']
+            platform_dict['platform_volume'] = platform_json[u'成交量']
+            platform_dict['platform_borrowing_period'] = platform_json[u'平均借款期限']
+            platform_dict['platform_need_return'] = platform_json[u'累计待还金额']
+
+            # 评论标签
+            all_comment_json = json.load(open('static/data/plat_top_labels_sentiment.json', 'r'))
+            comment_json = all_comment_json.get(platform_name, {u'frequent_label': [], u'sentiment': 0})
+            platform_dict['frequent_label'] = comment_json.get(u'frequent_label')
+            return jsonify(platform_dict);
+
+    return jsonify({})
 
 
 # 显示平台信息
 @app.route('/detail/platform/<platform_name>', methods=['GET'])
 def detail_info(platform_name):
-    # TODO platform_name 返回信息
-    platforms_json  = json.load(open('static/data/platforms.json','r'))
-    for platform_json in platforms_json:
-       if platform_name == platform_json[u'平台']:
-           platform_dict = dict()
-           platform_dict['platform_name'] = platform_json[u'平台']
-           platform_dict['platform_rank'] = platform_json[u'评级']
-           platform_dict['platform_index'] = platform_json[u'人气指数']
-           platform_dict['platform_earn'] = platform_json[u'平均收益']
-           platform_dict['platform_background'] = platform_json[u'平台背景']
-           platform_dict['platform_time'] = platform_json[u'上线时间']
-           platform_dict['platform_rate'] = platform_json[u'平均利率']
-           platform_dict['platform_volume'] = platform_json[u'成交量']
-           platform_dict['platform_borrowing_period'] = platform_json[u'平均借款期限']
-           platform_dict['platform_need_return'] = platform_json[u'累计待还金额']
-           return render_template('detail_info.html', data_info=platform_dict);
-
-    return render_template('detail_info.html', data_info={})
+    return render_template('detail_info.html', platform_name=platform_name)
 
 
 @app.route('/detail')
@@ -231,7 +241,7 @@ def search_info(key_word):
     data_info = {
         'key_word': key_word
     }
-    return render_template("search_info.html",data_info=data_info)
+    return render_template("search_info.html", data_info=data_info)
 
 
 @app.route('/search')
@@ -242,53 +252,6 @@ def search():
 @app.route('/invest')
 def invest():
     return render_template("invest.html")
-
-
-@app.route('/datajson', methods=['GET'])
-def json_data():
-    data0 = {
-        'categories': ['衬衫', '羊毛衫', '雪纺衫', '裤子', '高跟鞋', '袜子', '羊毛衫', '雪纺衫'],
-        'data': [20, 20, 36, 10, 10, 20, 10, 10]
-    }
-    return jsonify(data0)
-
-
-@app.route('/datajson2/current=<cur>&rowCount=<ri>&sort[sender]=<sor>&searchPhrase=<sp>')
-def json_data2(cur, ri, sor, sp):
-    data3 = {
-        "cue": cur,
-        "ri": ri,
-        "sor": sor,
-        "sp": sp
-    }
-    data2 = {
-        "current": 1,
-        "rowCount": 4,
-        "rows": [
-            {
-                "id": 19,
-                "sender": "123@test.de",
-                "received": "2014-05-30T22:15:00"
-            },
-            {
-                "id": 14,
-                "sender": "123@test.de",
-                "received": "2014-05-30T20:15:00"
-            },
-            {
-                "id": 11,
-                "sender": "123@test.de",
-                "received": "2014-05-30T22:15:00"
-            },
-            {
-                "id": 1,
-                "sender": "123@test.de",
-                "received": "2014-05-30T20:15:00"
-            }
-        ],
-        "total": 4
-    }
-    return jsonify(data2)
 
 
 if __name__ == '__main__':
