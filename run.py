@@ -191,7 +191,6 @@ def detail_platforms():
     }
     return jsonify(data_info)
 
-
 # 获取某一平台信息
 @app.route('/detail/platform/<platform_name>/info', methods=['GET'])
 def detail_platform(platform_name):
@@ -214,9 +213,14 @@ def detail_platform(platform_name):
             # 评论标签
             all_comment_json = json.load(open('static/data/plat_top_labels_sentiment.json', 'r'))
             comment_json = all_comment_json.get(platform_name, {u'frequent_label': [], u'sentiment': 0})
-            platform_dict['frequent_label'] = comment_json.get(u'frequent_label')
-            return jsonify(platform_dict);
-
+            comment_map_list = comment_json.get(u'frequent_label')
+            #转换成 name value 形式
+            comment_list = list()
+            for comment_map in comment_map_list:
+                for (k, v) in comment_map.items():
+                    comment_list.append({'name': k, 'value': v})
+            platform_dict['frequent_label'] = comment_list
+            return jsonify(platform_dict)
     return jsonify({})
 
 
