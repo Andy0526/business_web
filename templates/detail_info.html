@@ -3,186 +3,227 @@
 {% block body %}
 
     <!-- 显示导航栏 -->
-    <div class="container" style="margin-top: 70px" >
+    <div class="container" style="margin-top: 70px">
         <ol class="breadcrumb">
             <li><a href="/detail">平台详情</a></li>
-            <li class="active" id="title_platform_name">{{ platform_name }}</li>
+            <li class="active" id="platform_name">{{ platform_name }}</li>
         </ol>
     </div>
 
     <!-- 显示内容 -->
-    <div class="container" >
-
+    <div class="container">
 
         <div class="row">
+            <div class="col-md-12">
+                <table class="table table-bordered">
 
+                    <tbody style="text-align: center">
+                    <tr style="text-align: left " class="info">
+                        <td colspan="2"> <span
+                                class="glyphicon glyphicon-hand-right"></span>&nbsp&nbsp基本信息
+                        </td>
+                    </tr>
 
-            <div class="col-sm-5" >
-                <div class="panel panel-info" style="height:440px ">
+                    <tr>
+                        <td>评级</td>
+                        <td id="platform_rank"></td>
+                    </tr>
+                    <td>人气指数</td>
+                    <td id="platform_index"></td>
+                    </tr>
+                    <tr>
+                        <td>平均收益</td>
+                        <td id="platform_earn"></td>
+                    </tr>
+                    <tr>
+                        <td>平台背景</td>
+                        <td id="platform_background"></td>
+                    </tr>
+                    <tr>
+                        <td>上线时间</td>
+                        <td id="platform_time"></td>
+                    </tr>
+                    <tr>
+                        <td>平均利率</td>
+                        <td id="platform_rate"></td>
+                    </tr>
+                    <tr>
+                        <td> 成交量</td>
+                        <td id="platform_volume"></td>
+                    </tr>
+                    <tr>
+                        <td>平均借款期限</td>
+                        <td id="platform_borrowing_period"></td>
+                    </tr>
+                    <tr>
+                        <td>累计待还金额</td>
+                        <td id="platform_need_return"></td>
+                    </tr>
 
-                    <div class="panel-heading">
-                        <h3 class="panel-title">基本信息</h3>
-                    </div>
-                     <div class="panel-body">
-                        <br>
-                        <dl class="dl-horizontal" style="font-size: 20px;">
-                            <dt>平台</dt><dd id="platform_name"></dd>
-                            <dt>评级</dt><dd id="platform_rank"></dd>
-                            <dt>人气指数</dt><dd id="platform_index"></dd>
-                            <dt>平均收益</dt><dd id="platform_earn"></dd>
-                            <dt>平台背景</dt><dd id="platform_background"></dd>
-                            <dt>上线时间</dt><dd id="platform_time"></dd>
-                            <dt>平均利率</dt><dd id="platform_rate"></dd>
-                            <dt>成交量</dt><dd id="platform_volume"></dd>
-                            <dt>平均借款期限</dt><dd id="platform_borrowing_period"></dd>
-                            <dt>累计待还金额</dt><dd id="platform_need_return"></dd>
-                        </dl>
-                        </div>
+                    <tr class="info" style="text-align: left">
+                        <td colspan="2"> <span
+                                class="glyphicon glyphicon-hand-right"></span>&nbsp&nbsp用户评论
+                        </td>
+                    </tr>
 
+                    <tr>
+                        <td colspan="2">
+                            <div id="relation_graph" style="width:600px;height:400px;margin: 0px auto;"/>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
 
-                </div>
             </div>
-
-             <div class="col-sm-7 " >
-                <div class="panel panel-info" style="height:440px ">
-
-                    <div class="panel-heading">
-                        <h3 class="panel-title">用户评论</h3>
-                    </div>
-                    <div id="relation_graph" style="width:580px;height:400px;margin: 0px auto;" ></div>
-                </div>
-            </div>
-
- <script src="{{ url_for("static",filename='js/d3.v3.min.js') }}"></script>
-            <script>
-                // 加载数据
-            $(document).ready(function () {
-                var title_platform_name = $("#title_platform_name").text();
-                // 显示
-                $.getJSON("/detail/platform/"+title_platform_name+"/info", function (data) {
-
-                     $('#platform_name').text(data['platform_name']);
-                    $('#platform_rank').text(data['platform_rank']);
-                         $('#platform_index').text(data['platform_index']);
-                         $('#platform_earn').text(data['platform_earn']);
-                         $('#platform_background').text(data['platform_background']);
-                         $('#platform_time').text(data['platform_time']);
-                         $('#platform_rate').text(data['platform_rate']);
-                         $('#platform_volume').text(data['platform_volume']);
-
-                         $('#platform_borrowing_period').text(data['platform_borrowing_period']);
-
-                      $('#platform_need_return').text(data['platform_need_return']);
-
-                    var comments = data['frequent_label']
-                    if(comments.length>0) {
-
-                        var items = [
-                            {name: title_platform_name}
-                        ]
-                        for (var i = 0; i < comments.length; ++i) {
-                            items.push({name: comments[i]})
-                        }
-
-                        draw_relation_graph(items)
-                    }
-
-                });
-            });
-
-            var width  = 580; // 宽度
-            var height = 400; // 长度
-            var svg = d3.select("#relation_graph") // svg
-                    .append("svg")
-                    .attr("width",width)
-                    .attr("height",height);
-
-
-            function draw_relation_graph(items){
-
-                var nodes = items;
-                var edges = [];
-                 for(var i =1 ;i< items.length;i++){
-                    edges.push({ source : 0  , target: i } );
-              }
-
-                var force = d3.layout.force()
-                        .nodes(nodes)		//指定节点数组
-                        .links(edges)		//指定连线数组
-                        .size([width,height])	//指定范围
-                        .linkDistance(150)	//指定连线长度
-                        .charge(-400);	//相互之间的作用力
-
-                force.start();	//开始作用
-
-                // console.log(nodes);
-                // console.log(edges);
-
-                //添加连线
-                var svg_edges = svg.selectAll("line")
-                        .data(edges)
-                        .enter()
-                        .append("line")
-                        .style("stroke","#888")
-                        .style("stroke-width",1);
-
-                var color = d3.scale.category20();
-
-                //添加节点
-                var svg_nodes = svg.selectAll("circle")
-                        .data(nodes)
-                        .enter()
-                        .append("circle")
-                        .attr("r",20)
-                        .style("fill",function(d,i){
-                            return color(i);
-                        })
-                        .call(force.drag);	//使得节点能够拖动
-
-                //添加描述节点的文字
-                var svg_texts = svg.selectAll("text")
-                        .data(nodes)
-                        .enter()
-                        .append("text")
-                        .style("fill", "black")
-                        .attr("dx", 20)
-                        .attr("dy", 8)
-                        .text(function(d){
-                            return d.name;
-                        }).on("mouseover",function(d,i){
-
-				d3.select(this).attr("font-weight","bolder");
-
-		 })
-		 .on("mouseout",function(d,i){
-				d3.select(this).attr("cursor","auto");
-				d3.select(this).attr("font-weight","normal");
-
-		 });
-                force.on("tick", function(){	//对于每一个时间间隔
-
-                    //更新连线坐标
-                    svg_edges.attr("x1",function(d){ return d.source.x; })
-                            .attr("y1",function(d){ return d.source.y; })
-                            .attr("x2",function(d){ return d.target.x; })
-                            .attr("y2",function(d){ return d.target.y; });
-
-                    //更新节点坐标
-                    svg_nodes.attr("cx",function(d){ return d.x; })
-                            .attr("cy",function(d){ return d.y; });
-
-                    //更新文字坐标
-                    svg_texts.attr("x", function(d){ return d.x; })
-                            .attr("y", function(d){ return d.y; });
-                });
-
-            }
-
-            </script>
-
 
 
         </div>
+
+    </div>
+    <script src="{{ url_for("static",filename='js/d3.v3.min.js') }}"></script>
+    <script>
+        // 加载数据
+        $(document).ready(function () {
+            var platform_name = $("#platform_name").text();
+            // 显示
+            $.getJSON("/detail/platform/" + platform_name + "/info", function (data) {
+
+                $('#platform_rank').text(data['platform_rank']);
+                $('#platform_index').text(data['platform_index']);
+                $('#platform_earn').text(data['platform_earn']);
+                $('#platform_background').text(data['platform_background']);
+                $('#platform_time').text(data['platform_time']);
+                $('#platform_rate').text(data['platform_rate']);
+                $('#platform_volume').text(data['platform_volume']);
+
+                $('#platform_borrowing_period').text(data['platform_borrowing_period']);
+
+                $('#platform_need_return').text(data['platform_need_return']);
+
+                var comments = data['frequent_label']
+                if (comments.length > 0) {
+
+                    var items = [
+                        {name: platform_name}
+                    ]
+                    for (var i = 0; i < comments.length; ++i) {
+                        items.push({name: comments[i]})
+                    }
+
+                    draw_relation_graph(items)
+                }
+
+            });
+        });
+
+        var width = 600; // 宽度
+        var height = 400; // 长度
+        var svg = d3.select("#relation_graph") // svg
+                .append("svg")
+                .attr("width", width)
+                .attr("height", height);
+
+
+        function draw_relation_graph(items) {
+
+            var nodes = items;
+            var edges = [];
+            for (var i = 1; i < items.length; i++) {
+                edges.push({source: 0, target: i});
+            }
+
+            var force = d3.layout.force()
+                    .nodes(nodes)		//指定节点数组
+                    .links(edges)		//指定连线数组
+                    .size([width, height])	//指定范围
+                    .linkDistance(150)	//指定连线长度
+                    .charge(-400);	//相互之间的作用力
+
+            force.start();	//开始作用
+
+            // console.log(nodes);
+            // console.log(edges);
+
+            //添加连线
+            var svg_edges = svg.selectAll("line")
+                    .data(edges)
+                    .enter()
+                    .append("line")
+                    .style("stroke", "#888")
+                    .style("stroke-width", 1);
+
+            var color = d3.scale.category20();
+
+            //添加节点
+            var svg_nodes = svg.selectAll("circle")
+                    .data(nodes)
+                    .enter()
+                    .append("circle")
+                    .attr("r", 20)
+                    .style("fill", function (d, i) {
+                        return color(i);
+                    })
+                    .call(force.drag);	//使得节点能够拖动
+
+            //添加描述节点的文字
+            var svg_texts = svg.selectAll("text")
+                    .data(nodes)
+                    .enter()
+                    .append("text")
+                    .style("fill", "black")
+                    .attr("dx", 20)
+                    .attr("dy", 8)
+                    .text(function (d) {
+                        return d.name;
+                    }).on("mouseover", function (d, i) {
+
+                        d3.select(this).attr("font-weight", "bolder");
+
+                    })
+                    .on("mouseout", function (d, i) {
+                        d3.select(this).attr("cursor", "auto");
+                        d3.select(this).attr("font-weight", "normal");
+
+                    });
+            force.on("tick", function () {	//对于每一个时间间隔
+
+                //更新连线坐标
+                svg_edges.attr("x1", function (d) {
+                            return d.source.x;
+                        })
+                        .attr("y1", function (d) {
+                            return d.source.y;
+                        })
+                        .attr("x2", function (d) {
+                            return d.target.x;
+                        })
+                        .attr("y2", function (d) {
+                            return d.target.y;
+                        });
+
+                //更新节点坐标
+                svg_nodes.attr("cx", function (d) {
+                            return d.x;
+                        })
+                        .attr("cy", function (d) {
+                            return d.y;
+                        });
+
+                //更新文字坐标
+                svg_texts.attr("x", function (d) {
+                            return d.x;
+                        })
+                        .attr("y", function (d) {
+                            return d.y;
+                        });
+            });
+
+        }
+
+    </script>
+
+
+    </div>
     </div>
 
 
