@@ -191,6 +191,7 @@ def detail_platforms():
     }
     return jsonify(data_info)
 
+
 # 获取某一平台信息
 @app.route('/detail/platform/<platform_name>/info', methods=['GET'])
 def detail_platform(platform_name):
@@ -220,14 +221,29 @@ def detail_platform(platform_name):
                 for (k, v) in comment_map.items():
                     comment_list.append({'name': k, 'value': v})
             platform_dict['frequent_label'] = comment_list
-
-            # 相关动态
-            recent_news_json = json.load(open('static/data/plat_recent_news.json', 'r'))
-            recent_news_list = recent_news_json.get(platform_name, [])
-            platform_dict['recent_news_list'] = recent_news_list
             return jsonify(platform_dict)
+
     return jsonify({})
 
+
+# 获取某一平台最新信息
+@app.route('/detail/platform/<platform_name>/news/recent', methods=['GET'])
+def detail_platform_news_recent(platform_name):
+        recent_news_json = json.load(open('static/data/plat_recent_news.json', 'r'))
+        recent_news_list = recent_news_json.get(platform_name, [])
+        platform_dict = dict()
+        platform_dict['recent_news_list'] = recent_news_list
+        return jsonify(platform_dict)
+
+
+# 获取某一平台相关信息
+@app.route('/detail/platform/<platform_name>/news/related', methods=['GET'])
+def detail_platform_news_related(platform_name):
+        related_news_json = json.load(open('static/data/plat_related_news.json', 'r'))
+        related_news_list = related_news_json.get(platform_name, [])
+        platform_dict = dict()
+        platform_dict['related_news_list'] = related_news_list
+        return jsonify(platform_dict)
 
 
 # 显示平台信息
