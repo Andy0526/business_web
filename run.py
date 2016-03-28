@@ -227,22 +227,17 @@ def detail_platform(platform_name):
 
 
 # 获取某一平台最新信息
-@app.route('/detail/platform/<platform_name>/news/recent', methods=['GET'])
-def detail_platform_news_recent(platform_name):
+@app.route('/detail/platform/<platform_name>/news', methods=['GET'])
+def detail_platform_news(platform_name):
+        platform_dict = dict()
         recent_news_json = json.load(open('static/data/plat_recent_news.json', 'r'))
         recent_news_list = recent_news_json.get(platform_name, [])
-        platform_dict = dict()
         platform_dict['recent_news_list'] = recent_news_list
-        return jsonify(platform_dict)
 
-
-# 获取某一平台相关信息
-@app.route('/detail/platform/<platform_name>/news/related', methods=['GET'])
-def detail_platform_news_related(platform_name):
         related_news_json = json.load(open('static/data/plat_related_news.json', 'r'))
         related_news_list = related_news_json.get(platform_name, [])
-        platform_dict = dict()
         platform_dict['related_news_list'] = related_news_list
+
         return jsonify(platform_dict)
 
 

@@ -61,38 +61,26 @@
                     </tr>
 
                     <tr class="info" style="text-align: left" id="platform_comment_title">
-                        <td colspan="2" > <span
+                        <td colspan="2"> <span
                                 class="glyphicon glyphicon-hand-right"></span>&nbsp&nbsp用户评论
                         </td>
                     </tr>
 
                     <tr id="platform_comment_block">
-                        <td colspan="2" >
+                        <td colspan="2">
                             <div id="comment_div" style="width:600px;height:400px;margin: 5px auto;"/>
                         </td>
                     </tr>
 
-                    <tr class="info" style="text-align: left" id="recent_news_title">
-                        <td colspan="2" > <span
-                                class="glyphicon glyphicon-hand-right"></span>&nbsp&nbsp近期动态
-                        </td>
-                    </tr>
 
-                    <tr id="recent_news_block">
-                        <td colspan="2" style="padding: 0 0 0  0;">
-                            <div id="recent_news" style="width: 100%"></div>
-                        </td>
-                    </tr>
-
-
-                    <tr class="info" style="text-align: left" id="related_news_title">
+                    <tr class="info" style="text-align: left" id="news_title">
                         <td colspan="2"> <span
                                 class="glyphicon glyphicon-hand-right"></span>&nbsp&nbsp相关新闻
                         </td>
                     </tr>
-                    <tr id="related_news_block">
+                    <tr id="news_block">
                         <td colspan="2" style="padding: 0 0 0  0;">
-                            <div id="related_news" style="width: 100%"></div>
+                            <div id="news_div" style="width: 100%"></div>
                         </td>
                     </tr>
 
@@ -132,41 +120,40 @@
             });
 
 
-            $.getJSON("/detail/platform/" + platform_name + "/news/recent", function (data) {
-                var items = data['recent_news_list'];
-                for (var i = 0; i < items.length; ++i) {
-                    $('#recent_news').append(
-                            "<a href='" + items[i].url + "' target='_blank' class='list-group-item' style='border-left: none;border-right: none;border-bottom: none'>" +
-                            "<div class='row'>" +
-                            "<div class='col-md-12' style='white-space:nowrap;overflow:hidden;text-overflow:ellipsis;'>" + items[i].title + "</div>" +
-                            "</div>" +
-                            "</a>"
-                    );
-                }
-                if(items.length==0){
-                    $('#recent_news_title').hide();
-                    $('#recent_news_block').hide();
+            $.getJSON("/detail/platform/" + platform_name + "/news", function (data) {
+                var recent_news_list = data['recent_news_list'];
+                var related_news_list = data['related_news_list'];
+                var num = recent_news_list.length + related_news_list.length
+
+                if (num == 0) {
+                    $('#news_title').hide();
+                    $('#news_block').hide();
+                } else {
+                    for (var i = 0; i < recent_news_list.length; ++i) {
+                        $('#news_div').append(
+                                "<a href='" + recent_news_list[i].url + "' target='_blank' class='list-group-item' style='border-left: none;border-right: none;border-bottom: none'>" +
+                                "<div class='row'>" +
+                                "<div class='col-md-12' style='white-space:nowrap;overflow:hidden;text-overflow:ellipsis;'>" + recent_news_list[i].title + "&nbsp;&nbsp;<strong style='color:red;font-style:italic;'> New </strong></div>" +
+                                "</div>" +
+                                "</a>"
+                        );
+                    }
+
+                    for (var i = 0; i < related_news_list.length; ++i) {
+                        $('#news_div').append(
+                                "<a href='" + related_news_list[i].url + "' target='_blank' class='list-group-item' style='border-left: none;border-right: none;border-bottom: none'>" +
+                                "<div class='row'>" +
+                                "<div class='col-md-12' style='white-space:nowrap;overflow:hidden;text-overflow:ellipsis;'>" + related_news_list[i].title + "</div>" +
+                                "</div>" +
+                                "</a>"
+                        );
+                    }
+
                 }
 
             });
 
-            $.getJSON("/detail/platform/" + platform_name + "/news/related", function (data) {
-                var items = data['related_news_list'];
-                for (var i = 0; i < items.length; ++i) {
-                    $('#related_news').append(
-                            "<a href='" + items[i].url + "' target='_blank' class='list-group-item' style='border-left: none;border-right: none;border-bottom: none'>" +
-                            "<div class='row'>" +
-                            "<div class='col-md-12' style='white-space:nowrap;overflow:hidden;text-overflow:ellipsis;'>" + items[i].title + "</div>" +
-                            "</div>" +
-                            "</a>"
-                    );
-                }
-                if(items.length==0){
-                    $('#related_news_title').hide();
-                    $('#related_news_block').hide();
-                }
 
-            });
         });
 
         function show_commnet(platform_name, comment_data) {
