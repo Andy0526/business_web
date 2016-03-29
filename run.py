@@ -247,9 +247,19 @@ def detail_info(platform_name):
     return render_template('detail_info.html', platform_name=platform_name)
 
 
-@app.route('/detail')
-def detail():
-    return render_template("detail.html")
+@app.route('/detail/navigation')
+def detail_navigation():
+    return render_template("detail_navigation.html")
+
+
+@app.route('/detail/rank')
+def detail_rank():
+    return render_template("detail_rank.html")
+
+
+@app.route('/detail/problem')
+def detail_problem():
+    return render_template("detail_problem.html")
 
 
 @app.route('/data')

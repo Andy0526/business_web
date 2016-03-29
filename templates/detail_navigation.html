@@ -1,0 +1,316 @@
+{% extends "detail_info.html" %}
+
+{% block title %} 平台导航 {% endblock %}
+
+{% block body %}
+
+    <div class="container" style="margin-top: 70px;">
+
+        <ol class="breadcrumb">
+            <li class="active">排行榜</li>
+        </ol>
+
+
+        <div class="row">
+            <div class="col-md-3">
+                <div id="rank_platform_index" class="list-group">
+                    <a href="#" class="list-group-item list-group-item-heading list-group-item-danger">
+                        人气指数 TOP 5
+                    </a>
+                </div>
+            </div>
+
+            <div class="col-md-3">
+                <div id="rank_platform_earn" class="list-group">
+                    <a href="#" class="list-group-item list-group-item-heading list-group-item-success">
+                        收益 TOP 5
+                    </a>
+                </div>
+            </div>
+
+            <div class="col-md-3">
+                <div id="rank_platform_volume" class="list-group">
+                    <a href="#" class="list-group-item list-group-item-heading list-group-item-warning">
+                        成交量(万) TOP 5
+                    </a>
+                </div>
+            </div>
+
+            <div class="col-md-3">
+                <div id="rank_platform_rank" class="list-group">
+                    <a href="#" class="list-group-item list-group-item-heading list-group-item-info">
+                        评级 TOP 5
+                    </a>
+                </div>
+            </div>
+
+        </div>
+
+
+        <ol class="breadcrumb">
+            <li class="active">背景分类</li>
+        </ol>
+
+        <div>
+            <strong>上市公司背景</strong><br/><br/>
+            <ul id="background_quoted_company" class="list-inline">
+            </ul>
+            <br/>
+            <strong> VC/PE背景</strong><br/><br/>
+            <ul id="background_vc_pe" class="list-inline">
+            </ul>
+            <br/>
+            <strong> 国资背景</strong><br/><br/>
+            <ul id="background_state_owned" class="list-inline">
+            </ul>
+            <br/>
+            <strong> 无背景</strong><br/><br/>
+            <ul id="background_else" class="list-inline">
+            </ul>
+            <br/>
+        </div>
+
+
+    </div>
+    </div>
+
+    <script>
+        // 数据缓存
+        var data_info;
+
+        // 替换字符串
+        function replace_data_info() {
+            for (var i = 0; i < data_info.length; ++i) { // 逐个替换
+                var info = data_info[i];
+                // 背景
+                if (info.platform_background.length > 2) {
+                    info.platform_background = info.platform_background.substr(0, info.platform_background.length - 2);
+                }
+                // 成交量
+                if (info.platform_volume.length > 2) {
+                    info.platform_volume = info.platform_volume.substr(0, info.platform_volume.length - 2);
+                }
+                // 累计代还金额
+                if (info.platform_need_return.length > 2) {
+                    info.platform_need_return = info.platform_need_return.substr(0, info.platform_need_return.length - 2);
+                }
+                // 借款周期
+                if (info.platform_borrowing_period.length > 1) {
+                    info.platform_borrowing_period = info.platform_borrowing_period.substr(0, info.platform_borrowing_period.length - 1);
+                }
+            }
+        }
+
+        // 显示信息
+        function show_info() {
+            var rank_num = 5;
+            platform_sort('人气指数', '-1');
+            for (var i = 0; i < rank_num; ++i) { // 逐个渲染
+                var info = data_info[i];
+                $("#rank_platform_index").append(
+                        "<a href= '/detail/platform/" + info.platform_name + "' target='_blank' class='list-group-item'>" + info.platform_name + " (" + info.platform_index + ")" + "</a>"
+                );
+            }
+
+            platform_sort('平均收益', '-1');
+            for (var i = 0; i < rank_num; ++i) { // 逐个渲染
+                var info = data_info[i];
+                $("#rank_platform_earn").append(
+                        "<a href= '/detail/platform/" + info.platform_name + "' target='_blank' class='list-group-item'>" + info.platform_name + " (" + info.platform_earn + ")" + "</a>"
+                );
+            }
+
+            platform_sort('成交量', '-1');
+            for (var i = 0; i < rank_num; ++i) { // 逐个渲染
+                var info = data_info[i];
+                $("#rank_platform_volume").append(
+                        "<a href= '/detail/platform/" + info.platform_name + "' target='_blank' class='list-group-item'>" + info.platform_name + "(" + info.platform_volume + ")" + "</a>"
+                );
+            }
+
+            platform_sort('评级', '-1');
+            for (var i = 0; i < rank_num; ++i) { // 逐个渲染
+                var info = data_info[i];
+                $("#rank_platform_rank").append(
+                        "<a href= '/detail/platform/" + info.platform_name + "' target='_blank' class='list-group-item'>" + info.platform_name + " (" + info.platform_rank + ")" + "</a>"
+                );
+            }
+
+            for (var i = 0; i < data_info.length; ++i) { // 逐个渲染
+                var info = data_info[i];
+                var object;
+                var html_str;
+                if (info.platform_background == "上市公司") {
+                    object = $("#background_quoted_company")
+                    html_str = "<li><a href= '/detail/platform/" + info.platform_name + "' target='_blank' class='list-group-item list-group-item-danger' style='margin-top:5px;'>" + info.platform_name + "</a></li>";
+
+                } else if (info.platform_background == "VC/PE") {
+                    object = $("#background_vc_pe")
+
+                    html_str = "<li><a href= '/detail/platform/" + info.platform_name + "' target='_blank' class='list-group-item list-group-item-success' style='margin-top:5px;'>" + info.platform_name + "</a></li>";
+
+                } else if (info.platform_background == "国资") {
+                    object = $("#background_state_owned")
+
+                    html_str = "<li><a href= '/detail/platform/" + info.platform_name + "' target='_blank' class='list-group-item list-group-item-warning' style='margin-top:5px;'>" + info.platform_name + "</a></li>";
+
+                } else if (info.platform_background == "无") {
+                    object = $("#background_else")
+
+                    html_str = "<li><a href= '/detail/platform/" + info.platform_name + "' target='_blank' class='list-group-item list-group-item-info' style='margin-top:5px;'>" + info.platform_name + "</a></li>";
+
+                } else
+                    continue;
+
+                object.append(html_str
+                );
+
+
+            }
+
+
+        }
+
+        // 量化评级
+        function rankToVal(rank) {
+            if (rank == "A+")
+                return 10;
+            else if (rank == "A")
+                return 9;
+            else if (rank == "A-")
+                return 8;
+            else if (rank == "B+")
+                return 7;
+            else if (rank == "B")
+                return 6;
+            else if (rank == "B-")
+                return 5;
+            else if (rank == "C+")
+                return 4;
+            else if (rank == "C")
+                return 3;
+            else if (rank == "C-")
+                return 2;
+        }
+
+        // 进行排序
+        function platform_sort(tag, updown) {
+            if (tag == '人气指数') {
+                data_info.sort(
+                        function (d1, d2) {
+                            if (d1.platform_index.length == 0)
+                                return 1;
+                            if (d2.platform_index.length == 0)
+                                return -1;
+                            return (d1.platform_index - d2.platform_index) * updown;
+                        }
+                );
+            } else if (tag == '评级') {
+                data_info.sort(
+                        function (d1, d2) {
+                            if (d1.platform_rank.length == 0)
+                                return 1;
+                            if (d2.platform_rank.length == 0)
+                                return -1;
+                            var r1 = rankToVal(d1.platform_rank);
+                            var r2 = rankToVal(d2.platform_rank);
+                            return (r1 - r2) * updown;
+                        }
+                );
+
+            } else if (tag == '平均收益') {
+                data_info.sort(
+                        function (d1, d2) {
+                            if (d1.platform_earn.length == 0)
+                                return 1;
+                            if (d2.platform_earn.length == 0)
+                                return -1;
+                            var r1 = d1.platform_earn.substr(0, d1.platform_earn.length - 1); // 获取子字符串
+                            var r2 = d2.platform_earn.substr(0, d2.platform_earn.length - 1); // 获取子字符串
+                            return (parseFloat(r1) - parseFloat(r2)) * updown;
+                        }
+                );
+            } else if (tag == '上线时间') {
+                data_info.sort(
+                        function (d1, d2) {
+                            if (d1.platform_time.length == 0)
+                                return 1;
+                            if (d2.platform_time.length == 0)
+                                return -1;
+                            str1 = d1.platform_time.replace(/-/g, "/");
+                            str2 = d2.platform_time.replace(/-/g, "/");
+                            var date1 = new Date(str1);
+                            var date2 = new Date(str2);
+                            var value = 1;
+                            if (date1 < date2)
+                                value = -1;
+                            return value * updown;
+
+                        }
+                );
+            } else if (tag == "平均利率") {
+                data_info.sort(
+                        function (d1, d2) {
+                            if (d1.platform_rate.length == 0)
+                                return 1;
+                            if (d2.platform_rate.length == 0)
+                                return -1;
+                            var r1 = d1.platform_rate.substr(0, d1.platform_rate.length - 1); // 获取子字符串
+                            var r2 = d2.platform_rate.substr(0, d2.platform_rate.length - 1); // 获取子字符串
+                            return (parseFloat(r1) - parseFloat(r2)) * updown;
+                        }
+                );
+            } else if (tag == "成交量") {
+                data_info.sort(
+                        function (d1, d2) {
+                            if (d1.platform_volume.length == 0)
+                                return 1;
+                            if (d2.platform_volume.length == 0)
+                                return -1;
+                            //  var r1 = d1.platform_volume.substr(0, d1.platform_volume.length - 2); // 获取子字符串
+                            /// var r2 = d2.platform_volume.substr(0, d2.platform_volume.length - 2); // 获取子字符串
+                            return (parseFloat(d1.platform_volume) - parseFloat(d2.platform_volume)) * updown;
+                        }
+                );
+            } else if (tag == '平均借款期限') {
+                data_info.sort(
+                        function (d1, d2) {
+                            if (d1.platform_borrowing_period.length == 0)
+                                return 1;
+                            if (d2.platform_borrowing_period.length == 0)
+                                return -1;
+                            var r1 = d1.platform_borrowing_period; // 获取子字符串
+                            var r2 = d2.platform_borrowing_period; // 获取子字符串
+                            return (parseFloat(r1) - parseFloat(r2)) * updown;
+                        }
+                );
+            } else if (tag == '累计待还金额') {
+                data_info.sort(
+                        function (d1, d2) {
+                            if (d1.platform_need_return.length == 0)
+                                return 1;
+                            if (d2.platform_need_return.length == 0)
+                                return -1;
+                            var r1 = d1.platform_need_return; // 获取子字符串
+                            var r2 = d2.platform_need_return; // 获取子字符串
+                            return (parseFloat(r1) - parseFloat(r2)) * updown;
+                        }
+                );
+            }
+            return;
+        }
+
+        // 加载数据
+        $(document).ready(function () {
+            $.getJSON("/detail/platforms", function (data) {
+                data_info = data.platforms;
+                // 整理数据
+                replace_data_info();
+                // 显示信息
+                show_info();
+
+            });
+        });
+    </script>
+
+{% endblock %}
