@@ -209,7 +209,7 @@ def detail_problem_platforms():
         platform_dict['registration_capital'] = platform_json['registration capital']
         platforms.append(platform_dict)
         num += 1
-        if num >= 1000:
+        if num >= 600:
             break
 
     data_info = {
