@@ -192,6 +192,29 @@ def detail_platforms():
     return jsonify(data_info)
 
 
+# 获取问题平台信息
+@app.route('/detail/problem_platforms', methods=['GET'])
+def detail_problem_platforms():
+    platforms_json = json.load(open('static/data/problem_platform.json','r'))
+
+    platforms = []
+    for platform_json in platforms_json:
+        platform_dict = dict()
+        platform_dict['platform_name'] = platform_json['platform_name']
+        platform_dict['event_type'] = platform_json['event_type']
+        platform_dict['problem_time'] = platform_json['problem_time']
+        platform_dict['region'] = platform_json['region']
+        platform_dict['online_time'] = platform_json['online_time']
+        platform_dict['registration_capital'] = platform_json['registration capital']
+
+        platforms.append(platform_dict)
+
+    data_info = {
+        'platforms': platforms
+    }
+    return jsonify(data_info)
+
+
 # 获取某一平台信息
 @app.route('/detail/platform/<platform_name>/info', methods=['GET'])
 def detail_platform(platform_name):

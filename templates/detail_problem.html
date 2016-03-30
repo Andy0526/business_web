@@ -4,123 +4,24 @@
 
 {% block body %}
 
-      <div class="container" style="margin-top: 70px;">
-        <p ><strong>共<span id="platform_num">0</span>条记录&nbsp;&nbsp;&nbsp;&nbsp;排序: <span id="sort_tag"></span>&nbsp;<span id="sort_updown"></span></strong> </p>
+    <div class="container" style="margin-top: 70px;">
+
         <div class="row">
-            <div class="col-md-12">
+
+            <div class="col-md-10 col-md-offset-1">
+
+                <p><strong>共<span id="platform_num">0</span>条记录</strong></p>
                 <table class="table table-hover">
                     <thead>
                     <tr></tr>
                     <tr class="warning">
                         <th>编号</th>
                         <th>平台名称</th>
-                        <th>
-                            <div class="dropdown">
-                                人气指数
-                           <span class="dropdown-toggle" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true"
-                                 aria-expanded="true">
-                                <span class="caret"></span>
-                            </span>
-                                <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
-                                    <li onclick="platform_sort('人气指数','1')" style="cursor:pointer"><a>递增排序</a></li>
-                                    <li onclick="platform_sort('人气指数','-1')" style="cursor:pointer"><a>递减排序</a></li>
-                                </ul>
-                            </div>
-                        </th>
-                        <th>
-                            <div class="dropdown">
-                                评级
-                           <span class="dropdown-toggle" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true"
-                                 aria-expanded="true">
-                                <span class="caret"></span>
-                            </span>
-                                <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
-                                    <li onclick="platform_sort('评级','1')" style="cursor:pointer"><a>递增排序</a></li>
-                                    <li onclick="platform_sort('评级','-1')" style="cursor:pointer"><a>递减排序</a></li>
-                                </ul>
-                            </div>
-                        </th>
-                        <th>
-                            <div class="dropdown">
-                                平均收益
-                           <span class="dropdown-toggle" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true"
-                                 aria-expanded="true">
-                                <span class="caret"></span>
-                            </span>
-                                <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
-                                    <li onclick="platform_sort('平均收益','1')" style="cursor:pointer"><a>递增排序</a></li>
-                                    <li onclick="platform_sort('平均收益','-1')" style="cursor:pointer"><a>递减排序</a></li>
-                                </ul>
-                            </div>
-                        </th>
-                        <th>背景</th>
-                        <th>
-                            <div class="dropdown">
-                                上线时间
-                           <span class="dropdown-toggle" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true"
-                                 aria-expanded="true">
-                                <span class="caret"></span>
-                            </span>
-                                <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
-                                    <li onclick="platform_sort('上线时间','1')" style="cursor:pointer"><a>递增排序</a></li>
-                                    <li onclick="platform_sort('上线时间','-1')" style="cursor:pointer"><a>递减排序</a></li>
-                                </ul>
-                            </div>
-                        </th>
-
-                        <th>
-                            <div class="dropdown">
-                                平均利率
-                           <span class="dropdown-toggle" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true"
-                                 aria-expanded="true">
-                                <span class="caret"></span>
-                            </span>
-                                <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
-                                    <li onclick="platform_sort('平均利率','1')" style="cursor:pointer"><a>递增排序</a></li>
-                                    <li onclick="platform_sort('平均利率','-1')" style="cursor:pointer"><a>递减排序</a></li>
-                                </ul>
-                            </div>
-
-                        </th>
-                        <th>
-                            <div class="dropdown">
-                                成交量(万)
-                           <span class="dropdown-toggle" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true"
-                                 aria-expanded="true">
-                                <span class="caret"></span>
-                            </span>
-                                <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
-                                    <li onclick="platform_sort('成交量','1')" style="cursor:pointer"><a>递增排序</a></li>
-                                    <li onclick="platform_sort('成交量','-1')" style="cursor:pointer"><a>递减排序</a></li>
-                                </ul>
-                            </div>
-                        </th>
-                        <th>
-                            <div class="dropdown">
-                                平均借款期限(月)
-                           <span class="dropdown-toggle" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true"
-                                 aria-expanded="true">
-                                <span class="caret"></span>
-                            </span>
-                                <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
-                                    <li onclick="platform_sort('平均借款期限','1')" style="cursor:pointer"><a>递增排序</a></li>
-                                    <li onclick="platform_sort('平均借款期限','-1')" style="cursor:pointer"><a>递减排序</a></li>
-                                </ul>
-                            </div>
-                        </th>
-                        <th>
-                            <div class="dropdown">
-                                累计待还金额（万）
-                           <span class="dropdown-toggle" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true"
-                                 aria-expanded="true">
-                                <span class="caret"></span>
-                            </span>
-                                <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
-                                    <li onclick="platform_sort('累计待还金额','1')" style="cursor:pointer"><a>递增排序</a></li>
-                                    <li onclick="platform_sort('累计待还金额','-1')" style="cursor:pointer"><a>递减排序</a></li>
-                                </ul>
-                            </div>
-                        </th>
+                        <th>上线时间</th>
+                        <th>问题时间</th>
+                        <th>地区</th>
+                        <th>注册资本</th>
+                        <th>问题类型</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -128,8 +29,15 @@
                 </table>
             </div>
 
+
+
         </div>
+
+
+
     </div>
+
+     <script src="{{ url_for("static",filename='js/echarts.min.js') }}"></script>
     <script>
         // 数据缓存
         var data_info;
@@ -283,13 +191,13 @@
                         }
                 );
             }
-             $("#sort_tag").text(tag);
-            if(updown>0)
+            $("#sort_tag").text(tag);
+            if (updown > 0)
                 $("#sort_updown").text("递增");
             else
-                 $("#sort_updown").text("递减");
+                $("#sort_updown").text("递减");
             show_data(data_info);
-             show_data(data_info);
+            show_data(data_info);
             return;
         }
 
@@ -301,40 +209,39 @@
                 var info = data_info[i];
                 $("tbody").append("<tr>" +
                         "<td>" + (i + 1) + "</td>" +
-                        "<td> <a href= '/detail/platform/" + info.platform_name + "' target='_blank'>" + info.platform_name + "</a></td>" +
-                        "<td>" + info.platform_index + "</td>" +
-                        "<td>" + info.platform_rank + "</td>" +
-                        "<td>" + info.platform_earn + "</td>" +
-                        "<td>" + info.platform_background + "</td>" +
-                        "<td>" + info.platform_time + "</td>" +
-                        "<td>" + info.platform_rate + "</td>" +
-                        "<td>" + info.platform_volume + "</td>" +
-                        "<td>" + info.platform_borrowing_period + "</td>" +
-                        "<td>" + info.platform_need_return + "</td>" +
+                        "<td> " + info.platform_name + "</td>" +
+                        "<td>" + info.online_time + "</td>" +
+                        "<td>" + info.problem_time + "</td>" +
+                        "<td>" + info.region + "</td>" +
+                        "<td>" + info.registration_capital + "</td>" +
+                        "<td>" + info.event_type + "</td>" +
                         "</tr>"
                 );
             }
         }
 
+
+
         // 加载数据
         $(document).ready(function () {
-            $.getJSON("/detail/platforms", function (data) {
+            $.getJSON("/detail/problem_platforms", function (data) {
                 data_info = data.platforms;
+
                 // 整理数据
-                replace_data_info();
-
-                platform_sort('评级', '1');
-
-                var show_num = 20;
+                var show_num = 1000;
                 var tmp_data_info = [];
-                for(var i = 0;i<show_num;++i){
+                for (var i = 0; i < show_num; ++i) {
                     tmp_data_info.push(data_info[i]);
+                    // 进行处理
+
                 }
                 data_info = tmp_data_info;
+                show_data(data_info);
 
                 // 显示平台内容
                 $("#platform_num").text(show_num);
-                platform_sort('人气指数', '1');
+
+
 
             });
         });
