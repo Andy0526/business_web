@@ -198,6 +198,7 @@ def detail_problem_platforms():
     platforms_json = json.load(open('static/data/problem_platform.json','r'))
 
     platforms = []
+    num = 0
     for platform_json in platforms_json:
         platform_dict = dict()
         platform_dict['platform_name'] = platform_json['platform_name']
@@ -206,8 +207,10 @@ def detail_problem_platforms():
         platform_dict['region'] = platform_json['region']
         platform_dict['online_time'] = platform_json['online_time']
         platform_dict['registration_capital'] = platform_json['registration capital']
-
         platforms.append(platform_dict)
+        num += 1
+        if num >= 1000:
+            break
 
     data_info = {
         'platforms': platforms

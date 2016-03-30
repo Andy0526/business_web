@@ -225,23 +225,11 @@
         // 加载数据
         $(document).ready(function () {
             $.getJSON("/detail/problem_platforms", function (data) {
-                data_info = data.platforms;
 
                 // 整理数据
-                var show_num = 1000;
-                var tmp_data_info = [];
-                for (var i = 0; i < show_num; ++i) {
-                    tmp_data_info.push(data_info[i]);
-                    // 进行处理
-
-                }
-                data_info = tmp_data_info;
-                show_data(data_info);
-
+                show_data(data.platforms);
                 // 显示平台内容
-                $("#platform_num").text(show_num);
-
-
+                $("#platform_num").text(data.platforms.length);
 
             });
         });
