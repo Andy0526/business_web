@@ -10,7 +10,7 @@
                 <ul class="nav navbar-nav">
                     <li><a href="/home">首页</a></li>
                     <li><a href="/info">资讯</a></li>
-                      <li class="dropdown">
+                    <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
                            aria-expanded="false">平台详情 <span class="caret"></span></a>
                         <ul class="dropdown-menu">
@@ -30,167 +30,372 @@
 
 
 {% block body %}
-    <div class="container">
-        <div class="jumbotron">
-            <h2>投资性格测试</h2>
-            <hr>
-            <p>风险偏好和风险承受能力是影响投资的重要因素之一。不同的人的风险偏好和风险承受能力各不相同。只有正确的了解您的投资属性及风险承担能力，才能知道什么样的平台最适合您。</p>
+    <div class="container" style="margin-top: 60px">
+        <div class="row">
+            <div class="col-md-10 col-md-offset-1" style="line-height: 150%">
 
-            <p><strong>1、您目前所处的年龄阶段：</strong></p>
+                <div id ="show_panel"class="panel panel-info">
+                    <div class="panel-heading">
+                        <h3 class="panel-title"><span class="glyphicon glyphicon-hand-right"></span>&nbsp;&nbsp;测试说明
+                        </h3>
+                    </div>
+                    <div class="panel-body">
 
-            <label class="radio-inline">
-                <input type="radio" name="test1" id="optionsRadios1" value="option1" checked > 30岁以下
-            </label>
+                        <p class="text-danger">&nbsp;&nbsp;&nbsp;&nbsp;投资性格测试:
+                            风险偏好和风险承受能力是影响投资的重要因素之一。不同的人的风险偏好和风险承受能力各不相同。只有正确的了解您的投资属性及风险承担能力，才能知道什么样的平台最适合您。
+                        </p>
+                    </div>
 
-            <label class="radio-inline">
-                <input type="radio" name="test1" id="optionsRadios2" value="option2" >  30－39岁
-            </label>
-            <label class="radio-inline">
-                <input type="radio" name="test1" id="optionsRadios3" value="option3" >   40-49岁
-            </label>
-            <label class="radio-inline">
-                <input type="radio" name="test1" id="optionsRadios4" value="option4" >  50-59岁
-            </label>
-            <label class="radio-inline">
-                <input type="radio" name="test1" id="optionsRadios5" value="option5" > 60岁以上
-            </label>
-            <br>  <br>
-
-
-            <p><strong>2、您的朋友或同事会以下列哪句话来形容您？</strong></p>
-            <div class="radio">
-                <label>
-                    <input type="radio" name="test2" id="optionsRadios1" value="option1" checked> 您是一个喜欢冒险的人
-                </label>
-                <br>  <br>
-                <label>
-                    <input type="radio" name="test2" id="optionsRadios2" value="option2" > 经仔细考虑后，您会愿意承受风险
-                </label>
-                <br>  <br>
-                <label>
-                    <input type="radio" name="test2" id="optionsRadios2" value="option3" >  您是一个小心、谨慎的人
-                </label>
-                <br>  <br>
-                <label>
-                    <input type="radio" name="test2" id="optionsRadios2" value="option4" >  您从来都不愿承担风险
-                </label>
-
-            </div>
-
-            <br>
-
-            <p><strong>3、什么是您目前投资的主要目的？请在以下五个答案中选择最符合您的一个描述：</strong></p>
-            <div class="radio">
-                <label>
-                    <input type="radio" name="test3" id="optionsRadios1" value="option1" checked>希望利用投资以及投资所获得的收益在短期内用于大额的购买计划。
-                </label>
-                <br>  <br>
-                <label>
-                    <input type="radio" name="test3" id="optionsRadios2" value="option2" >  没有具体目标，只想确保资产的安全性，同时希望能够得到固定的收益。
-                </label>
-                <br>  <br>
-                <label>
-                    <input type="radio" name="test3" id="optionsRadios2" value="option2" >   没有具体目标，希望投资能获得一定的增值，同时获得波动适度的年回报
-                </label>
-                <br>  <br>
-                <label>
-                    <input type="radio" name="test3" id="optionsRadios2" value="option2" > 没有具体目标，更倾向于长期的成长，较少关心短期的回报以及波动。
-                </label>
-                <br>  <br>
-                <label>
-                    <input type="radio" name="test3" id="optionsRadios2" value="option2" >   没有具体目标，只关心长期的高回报，能够接受短期的资产价值波动。
-                </label>
-            </div>
-
-            <br>
-
-            <p><strong>4、假设您参加一项有奖电视智力竞赛节目，并且已经胜出。现在，主持人要求您在以下的获奖方式中做出选择，您会选择：</strong></p>
-            <div class="radio">
-                <label>
-                    <input type="radio" name="test4" id="optionsRadios1" value="option1" checked>  立刻拿到10,000现金
-                </label>
-                <br>  <br>
-                <label>
-                    <input type="radio" name="test4" id="optionsRadios2" value="option2" >   有50%机会赢取50,000现金的抽奖
-                </label>
-                <br>  <br>
-                <label>
-                    <input type="radio" name="test4" id="optionsRadios2" value="option2" >  有25%机会赢取100,000现金的抽奖
-                </label>
-                <br>  <br>
-                <label>
-                    <input type="radio" name="test4" id="optionsRadios2" value="option2" >   有5%机会赢取1,000,000现金的抽奖
-                </label>
-                <br>  <br>
-
-            </div>
+                    <div class="panel-heading">
+                        <h3 class="panel-title"><span class="glyphicon glyphicon-hand-right"></span>&nbsp;&nbsp;基本情况
+                        </h3>
+                    </div>
+                    <div class="panel-body">
+                        <p><strong> 1、您的年龄：</strong></p>
+                        <label class="radio-inline">
+                            <input type="radio" name="basic_age" value="35" checked> 25岁以下
+                        </label>
+                        <label class="radio-inline">
+                            <input type="radio" name="basic_age" value="28"> 25~35岁
+                        </label>
+                        <label class="radio-inline">
+                            <input type="radio" name="basic_age" value="21"> 35~45岁
+                        </label>
+                        <label class="radio-inline">
+                            <input type="radio" name="basic_age" value="14"> 45~60岁
+                        </label>
+                        <label class="radio-inline">
+                            <input type="radio" name="basic_age" value="7"> 60岁以上
+                        </label>
+                        <br><br>
 
 
+                        <p><strong> 2、您的就业状况：</strong></p>
+                        <label class="radio-inline">
+                            <input type="radio" name="basic_occupation" value="10" checked> 公务员
+                        </label>
+                        <label class="radio-inline">
+                            <input type="radio" name="basic_occupation" value="8"> 上班族
+                        </label>
+                        <label class="radio-inline">
+                            <input type="radio" name="basic_occupation" value="6"> 佣金收入者
+                        </label>
+                        <label class="radio-inline">
+                            <input type="radio" name="basic_occupation" value="4"> 自营事业者
+                        </label>
+                        <label class="radio-inline">
+                            <input type="radio" name="basic_occupation" value="2"> 无工作
+                        </label>
+                        <br><br>
+
+                        <p><strong> 3、家庭状况：</strong></p>
+                        <label class="radio-inline">
+                            <input type="radio" name="basic_family" value="10" checked> 未婚
+                        </label>
+                        <label class="radio-inline">
+                            <input type="radio" name="basic_family" value="8"> 双薪无子女
+                        </label>
+                        <label class="radio-inline">
+                            <input type="radio" name="basic_family" value="6"> 双薪有子女
+                        </label>
+                        <label class="radio-inline">
+                            <input type="radio" name="basic_family" value="4"> 单薪有子女
+                        </label>
+                        <label class="radio-inline">
+                            <input type="radio" name="basic_family" value="2"> 单薪养三代
+                        </label>
+                        <br><br>
+
+                        <p><strong> 4、您的投资经验：</strong></p>
+                        <label class="radio-inline">
+                            <input type="radio" name="basic_invest_year" value="10" checked> 10年以上
+                        </label>
+                        <label class="radio-inline">
+                            <input type="radio" name="basic_invest_year" value="8"> 6-10年
+                        </label>
+                        <label class="radio-inline">
+                            <input type="radio" name="basic_invest_year" value="6"> 2-5年
+                        </label>
+                        <label class="radio-inline">
+                            <input type="radio" name="basic_invest_year" value="4"> 2年以内
+                        </label>
+                        <label class="radio-inline">
+                            <input type="radio" name="basic_invest_year" value="2"> 无
+                        </label>
+                        <br><br>
 
 
-            <p><strong>5、以下哪项描述最符合您对本项投资在未来3年内的表现的态度？</strong></p>
-            <div class="radio">
-                <label>
-                    <input type="radio" name="test5" id="optionsRadios2" value="option2" checked>  如果发生亏损，我并不在乎
-                </label>
-                <br>  <br>
-                <label>
-                    <input type="radio" name="test5" id="optionsRadios2" value="option2" >   我能承受一定程度的亏损
-                </label>
-                <br>  <br>
-                <label>
-                    <input type="radio" name="test5" id="optionsRadios2" value="option2" > 我只能承受较小的亏损
-                </label>
-                <br>  <br>
-                <label>
-                    <input type="radio" name="test5" id="optionsRadios2" value="option2" >    我几乎不能承受任何亏损
-                </label>
-                <br>  <br>
-                <label>
-                    <input type="radio" name="test5" id="optionsRadios2" value="option2" > 我需要至少获得一定的收益
-                </label>
-                <br>  <br>
-            </div>
+                        <p><strong> 5、房产信息：</strong></p>
+                        <label class="radio-inline">
+                            <input type="radio" name="basic_house" value="35" checked> 投资不动产
+                        </label>
+                        <label class="radio-inline">
+                            <input type="radio" name="basic_house" value="28"> 自宅无房贷
+                        </label>
+                        <label class="radio-inline">
+                            <input type="radio" name="basic_house" value="21"> 房贷＜50%
+                        </label>
+                        <label class="radio-inline">
+                            <input type="radio" name="basic_house" value="14"> 房贷＞=50%
+                        </label>
+                        <label class="radio-inline">
+                            <input type="radio" name="basic_house" value="7"> 无房
+                        </label>
+                        <br>
+                    </div>
 
+                    <div class="panel-heading">
+                        <h3 class="panel-title"><span class="glyphicon glyphicon-hand-right"></span>&nbsp;&nbsp;风险态度
+                        </h3>
+                    </div>
+                    <div class="panel-body">
+                        <p><strong>1、您目前所处的年龄阶段：</strong></p>
 
+                        <label class="radio-inline">
+                            <input type="radio" name="attitude_age" value="10" checked> 30岁以下
+                        </label>
+                        <label class="radio-inline">
+                            <input type="radio" name="attitude_age" id="8" value="option2"> 30－39岁
+                        </label>
+                        <label class="radio-inline">
+                            <input type="radio" name="attitude_age" id="6" value="option3"> 40-49岁
+                        </label>
+                        <label class="radio-inline">
+                            <input type="radio" name="attitude_age" id="4" value="option4"> 50-59岁
+                        </label>
+                        <label class="radio-inline">
+                            <input type="radio" name="attitude_age" id="2" value="option5"> 60岁以上
+                        </label>
+                        <br><br>
 
-            <p><strong>6、根据您以往投资的经验，当平台的资金被分配到高风险的股票或是其他不确定收益的项目中时，您通常：</strong></p>
-            <label class="radio-inline">
-                <input type="radio" name="test6" id="optionsRadios2" value="option2" checked> 非常焦虑
-            </label>
-            &nbsp;&nbsp;&nbsp;&nbsp;
-            <label class="radio-inline">
-                <input type="radio" name="test6" id="optionsRadios2" value="option2" >  有一些焦虑
-            </label>
-            &nbsp;&nbsp;&nbsp;&nbsp;
-            <label class="radio-inline">
-                <input type="radio" name="test6" id="optionsRadios2" value="option2" > 完全放心
-            </label>
-            &nbsp;&nbsp;&nbsp;&nbsp;
+                        <p><strong>2、您的朋友或同事会以下列哪句话来形容您？</strong></p>
+                        <div class="radio">
+                            <label>
+                                <input type="radio" name="attitude_character" value="8" checked> 您是一个喜欢冒险的人
+                            </label>
+                            <br> <br>
+                            <label>
+                                <input type="radio" name="attitude_character" value="6"> 经仔细考虑后，您会愿意承受风险
+                            </label>
+                            <br> <br>
+                            <label>
+                                <input type="radio" name="attitude_character" value="4"> 您是一个小心、谨慎的人
+                            </label>
+                            <br> <br>
+                            <label>
+                                <input type="radio" name="attitude_character" value="2"> 您从来都不愿承担风险
+                            </label>
+                        </div>
+                        <br>
 
+                        <p><strong>3、什么是您目前投资的主要目的？请在以下五个答案中选择最符合您的一个描述：</strong></p>
+                        <div class="radio">
+                            <label>
+                                <input type="radio" name="attitude_target" value="10" checked>希望利用投资以及投资所获得的收益在短期内用于大额的购买计划。
+                            </label>
+                            <br> <br>
+                            <label>
+                                <input type="radio" name="attitude_target" value="2"> 没有具体目标，只想确保资产的安全性，同时希望能够得到固定的收益。
+                            </label>
+                            <br> <br>
+                            <label>
+                                <input type="radio" name="attitude_target" value="4"> 没有具体目标，希望投资能获得一定的增值，同时获得波动适度的年回报
+                            </label>
+                            <br> <br>
+                            <label>
+                                <input type="radio" name="attitude_target" value="6"> 没有具体目标，更倾向于长期的成长，较少关心短期的回报以及波动。
+                            </label>
+                            <br> <br>
+                            <label>
+                                <input type="radio" name="attitude_target" value="8"> 没有具体目标，只关心长期的高回报，能够接受短期的资产价值波动。
+                            </label>
+                        </div>
+                        <br>
 
-            <br><br>
-            <button id ="submit_btn" class="btn btn-info" type="button" style="height: 40px">提交选项</button>
-            <br>
-            <hr/>
-            <div id="answer" >
+                        <p><strong>4、假设您参加一项有奖电视智力竞赛节目，并且已经胜出。现在，主持人要求您在以下的获奖方式中做出选择，您会选择：</strong></p>
+                        <div class="radio">
+                            <label>
+                                <input type="radio" name="attitude_choice" value="2" checked> 立刻拿到10,000现金
+                            </label>
+                            <br> <br>
+                            <label>
+                                <input type="radio" name="attitude_choice" value="4"> 有50%机会赢取50,000现金的抽奖
+                            </label>
+                            <br> <br>
+                            <label>
+                                <input type="radio" name="attitude_choice" value="6"> 有25%机会赢取100,000现金的抽奖
+                            </label>
+                            <br> <br>
+                            <label>
+                                <input type="radio" name="attitude_choice" value="8"> 有5%机会赢取1,000,000现金的抽奖
+                            </label>
+                        </div>
+                        <br>
+
+                        <p><strong>5、以下哪项描述最符合您对本项投资在未来3年内的表现的态度？</strong></p>
+                        <div class="radio">
+                            <label>
+                                <input type="radio" name="attitude_future" value="15" checked> 如果发生亏损，我并不在乎
+                            </label>
+                            <br> <br>
+                            <label>
+                                <input type="radio" name="attitude_future" value="12"> 我能承受一定程度的亏损
+                            </label>
+                            <br> <br>
+                            <label>
+                                <input type="radio" name="attitude_future" value="9"> 我只能承受较小的亏损
+                            </label>
+                            <br> <br>
+                            <label>
+                                <input type="radio" name="attitude_future" value="6"> 我几乎不能承受任何亏损
+                            </label>
+                            <br> <br>
+                            <label>
+                                <input type="radio" name="attitude_future" value="3"> 我需要至少获得一定的收益
+                            </label>
+                        </div>
+                        <br>
+
+                        <p><strong>6、根据您以往投资的经验，当平台的资金被分配到高风险的股票或是其他不确定收益的项目中时，您通常：</strong></p>
+                        <label class="radio-inline">
+                            <input type="radio" name="attitude_decide" value="15" checked> 非常焦虑
+                        </label>
+                        &nbsp;&nbsp;&nbsp;&nbsp;
+                        <label class="radio-inline">
+                            <input type="radio" name="attitude_decide" value="10"> 有一些焦虑
+                        </label>
+                        &nbsp;&nbsp;&nbsp;&nbsp;
+                        <label class="radio-inline">
+                            <input type="radio" name="attitude_decide" value="5"> 完全放心
+                        </label>
+                        &nbsp;&nbsp;&nbsp;&nbsp;
+
+                        <br> <br>
+                        <button id="submit_btn" class="btn btn-info" type="button" >提交选项</button>
+                        <br>
+                    </div>
+
+                </div>
 
             </div>
         </div>
-
-
-
     </div>
 
     <script>
-     $("#submit_btn").click(function(){
-     $("#answer").html("<h2>测试结果</h2> <br>" +
-             "<p >经过我们的测试，您属于：中庸型</p>" +
-         "<p >投资者：在任何投资中，在风险较小的情况下获得一定的收益是您主要的投资目的。您通常愿意使本金面临一定的风险，但在做投资决定时，会仔细的对将要面临的风险进行认真的分析。您对风险总是客观存在的道理有清楚的认识。总体来看，愿意承受市场的平均风险。</p>" +
-         "<p >风险承受能力：中</p>" +
-         "<p >获利期待：中等报酬</p>" +
-         "<p >为您推荐：<a href= '/detail/platform/陆金所'>陆金所</a></p>"
-         );
-                });
-</script>
+
+        var data_info;
+        // 加载数据
+        $(document).ready(function () {
+            $.getJSON("/detail/platforms", function (data) {
+                data_info = data.platforms;
+            });
+        });
+
+        $("#submit_btn").click(function () {
+
+            var basic_age = parseInt($("[name='basic_age']:checked").val());
+            var basic_occupation = parseInt($("[name='basic_occupation']:checked").val());
+            var basic_family = parseInt($("[name='basic_family']:checked").val());
+            var basic_invest_year = parseInt($("[name='basic_invest_year']:checked").val());
+            var basic_house = parseInt($("[name='basic_house']:checked").val());
+
+            var attitude_age = parseInt($("[name='attitude_age']:checked").val());
+            var attitude_character = parseInt($("[name='attitude_character']:checked").val());
+            var attitude_target = parseInt($("[name='attitude_target']:checked").val());
+            var attitude_choice = parseInt($("[name='attitude_choice']:checked").val());
+            var attitude_future = parseInt($("[name='attitude_future']:checked").val());
+            var attitude_decide = parseInt($("[name='attitude_decide']:checked").val())
+                    ;
+
+            // 风险态度
+            var fxtd = attitude_age + attitude_character + attitude_target + attitude_choice + attitude_choice + attitude_future + attitude_decide;
+            //16~32 保守型 33~50 稳健性 51~66 激进型
+            var fxtd_type;
+            var fxtd_description;
+
+            if (fxtd <= 32) {
+                fxtd_type = "保守型";
+                fxtd_description = "保守型投资者是典型的风险厌恶者，注重获得相对确定的投资回报，但不追求高额的回报，且忍受不了短期内的资产大幅波动。投资期限内，回报率的波动性较小。这种类型的投资者，能够在短期内克服风险，获得稳定收益，但从中长期来看，回报率较低。"
+            } else if (fxtd <= 50) {
+                fxtd_type = "稳健型";
+                fxtd_description = "稳健型投资者既担忧风险也渴望收益，希望在较低风险下获取稳健的收益。理财时要对投资本金的安全性给予适当关注，主要是投资者的资产可能保持一个稳步上升的态势。"
+            } else {
+                fxtd_type = "激进型";
+                fxtd_description = "激进型投资者或者因为财务状况十分乐观，或者因为投资期限较长。为了追求最大回报，愿意承受资产价格的短期大幅波动风险，甚至相对长时间的亏损。但承担的较高风险水平，在大多数情况下，也往往能够带来较高的收益回报。";
+            }
+
+            // 获利期待
+            var hlqd = attitude_target * 3 + attitude_choice * 5 + attitude_future * 2;
+            // 10~30: 稳定小额报酬 31~70：中等报酬 71~100：高额报酬
+            var hlqd_type;
+            // 推荐算法：根据获利期待推荐相对应平均利率的5个最热门平台 小额稳定报酬：%8以下 中等报酬：%8~%12 大额报酬：%13以上
+            var platform_earn_start; // 包括
+            var platform_earn_end;   // 不包括
+            if (hlqd <= 30) {
+                hlqd_type = "稳定小额报酬";
+                platform_earn_start = 1;
+                platform_earn_end = 8;
+            } else if (hlqd <= 70) {
+                hlqd_type = "中等报酬";
+                platform_earn_start = 8;
+                platform_earn_end = 13;
+            } else {
+                hlqd_type = "高额报酬";
+                platform_earn_start = 13;
+                platform_earn_end = 101;
+            }
+
+            // 风险承受能力
+            var fxcs = basic_age + basic_occupation + basic_family + basic_invest_year + basic_house;
+
+            $("#show_panel").append('<div class="panel-heading">' +
+                    '<h3 class="panel-title"><span class="glyphicon glyphicon-hand-right"></span>&nbsp;&nbsp;测试结果</h3></div> ' +
+                    '<div class="panel-body" id="answer">' +
+                    '</div>'
+            )
+
+
+            $("#answer").html(
+                    "<p ><span class='glyphicon glyphicon-hand-right'></span>&nbsp;&nbsp;风险态度: " + fxtd_type + "</p>" +
+                    "<p >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; " + fxtd_description + "</p>" +
+                    "<p ><span class='glyphicon glyphicon-hand-right'></span>&nbsp;&nbsp;风险承受能力: " + fxcs + " 分</p>" +
+                    "<p ><span class='glyphicon glyphicon-hand-right'></span>&nbsp;&nbsp;获利期待: " + hlqd_type + "</p>" +
+                    "<p ><span class='glyphicon glyphicon-hand-right'></span>&nbsp;&nbsp;推荐平台:</p>"
+            );
+
+            // 推荐算法：根据获利期待推荐相对应平均利率的5个最热门平台 小额稳定报酬：%8以下 中等报酬：%8~%12 大额报酬：%13以上
+            var show_info = [];
+            for (var i = 0; i < data_info.length; ++i) { // 逐个替换
+                var info = data_info[i];
+                if (info.platform_earn.length == 0)
+                    continue;
+                var earn_str = info.platform_earn.substr(0, info.platform_earn.length - 1); // 获取子字符串
+                var earn = parseFloat(earn_str);
+                if (earn >= platform_earn_start && earn < platform_earn_end) {
+                    show_info.push(info);
+                }
+            }
+
+            // 选出热门的五个
+            show_info.sort(
+                    function (d1, d2) {
+                        if (d1.platform_index.length == 0)
+                            return 1;
+                        if (d2.platform_index.length == 0)
+                            return -1;
+                        return (d1.platform_index - d2.platform_index) * -1;
+                    }
+            );
+
+            var show_num = 5;
+            $("#answer").append('<ul id="show_ul" class="list-inline"></ul>')
+            for (var i = 0; i < show_num; ++i) {
+                var info = show_info[i];
+                html_str = "<li><a href= '/detail/platform/" + info.platform_name + "' target='_blank' class='list-group-item list-group-item-info' style='margin-top:5px;'>" + info.platform_name + "</a></li>";
+                $("#show_ul").append(html_str);
+            }
+
+        });
+
+    </script>
 {% endblock %}
