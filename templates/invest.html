@@ -353,7 +353,7 @@
            if(isFirst) {
                $("#show_panel").append('<div class="panel-heading">' +
                        '<h3 class="panel-title"><span class="glyphicon glyphicon-hand-right"></span>&nbsp;&nbsp;测试结果</h3></div> ' +
-                       '<div class="panel-body" id="answer">' +
+                       '<div class="panel-body" id="answer" style="line-height: 200%">' +
                        '</div>'
                )
                 isFirst = false;
@@ -366,7 +366,7 @@
                     "<p >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; " + fxtd_description + "</p>" +
                     "<p ><span class='glyphicon glyphicon-hand-right'></span>&nbsp;&nbsp;风险承受能力: " + fxcs + " 分</p>" +
                     "<p ><span class='glyphicon glyphicon-hand-right'></span>&nbsp;&nbsp;获利期待: " + hlqd_type + "</p>" +
-                    "<p ><span class='glyphicon glyphicon-hand-right'></span>&nbsp;&nbsp;推荐平台:</p>"
+                    "<p ><span class='glyphicon glyphicon-hand-right'></span>&nbsp;&nbsp;推荐平台:<span id='show_ul'></span></p>"
             );
 
             // 推荐算法：根据获利期待推荐相对应平均利率的5个最热门平台 小额稳定报酬：%8以下 中等报酬：%8~%12 大额报酬：%13以上
@@ -394,10 +394,10 @@
             );
 
             var show_num = 5;
-            $("#answer").append('<ul id="show_ul" class="list-inline"></ul>')
+           //$("#answer").append('<ul id="show_ul" class="list-inline"></ul>')
             for (var i = 0; i < show_num; ++i) {
                 var info = show_info[i];
-                html_str = "<li><a href= '/detail/platform/" + info.platform_name + "' target='_blank' class='list-group-item list-group-item-info' style='margin-top:5px;'>" + info.platform_name + "</a></li>";
+                html_str = "&nbsp;&nbsp;&nbsp;&nbsp;<a href= '/detail/platform/" + info.platform_name + "' target='_blank'>" + info.platform_name + "</a>";
                 $("#show_ul").append(html_str);
             }
 
