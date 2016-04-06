@@ -26,26 +26,33 @@ def info_hot():
     num = 0
     day_hot_keywords = []
     for day_hot_keyword_str in platforms_json['day_hot_keywords'].split(';'):
-        day_hot_keyword = day_hot_keyword_str.split(':')[0]
-        day_hot_keywords.append(day_hot_keyword)
+        day_map = dict()
+        day_map['name'] = day_hot_keyword_str.split(':')[0]
+        day_map['value'] = day_hot_keyword_str.split(':')[1]
+        day_hot_keywords.append(day_map)
         num += 1
         if num > max_num:
             break
+
 
     num = 0
     week_hot_keywords = []
     for week_hot_keyword_str in platforms_json['week_hot_keywords'].split(';'):
-        week_hot_keyword = week_hot_keyword_str.split(':')[0]
-        week_hot_keywords.append(week_hot_keyword)
+        week_map = dict()
+        week_map['name'] = week_hot_keyword_str.split(':')[0]
+        week_map['value'] = week_hot_keyword_str.split(':')[1]
+        week_hot_keywords.append(week_map)
         num += 1
         if num > max_num:
             break
 
     num = 0
-    month_hot_keywords = [];
+    month_hot_keywords = []
     for month_hot_keyword_str in platforms_json['month_hot_keywords'].split(';'):
-        month_hot_keyword = month_hot_keyword_str.split(':')[0];
-        month_hot_keywords.append(month_hot_keyword);
+        month_map = dict()
+        month_map['name'] = month_hot_keyword_str.split(':')[0]
+        month_map['value'] = month_hot_keyword_str.split(':')[1]
+        month_hot_keywords.append(month_map)
         num += 1
         if num > max_num:
             break
