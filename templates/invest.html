@@ -291,6 +291,8 @@
             });
         });
 
+        var isFirst = true;
+
         $("#submit_btn").click(function () {
 
             var basic_age = parseInt($("[name='basic_age']:checked").val());
@@ -348,11 +350,15 @@
             // 风险承受能力
             var fxcs = basic_age + basic_occupation + basic_family + basic_invest_year + basic_house;
 
-            $("#show_panel").append('<div class="panel-heading">' +
-                    '<h3 class="panel-title"><span class="glyphicon glyphicon-hand-right"></span>&nbsp;&nbsp;测试结果</h3></div> ' +
-                    '<div class="panel-body" id="answer">' +
-                    '</div>'
-            )
+           if(isFirst) {
+               $("#show_panel").append('<div class="panel-heading">' +
+                       '<h3 class="panel-title"><span class="glyphicon glyphicon-hand-right"></span>&nbsp;&nbsp;测试结果</h3></div> ' +
+                       '<div class="panel-body" id="answer">' +
+                       '</div>'
+               )
+                isFirst = false;
+           }
+
 
 
             $("#answer").html(
