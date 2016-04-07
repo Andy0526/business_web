@@ -21,7 +21,7 @@ def home():
 @app.route('/info/hot', methods=['GET'])
 def info_hot():
     platforms_json = json.load(open('static/data/hot_keyword.json', 'r'))
-    max_num = 40
+    max_num = 60
 
     num = 0
     day_hot_keywords = []

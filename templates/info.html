@@ -103,20 +103,6 @@
             var week_hot_keywords;
             var month_hot_keywords;
 
-
-            function createRandomItemStyle() {
-    return {
-        normal: {
-            color: 'rgb(' + [
-                Math.round(Math.random() * 160),
-                Math.round(Math.random() * 160),
-                Math.round(Math.random() * 160)
-            ].join(',') + ')'
-        }
-    };
-}
-
-
             $(document).ready(function () {
                 $.getJSON("/info/hot", function (data, textStatus, jqXHR) {
                     day_hot_keywords = data.day_hot_keywords;
@@ -153,13 +139,14 @@
 
                 $("#hot_content").html("");
                var color = d3.scale.category20();
-                var size = 48;
+                var size = 50;
                 var show_data = [];
                 //alert(word_data.length)
                 for (var i = 0; i < word_data.length; ++i) {
                     var word = word_data[i];
-
-                     if (size > 24)
+                    if(size > 40)
+                        size -= 4;
+                    else if (size > 24)
                         size -= 2;
                     else if (size > 8)
                         size -= 1;
@@ -169,9 +156,7 @@
 
                     item['name']= word['name'];
                     item['value']= size;
-                    item['itemStyle']= {normal: {
-            color: color(i)}
-        };
+                    item['itemStyle']= {normal: {color: color(i)}};
                     show_data.push(item);
                     // $("#hot_content").append("<span style=font-size:" + size + "px;color:"+color(i)+" !important;>" + word + "</span>&nbsp&nbsp");
                 }
@@ -185,8 +170,8 @@
     series: [{
         type: 'wordCloud',
         size: ['100%', '100%'],
-        textRotation : [0, 45, 90, -45],
-        textPadding: 0,
+        textRotation : [0, 45,-45,90],
+        textPadding: 1,
         autoSize: {
             enable: true,
             minSize: 40
