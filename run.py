@@ -17,6 +17,56 @@ def home():
     return render_template("home.html")
 
 
+@app.route('/yqdp')
+def yqdp():
+    return render_template("yqdp.html")
+
+
+@app.route('/info/hot/topic/<int:topic_id>')
+def info_hot_topic(topic_id):
+    return render_template("info_hot_topic.html",topic_id = topic_id)
+
+
+@app.route('/info/hot/topic/preview/<topic_id>')
+def info_hot_topic_preview(topic_id):
+    news_json = json.load(open('static/data/hot_topic/'+topic_id+'/news.json', 'r'))
+    item_list = []
+    for json_item in news_json['item_list']:
+        item = dict()
+        item['_id'] = json_item['_id']
+        item['title'] = json_item['title']
+        item['item_pub_time'] = json_item['item_pub_time']
+        item_list.append(item)
+
+    keywords_json = json.load(open('static/data/hot_topic/'+topic_id+'/keywords.json', 'r'))
+    max_num = 60
+    num = 0
+    keyword_list = []
+    for name in keywords_json:
+        keyword_map = dict()
+        keyword_map['name'] = name
+        keyword_map['value'] = keywords_json[name]
+        keyword_list.append(keyword_map)
+        num += 1
+        if num > max_num:
+            break
+
+    data_info = {
+        "item_list": item_list,
+        "keyword_list": keyword_list
+    }
+    return jsonify(data_info)
+
+
+@app.route('/info/hot/topic/news/detail/<topic_id>/<news_id>')
+def info_hot_topic_news_detail(topic_id,news_id):
+    news_json = json.load(open('static/data/hot_topic/'+topic_id+'/news.json', 'r'))
+    for json_item in news_json['item_list']:
+        if json_item['_id'] == news_id:
+            return render_template('info_hot_topic_news_detail.html', data_info=json_item)
+    return render_template('info_hot_topic_news_detail.html', data_info={})
+
+
 # 新闻 >> 热点
 @app.route('/info/hot', methods=['GET'])
 def info_hot():
@@ -216,7 +266,7 @@ def detail_problem_platforms():
         platform_dict['registration_capital'] = platform_json['registration capital']
         platforms.append(platform_dict)
         num += 1
-        if num >= 600:
+        if num >= 1000:
             break
 
     data_info = {
@@ -254,6 +304,13 @@ def detail_platform(platform_name):
                 for (k, v) in comment_map.items():
                     comment_list.append({'name': k, 'value': v})
             platform_dict['frequent_label'] = comment_list
+
+
+            # 相关图标
+            all_chart_json = json.load(open('static/data/charts_data.json', 'r'))
+            chart_json = all_chart_json.get(platform_name, {})
+            platform_dict['chart_json'] = chart_json
+
             return jsonify(platform_dict)
 
     return jsonify({})
@@ -280,14 +337,14 @@ def detail_info(platform_name):
     return render_template('detail_info.html', platform_name=platform_name)
 
 
-@app.route('/detail/navigation')
-def detail_navigation():
-    return render_template("detail_navigation.html")
-
-
 @app.route('/detail/rank')
 def detail_rank():
     return render_template("detail_rank.html")
+
+
+@app.route('/detail/navigation')
+def detail_navigation():
+    return render_template("detail_navigation.html")
 
 
 @app.route('/detail/problem')
@@ -295,9 +352,9 @@ def detail_problem():
     return render_template("detail_problem.html")
 
 
-@app.route('/data')
-def data():
-    return render_template("data.html")
+@app.route('/detail/problem_analyze')
+def detail_problem_analyze():
+    return render_template("detail_problem_analyze.html")
 
 
 @app.route('/search/<key_word>', methods=['GET'])
@@ -319,4 +376,4 @@ def invest():
 
 
 if __name__ == '__main__':
-    app.run(host="0.0.0.0", port=8086)
+    app.run(host="0.0.0.0", port=6086)

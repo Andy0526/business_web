@@ -1,0 +1,38 @@
+{% extends "layout.html" %}
+
+{% block title %} 热点新闻详情 {% endblock %}
+
+{% block body %}
+
+    <script>
+        // 页面加载后
+        $(document).ready(function(){
+            // 处理文本中的换行和空格
+            var content =  $("#content").text();
+            content = content.replace(new RegExp("#n#","gm"),"<br>");
+            content = content.replace(new RegExp("#r#","gm"),"");
+            content = content.replace(new RegExp(" ","gm"),"&nbsp;")
+            $("#content").html(content);
+
+        });
+    </script>
+
+    <!-- 显示新闻内容 -->
+    <div class="container" style="margin-top: 70px">
+        <div class="row">
+            <div class="col-sm-12  col-sm-offset-0">
+                <div class="jumbotron">
+                    <h2 id="title">{{ data_info.title}}</h2>
+                    <hr>
+                    <p >
+                        日期：<span id="date">{{ data_info.item_pub_time }}</span><br>
+                    </p>
+
+                    <p id="content" style="margin-top: 0px">{{ data_info.concent }}</p>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

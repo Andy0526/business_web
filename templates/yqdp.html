@@ -1,0 +1,713 @@
+{% extends "layout.html" %}
+
+{% block title %} 行业概览 {% endblock %}
+
+{% block body %}
+    <div class="container" style="margin-top: 70px">
+
+        <div class="row col-md-offset">
+
+
+            <div class="col-md-6">
+
+                <ol class="breadcrumb">
+                    <li class="active">年度舆情热度分析</li>
+                </ol>
+
+                <div id="month_summary" style="width:100%;height:350px;margin: 0 auto"></div>
+                <script type="text/javascript">
+                    $(document).ready(function () {
+                        show_month_summary();
+                    });
+                    function show_month_summary() {
+                        var month_summary_chart = echarts.init(document.getElementById('month_summary'));
+                        month_summary_option = {
+                            tooltip: {
+                                trigger: 'axis'
+                            },
+                            toolbox: {
+                                feature: {
+                                    dataView: {show: true, readOnly: false},
+                                    magicType: {show: true, type: ['line', 'bar']},
+                                    restore: {show: true},
+                                    saveAsImage: {show: true}
+                                }
+                            },
+                            legend: {
+                                data: ['政策', '新闻', '用户评论']
+                            },
+                            xAxis: [
+                                {
+                                    type: 'category',
+                                    data: ['1月', '2月', '3月', '4月', '5月', '6月', '7月', '8月', '9月', '10月', '11月', '12月']
+                                }
+                            ],
+                            yAxis: [
+                                {
+                                    type: 'value',
+                                    name: '文章数',
+                                    min: 0,
+                                    max: 1250,
+                                    interval: 250,
+                                    axisLabel: {
+                                        formatter: '{value} 篇'
+                                    }
+                                },
+                                {
+                                    type: 'value',
+                                    name: '评论数',
+                                    min: 0,
+                                    max: 35000,
+                                    interval: 7000,
+                                    axisLabel: {
+                                        formatter: '{value} 条'
+                                    }
+                                }
+                            ],
+                            series: [
+                                {
+                                    name: '政策',
+                                    type: 'bar',
+                                    data: [20, 22, 35, 10, 14, 12, 31, 17, 11, 12, 15, 24]
+                                },
+                                {
+                                    name: '新闻',
+                                    type: 'bar',
+                                    data: [467, 319, 472, 561, 597, 608, 799, 842, 903, 778, 1018, 1176]
+                                },
+                                {
+                                    name: '用户评论',
+                                    type: 'line',
+                                    yAxisIndex: 1,
+                                    data: [6968, 7817, 9918, 14039, 14264, 12357, 17655, 20388, 22736, 29731, 34460, 34222]
+                                }
+                            ]
+                        };
+                        month_summary_chart.setOption(month_summary_option);
+                    }
+                </script>
+                <div class="well">
+                    <span class="glyphicon glyphicon-hand-right"></span>&nbsp;
+                    《年度舆情热度变化》解析:&nbsp;与行业相关的用户评论和新闻逐渐增多，可见行业热度逐渐增加。
+                    <strong>预计：之后的月份，政策平稳增加，相关新闻持续增加, 用户评论将略有下降。</strong>
+                </div>
+
+            </div>
+
+
+            <div class="col-md-6">
+                <ol class="breadcrumb">
+                    <li class="active">网贷平台分布分析</li>
+                </ol>
+                <!--区域情况 开始 -->
+                <div id="industry_areas" style="width:100%;height:350px;margin: 0 auto"></div>
+                <script src="{{ url_for("static",filename='js/china.js') }}"></script>
+                <script type="text/javascript">
+                    $(document).ready(function () {
+                        industry_areas();
+                    });
+                    function industry_areas() {
+                        var data_info = {
+                            '广东': {
+                                "成交量": "369.5亿元",
+                                "运营平台": "461",
+                                "问题平台": "241家",
+                                "综合利率": "11.89%"
+                            },
+                            '北京': {
+                                "成交量": "305.74亿元",
+                                "运营平台": "213",
+                                "问题平台": "87家",
+                                "综合利率": "10.83%"
+                            },
+                            '上海': {
+                                "成交量": "142.42亿元",
+                                "运营平台": "213",
+                                "问题平台": "116家",
+                                "综合利率": "10.4%"
+                            },
+                            '浙江': {
+                                "成交量": "137.42亿元",
+                                "运营平台": "292",
+                                "问题平台": "157家",
+                                "综合利率": "11.44%"
+                            },
+                            '山东': {
+                                "成交量": "43.6亿元",
+                                "运营平台": "311",
+                                "问题平台": "266家",
+                                "综合利率": "16.5%"
+                            },
+                            '江苏': {
+                                "成交量": "26.55亿元",
+                                "运营平台": "127",
+                                "问题平台": "84家",
+                                "综合利率": "15.72%"
+                            },
+                            '四川': {
+                                "成交量": "26.27亿元",
+                                "运营平台": "83",
+                                "问题平台": "45家",
+                                "综合利率": "13.18%"
+                            },
+                            '湖北': {
+                                "成交量": "12.31亿元",
+                                "运营平台": "83",
+                                "问题平台": "50家",
+                                "综合利率": "16.31%"
+                            },
+
+                        };
+
+                        var names = [];
+                        for (var key in data_info) {
+                            names.push(key)
+                        }
+
+                        var industry_areas_chart = echarts.init(document.getElementById('industry_areas'));
+                        industry_areas_option = {
+
+                            tooltip: {
+                                trigger: 'item',
+                                formatter: function (params) {
+                                    return params.name + '<br>'
+                                            + '运营平台: ' + data_info[params.name]['运营平台'] + '家<br>'
+                                            + '成交量: ' + data_info[params.name]['成交量'] + '<br>'
+                                            + '问题平台: ' + data_info[params.name]['问题平台'] + '<br>'
+                                            + '综合利率: ' + data_info[params.name]['综合利率'] + '<br>'
+                                }
+                            },
+                            dataRange: {
+        min: 0,
+        max: 500,
+        x: 'left',
+        y: 'bottom',
+        text:['高','低'],           // 文本，默认为数值文本
+        calculable : true
+    },
+                            legend: {
+                                orient: 'vertical',
+                                left: 'left',
+                                data: ['运营平台数量']
+                            },
+                            series: [
+                                {
+                                    name: '运营平台数量',
+                                    type: 'map',
+                                    mapType: 'china',
+                                    roam: false,
+                                    itemStyle: {
+                                        normal: {label: {show: true}},
+                                        emphasis: {label: {show: true}}
+                                    },
+                                    data: names.map(function (d) {
+                                        return {name: d, value: data_info[d]['运营平台']}
+                                    })
+                                }
+                            ]
+                        };
+                        industry_areas_chart.setOption(industry_areas_option);
+                    }
+                </script>
+                <div class="well">
+                    <span class="glyphicon glyphicon-hand-right"></span>&nbsp;
+                    《网贷平台分布》解析:&nbsp;行业平台主要分布在沿海发达城市。但是内陆地区的潜力也是很大的。
+                    <strong>预计：内陆地区的平台数也会迎头赶上。</strong><br><br>
+                </div>
+                <!--区域情况 结束 -->
+
+            </div>
+
+
+        </div>
+
+         <br>
+
+
+        <div class="row ">
+
+
+            <div class="col-md-6">
+
+                <ol class="breadcrumb">
+                    <li class="active">投资借款人数状况分析</li>
+                </ol>
+                <!-- 投资借款人数情况 开始 -->
+                <div id="industry_hot_people" style="width:100%;height:350px;margin: 0 auto"></div>
+                <script type="text/javascript">
+                    $(document).ready(function () {
+                        show_industry_hot_people();
+                    });
+                    function show_industry_hot_people() {
+                        var industry_hot_people_chart = echarts.init(document.getElementById('industry_hot_people'));
+                        industry_hot_people_option = {
+                            title: {
+                                text: '投资借款人数'
+                            },
+                            tooltip: {
+                                trigger: 'axis'
+                            },
+                            legend: {
+                                data: ['借款人数', '投资人数']
+                            },
+                            toolbox: {
+                                feature: {
+                                    saveAsImage: {}
+                                }
+                            },
+                            grid: {
+                                left: '3%',
+                                right: '4%',
+                                bottom: '3%',
+                                containLabel: true
+                            },
+                            xAxis: [
+                                {
+                                    type: 'category',
+                                    boundaryGap: false,
+                                    data: [
+                                        '2015/1/1', '2015/2/1', '2015/3/1', '2015/4/1', '2015/5/1', '2015/6/1',
+                                        '2015/7/1', '2015/8/1', '2015/9/1', '2015/10/1', '2015/11/1', '2015/12/1'
+                                    ]
+                                }
+                            ],
+                            yAxis: [
+                                {
+                                    name: '人数(万人)',
+                                    type: 'value'
+                                }
+                            ],
+                            series: [
+                                {
+                                    name: '借款人数',
+                                    type: 'line',
+                                    stack: '总量',
+                                    label: {
+                                        normal: {
+                                            show: true,
+                                            position: 'top'
+                                        }
+                                    },
+                                    areaStyle: {normal: {}},
+                                    data: [19.1, 16.18, 18.17, 22.69, 27.84, 33.04, 44.13, 54.94, 56.91, 58.09, 71.94, 78.49]
+                                },
+                                {
+                                    name: '投资人数',
+                                    type: 'line',
+                                    stack: '总量',
+                                    label: {
+                                        normal: {
+                                            show: true,
+                                            position: 'top'
+                                        }
+                                    },
+                                    areaStyle: {normal: {}},
+                                    data: [88.22, 80.86, 96.16, 113, 126.79, 154.36, 179.31, 204.28, 240.41, 247.34, 300.62, 298.02]
+                                }
+                            ]
+                        };
+                        industry_hot_people_chart.setOption(industry_hot_people_option);
+                    }
+                </script>
+
+                <div class="well">
+                    <span class="glyphicon glyphicon-hand-right"></span>&nbsp;
+                    《投资借款人数》解析:&nbsp;投资人数与借款人数都在增加，投资人数增加的更快一些。
+                    <strong>预计：之后一个月，借款人数将增加至 83.22 万人，投资人数回升至 299.32 万人。 </strong>
+                </div>
+                <br> <br>
+                <!-- 投资借款人数情况 结束 -->
+            </div>
+
+
+            <div class="col-md-6">
+                <ol class="breadcrumb">
+                    <li class="active">投资借款金额状况分析</li>
+                </ol>
+                <!-- 人均投资借款金额走势图 开始 -->
+                <div id="industry_hot_money" style="width:100%;height:350px;margin: 0 auto"></div>
+                <script type="text/javascript">
+                    $(document).ready(function () {
+                        show_industry_hot_money();
+                    });
+                    function show_industry_hot_money() {
+                        var industry_hot_money_chart = echarts.init(document.getElementById('industry_hot_money'));
+                        industry_hot_money_option = {
+                            title: {
+                                text: '投资借款金额'
+                            },
+                            tooltip: {
+                                trigger: 'axis'
+                            },
+                            legend: {
+                                data: ['人均投资', '人均借款']
+                            },
+                            toolbox: {
+                                feature: {
+                                    saveAsImage: {}
+                                }
+                            },
+                            grid: {
+                                left: '3%',
+                                right: '4%',
+                                bottom: '3%',
+                                containLabel: true
+                            },
+                            xAxis: [
+                                {
+                                    type: 'category',
+                                    boundaryGap: false,
+                                    data: [
+                                        '2015/1/1', '2015/2/1', '2015/3/1', '2015/4/1', '2015/5/1', '2015/6/1',
+                                        '2015/7/1', '2015/8/1', '2015/9/1', '2015/10/1', '2015/11/1', '2015/12/1'
+                                    ]
+                                }
+                            ],
+                            yAxis: [
+                                {
+                                    name: '金额(元)',
+                                    type: 'value'
+                                }
+                            ],
+                            series: [
+                                {
+                                    name: '人均投资',
+                                    type: 'line',
+                                    stack: '总量',
+                                    label: {
+                                        normal: {
+                                            show: true,
+                                            position: 'top'
+                                        }
+                                    },
+                                    areaStyle: {normal: {}},
+                                    data: [40559, 41446, 51227, 48801, 48081, 42729,
+                                        46015, 47710, 47913, 48374, 44282, 44878]
+                                },
+                                {
+                                    name: '人均借款',
+                                    type: 'line',
+                                    stack: '总量',
+                                    label: {
+                                        normal: {
+                                            show: true,
+                                            position: 'top'
+                                        }
+                                    },
+                                    areaStyle: {normal: {}},
+                                    data: [187340, 207132, 271106, 243037, 218973, 199649,
+                                        186987, 177398, 202419, 205974, 185061, 170391]
+                                }
+                            ]
+                        };
+                        industry_hot_money_chart.setOption(industry_hot_money_option);
+                    }
+                </script>
+                <div class="well">
+                    <span class="glyphicon glyphicon-hand-right"></span>&nbsp;
+                    《投资借款金额》解析:&nbsp;人均投资保持稳定，人均借款波动较大。
+                    <strong>预计：之后一个月，人均投资金额小幅回落至 44580 元 ，人均借款金额将继续回落至 167726 元。 </strong>
+
+                </div>
+                <br> <br>
+                <!-- 人均投资借款金额走势图 结束 -->
+            </div>
+
+
+            <div class="col-md-6">
+                <ol class="breadcrumb">
+                    <li class="active">综合利率分析</li>
+                </ol>
+
+                <!-- 综合利率走势图 开始-->
+                <div id="industry_interest" style="width:100%;height:350px;margin: 0 auto"></div>
+                <script type="text/javascript">
+                    $(document).ready(function () {
+                        show_industry_interest();
+                    });
+                    function show_industry_interest() {
+                        var industry_interest_chart = echarts.init(document.getElementById('industry_interest'));
+                        industry_interest_option = {
+                            title: {
+                                text: '综合利率'
+                            },
+                            tooltip: {
+                                trigger: 'axis'
+                            },
+                            legend: {
+                                data: ['综合利率']
+                            },
+                            toolbox: {
+                                feature: {
+                                    saveAsImage: {}
+                                }
+                            },
+                            grid: {
+                                left: '3%',
+                                right: '4%',
+                                bottom: '3%',
+                                containLabel: true
+                            },
+                            xAxis: [
+                                {
+                                    type: 'category',
+                                    boundaryGap: false,
+                                    data: [
+                                        '2015/3/1', '2015/4/1', '2015/5/1', '2015/6/1', '2015/7/1', '2015/8/1', '2015/9/1', '2015/10/1', '2015/11/1', '2015/12/1', '2016/1/1', '2016/2/1'
+                                    ]
+                                }
+                            ],
+                            yAxis: [
+                                {
+                                    name: '百分比(%)',
+                                    type: 'value'
+                                }
+                            ],
+                            series: [
+                                {
+                                    name: '综合利率',
+                                    type: 'line',
+                                    stack: '总量',
+                                    label: {
+                                        normal: {
+                                            show: true,
+                                            position: 'top'
+                                        }
+                                    },
+                                    areaStyle: {normal: {}},
+                                    data: [15.02, 14.46, 14.57, 14.17, 13.58, 12.98, 12.63, 12.38, 12.25, 12.45, 12.18, 11.86]
+                                }
+                            ]
+                        };
+                        industry_interest_chart.setOption(industry_interest_option);
+                    }
+                </script>
+                <div class="well">
+                    <span class="glyphicon glyphicon-hand-right"></span>&nbsp;
+                    《综合利率》解析:&nbsp;综合利率逐渐在下降，表明随着平台和投资者的增多，用户借钱的成本逐渐下降。
+                    <strong>预计：之后一个月，综合利率继续回落至 11.67 %。 </strong>
+
+                </div>
+                <br> <br>
+                <!-- 综合利率走势图 结束-->
+            </div>
+
+
+
+                <div class="col-md-6 " style="float: left;margin-top: 0px">
+                     <ol class="breadcrumb">
+                    <li class="active">平台背景调查</li>
+                </ol>
+
+
+                <div id="platform_background" style="width:100%;height:350px;margin: 0 auto"></div>
+
+                <script type="text/javascript">
+                    $(document).ready(function () {
+                        show_platform_background();
+                    });
+                    function show_platform_background() {
+                        var platform_background_chart = echarts.init(document.getElementById('platform_background'));
+                        platform_background_option = {
+
+                            tooltip: {
+                                trigger: 'item',
+                                formatter: "{a} <br/>{b} : {c} ({d}%)"
+                            },
+                            legend: {
+                                left: 'left',
+                                data: [ "未知","无背景","上市公司", "VC/PE", "国资"]
+                            },
+                            series: [
+                                {
+                                    name: '访问来源',
+                                    type: 'pie',
+                                    radius: '65%',
+                                    center: ['50%', '50%'],
+                                    data: [
+                                        {name: "未知", value: 337},
+                                        {name: "无背景", value: 43},
+                                        {name: "上市公司", value: 22},
+                                        {name: "VC/PE", value: 29},
+                                        {name: "国资", value: 10},
+
+                                    ],
+                                    itemStyle: {
+                                        emphasis: {
+                                            shadowBlur: 10,
+                                            shadowOffsetX: 0,
+                                            shadowColor: 'rgba(0, 0, 0, 0.5)'
+                                        }
+                                    }
+                                }
+                            ]
+                        };
+
+                        platform_background_chart.setOption(platform_background_option);
+                    }
+                </script>
+
+            </div>
+
+
+
+        </div>
+
+
+    </div>
+
+    <script>
+        // 数据缓存
+        var data_info;
+
+        // 替换字符串
+        function replace_data_info() {
+            for (var i = 0; i < data_info.length; ++i) { // 逐个替换
+                var info = data_info[i];
+                // 背景
+                if (info.platform_background.length > 2) {
+                    info.platform_background = info.platform_background.substr(0, info.platform_background.length - 2);
+                }
+                // 成交量
+                if (info.platform_volume.length > 2) {
+                    info.platform_volume = info.platform_volume.substr(0, info.platform_volume.length - 2);
+                }
+                // 累计代还金额
+                if (info.platform_need_return.length > 2) {
+                    info.platform_need_return = info.platform_need_return.substr(0, info.platform_need_return.length - 2);
+                }
+                // 借款周期
+                if (info.platform_borrowing_period.length > 1) {
+                    info.platform_borrowing_period = info.platform_borrowing_period.substr(0, info.platform_borrowing_period.length - 1);
+                }
+            }
+        }
+
+        // 显示信息
+        function show_info() {
+            var rank_num = 8;
+            platform_sort('人气指数', '-1');
+            for (var i = 0; i < rank_num; ++i) { // 逐个渲染
+                var info = data_info[i];
+                $("#rank_platform_index").append(
+                        "<a href= '/detail/platform/" + info.platform_name + "' target='_blank' class='list-group-item'>" + info.platform_name + " (" + info.platform_index + ")" + "</a>"
+                );
+            }
+
+            platform_sort('平均收益', '-1');
+            for (var i = 0; i < rank_num; ++i) { // 逐个渲染
+                var info = data_info[i];
+                $("#rank_platform_earn").append(
+                        "<a href= '/detail/platform/" + info.platform_name + "' target='_blank' class='list-group-item'>" + info.platform_name + " (" + info.platform_earn + ")" + "</a>"
+                );
+            }
+
+            platform_sort('成交量', '-1');
+            for (var i = 0; i < rank_num; ++i) { // 逐个渲染
+                var info = data_info[i];
+                $("#rank_platform_volume").append(
+                        "<a href= '/detail/platform/" + info.platform_name + "' target='_blank' class='list-group-item'>" + info.platform_name + "(" + info.platform_volume + ")" + "</a>"
+                );
+            }
+
+            platform_sort('评级', '-1');
+            for (var i = 0; i < rank_num; ++i) { // 逐个渲染
+                var info = data_info[i];
+                $("#rank_platform_rank").append(
+                        "<a href= '/detail/platform/" + info.platform_name + "' target='_blank' class='list-group-item'>" + info.platform_name + " (" + info.platform_rank + ")" + "</a>"
+                );
+            }
+        }
+
+        // 量化评级
+        function rankToVal(rank) {
+            if (rank == "A+")
+                return 10;
+            else if (rank == "A")
+                return 9;
+            else if (rank == "A-")
+                return 8;
+            else if (rank == "B+")
+                return 7;
+            else if (rank == "B")
+                return 6;
+            else if (rank == "B-")
+                return 5;
+            else if (rank == "C+")
+                return 4;
+            else if (rank == "C")
+                return 3;
+            else if (rank == "C-")
+                return 2;
+        }
+
+        // 进行排序
+        function platform_sort(tag, updown) {
+            if (tag == '人气指数') {
+                data_info.sort(
+                        function (d1, d2) {
+                            if (d1.platform_index.length == 0)
+                                return 1;
+                            if (d2.platform_index.length == 0)
+                                return -1;
+                            return (d1.platform_index - d2.platform_index) * updown;
+                        }
+                );
+            } else if (tag == '评级') {
+                data_info.sort(
+                        function (d1, d2) {
+                            if (d1.platform_rank.length == 0)
+                                return 1;
+                            if (d2.platform_rank.length == 0)
+                                return -1;
+                            var r1 = rankToVal(d1.platform_rank);
+                            var r2 = rankToVal(d2.platform_rank);
+                            return (r1 - r2) * updown;
+                        }
+                );
+
+            } else if (tag == '平均收益') {
+                data_info.sort(
+                        function (d1, d2) {
+                            if (d1.platform_earn.length == 0)
+                                return 1;
+                            if (d2.platform_earn.length == 0)
+                                return -1;
+                            var r1 = d1.platform_earn.substr(0, d1.platform_earn.length - 1); // 获取子字符串
+                            var r2 = d2.platform_earn.substr(0, d2.platform_earn.length - 1); // 获取子字符串
+                            return (parseFloat(r1) - parseFloat(r2)) * updown;
+                        }
+                );
+            } else if (tag == "成交量") {
+                data_info.sort(
+                        function (d1, d2) {
+                            if (d1.platform_volume.length == 0)
+                                return 1;
+                            if (d2.platform_volume.length == 0)
+                                return -1;
+                            //  var r1 = d1.platform_volume.substr(0, d1.platform_volume.length - 2); // 获取子字符串
+                            /// var r2 = d2.platform_volume.substr(0, d2.platform_volume.length - 2); // 获取子字符串
+                            return (parseFloat(d1.platform_volume) - parseFloat(d2.platform_volume)) * updown;
+                        }
+                );
+            }
+            return;
+        }
+
+        // 加载数据
+        $(document).ready(function () {
+            $.getJSON("/detail/platforms", function (data) {
+                data_info = data.platforms;
+                // 整理数据
+                replace_data_info();
+                // 显示信息
+                show_info();
+
+            });
+        });
+    </script>
+
+    <script src="{{ url_for("static",filename='js/echarts-all-2.2.7.js') }}"></script>
+
+
+{% endblock %}

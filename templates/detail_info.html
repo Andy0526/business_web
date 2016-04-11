@@ -1,4 +1,6 @@
-{% extends "detail_header.html" %}
+{% extends "layout.html" %}
+
+{% block title %} 平台详情 {% endblock %}
 
 {% block body %}
 
@@ -72,9 +74,84 @@
                     </tr>
 
 
+
+                    <tr class="info" style="text-align: left" id="chart_ll_title">
+                        <td colspan="2"> <span
+                                class="glyphicon glyphicon-hand-right"></span>&nbsp&nbsp利率信息
+                        </td>
+                    </tr>
+
+                    <tr id="chart_ll">
+                        <td colspan="2">
+                            <div id="chart_ll_div" style="width:100%;height:400px;margin: 5px auto;"/>
+                        </td>
+                    </tr>
+
+
+                    <tr class="info" style="text-align: left" id="chart_cjl_title">
+                        <td colspan="2"> <span
+                                class="glyphicon glyphicon-hand-right"></span>&nbsp&nbsp成交量信息
+                        </td>
+                    </tr>
+                    <tr id="chart_cjl">
+                        <td colspan="2">
+                         <div id="chart_cjl_div" style="width:100%;height:400px;margin: 5px auto;"/>
+                        </td>
+                    </tr>
+
+                    <tr class="info" style="text-align: left" id="chart_chart_dhk_title">
+                        <td colspan="2"> <span
+                                class="glyphicon glyphicon-hand-right"></span>&nbsp&nbsp待还款
+                        </td>
+                    </tr>
+                    <tr id="chart_dhk">
+                        <td colspan="2">
+                            <div id="chart_dhk_div" style="width:100%;height:400px;margin: 5px auto;"/>
+                        </td>
+                    </tr>
+
+
+                    <tr class="info" style="text-align: left" id="chart_zjlr_title">
+                        <td colspan="2"> <span
+                                class="glyphicon glyphicon-hand-right"></span>&nbsp&nbsp资金净流入
+                        </td>
+                    </tr>
+                    <tr id="chart_zjlr">
+                        <td colspan="2">
+                            <div id="chart_zjlr_div" style="width:100%;height:400px;margin: 5px auto;"/>
+                        </td>
+                    </tr>
+
+
+                      <tr class="info" style="text-align: left" id="chart_tzrs_title">
+                        <td colspan="2"> <span
+                                class="glyphicon glyphicon-hand-right"></span>&nbsp&nbsp投资人数
+                        </td>
+                    </tr>
+                    <tr id="chart_tzrs">
+                        <td colspan="2">
+                            <div id="chart_tzrs_div" style="width:100%;height:400px;margin: 5px auto;"/>
+                        </td>
+                    </tr>
+
+
+
+                      <tr class="info" style="text-align: left" id="chart_jkrs_title">
+                        <td colspan="2"> <span
+                                class="glyphicon glyphicon-hand-right"></span>&nbsp&nbsp借款人数
+                        </td>
+                    </tr>
+                    <tr id="chart_jkrs">
+                        <td colspan="2">
+                            <div id="chart_jkrs_div" style="width:100%;height:400px;margin: 5px auto;"/>
+                        </td>
+                    </tr>
+
+
+
                     <tr class="info" style="text-align: left" id="news_title">
                         <td colspan="2"> <span
-                                class="glyphicon glyphicon-hand-right"></span>&nbsp&nbsp相关新闻
+                                class="glyphicon glyphicon-hand-right"></span>&nbsp&nbsp投资人数\借款人数
                         </td>
                     </tr>
                     <tr id="news_block">
@@ -91,7 +168,7 @@
         </div>
 
     </div>
-    <script src="{{ url_for("static",filename='js/echarts.min.js') }}"></script>
+
     <script>
         // 加载数据
         $(document).ready(function () {
@@ -116,7 +193,82 @@
                     $('#platform_comment_title').hide();
                     $('#platform_comment_block').hide();
                 }
+
+                //alert(data['chart_json']['0']['x'])
+
+                show_chart('chart_ll_div' ,'利率信息',data['chart_json']['0']['x'],data['chart_json']['0']['y1'],'百分比(%)');
+                show_chart('chart_cjl_div' ,'成交量信息',data['chart_json']['0']['x'],data['chart_json']['0']['y2'],'成交量(万)');
+                show_chart('chart_dhk_div' ,'待还款信息',data['chart_json']['1']['x'],data['chart_json']['1']['y1'],'代还款(万)');
+                show_chart('chart_zjlr_div', '资金净流入',data['chart_json']['1']['x'],data['chart_json']['1']['y2'],'净流入资金(万)');
+                show_chart('chart_tzrs_div', '投资人数',data['chart_json']['2']['x'],data['chart_json']['2']['y1'],'投资人数(个)');
+                show_chart('chart_jkrs_div', '借款人数',data['chart_json']['2']['x'],data['chart_json']['2']['y2'],'借款人数(个)');
+
+
+
             });
+
+
+
+            function show_chart(div_id, data_text,data_x,data_y,y_name) {
+
+                var chart = echarts.init(document.getElementById(div_id));
+                var option = {
+                            title: {
+                                text: data_text
+                            },
+                            tooltip: {
+                                trigger: 'axis'
+                            },
+                            legend: {
+                                data: [data_text]
+                            },
+                            toolbox: {
+                                feature: {
+                                    saveAsImage: {}
+                                }
+                            },
+                            grid: {
+                                left: '3%',
+                                right: '4%',
+                                bottom: '3%',
+                                containLabel: true
+                            },
+                            xAxis: [
+                                {
+                                    type: 'category',
+                                    boundaryGap: false,
+                                    data: data_x
+                                }
+                            ],
+                            yAxis: [
+                                {
+                                    name: y_name,
+                                    type: 'value'
+                                }
+                            ],
+                            series: [
+                                {
+                                    name: data_text,
+                                    type: 'line',
+                                    stack: '总量',
+                                    label: {
+                                        normal: {
+                                            show: true,
+                                            position: 'top'
+                                        }
+                                    },
+                                    areaStyle: {normal: {}},
+                                    data: data_y
+                                }
+                            ]
+                        };
+
+                        chart.setOption(option);
+
+
+                    }
+
+
 
 
             $.getJSON("/detail/platform/" + platform_name + "/news", function (data) {
@@ -173,11 +325,7 @@
                         saveAsImage: {show: true}
                     }
                 },
-                legend: {
-                    orient: 'vertical',
-                    left: 'left',
-                    data: ['直接访问', '邮件营销', '联盟广告', '视频广告', '搜索引擎']
-                },
+
                 series: [
                     {
                         name: '访问来源',
@@ -197,6 +345,10 @@
             };
             comment_chart.setOption(comment_option);
         }
+
+
+
+
     </script>
 
 
@@ -204,4 +356,5 @@
     </div>
 
 
+    <script src="{{ url_for("static",filename='js/echarts-all-2.2.7.js') }}"></script>
 {% endblock %}            
