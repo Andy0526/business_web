@@ -83,7 +83,7 @@
                                 </ul>
                             </div>
                         </th>
-
+                        <th>平台详情</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -264,15 +264,15 @@
                 var info = data_info[i];
                 $("tbody").append("<tr>" +
                         "<td>" + (i + 1) + "</td>" +
-                        "<td> <a href= '/detail/platform/" + info.platform_name + "' target='_blank'>" + info.platform_name + "</a></td>" +
+                        "<td>" + info.platform_name + "</a></td>" +
                         "<td>" + info.platform_index + "</td>" +
                         "<td>" + info.platform_rank + "</td>" +
                         "<td>" + info.platform_earn + "</td>" +
                         "<td>" + info.platform_background + "</td>" +
                         "<td>" + info.platform_time + "</td>" +
                         "<td>" + info.platform_volume + "</td>" +
-
-                        "</tr>"
+                        "<td style='text-align:center'> <a href= '/detail/platform/" + info.platform_name + "' target='_blank'>查看详情</a></td>" +
+                     "</tr>"
                 );
             }
         }
