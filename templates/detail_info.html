@@ -6,41 +6,37 @@
 
     <!-- 显示导航栏 -->
     <div class="container" style="margin-top: 70px">
-        <ol class="breadcrumb">
-            <li class="active" id="platform_name">{{ platform_name }}</li>
-        </ol>
-    </div>
 
-    <!-- 显示内容 -->
-    <div class="container">
+
+
 
         <div class="row">
             <div class="col-md-12">
                 <table class="table table-bordered">
 
-                    <tbody >
-                    <tr style="text-align: left " class="info">
-                        <td width="50%"> <span
+                    <tbody style="text-align: center">
+
+                       <tr style="text-align: left " class="bg-info">
+                        <td colspan="2">
+                            <img  class="img-responsive" src="{{ url_for("static",filename='img/detail.png') }}" style="width:42px;height:42px;margin-bottom:0px;float: left" >
+<span  id="platform_name"  style="float: left;font-size:32px;margin-left: 10px;">{{ platform_name }}</span>
+
+                        </td>
+                    </tr>
+
+                    <!--tr style="text-align: left" class="bg-warning" >
+                        <td colspan="2"> <span
                                 class="glyphicon glyphicon-hand-right"></span>&nbsp&nbsp基本信息
                         </td>
+                    </tr-->
 
-                        <td   width="50%" id="platform_comment_title"> <span
-                                class="glyphicon glyphicon-hand-right"></span>&nbsp&nbsp用户评论
-                        </td>
+                    <tr>
+                        <td>评级</td>
+                        <td id="platform_rank"></td>
                     </tr>
                     <tr>
-                        <td width="50%" >
-
-                            <table  border="0" bordercolor="cccccc" style="width: 100%;height: 400px;text-align: center;margin: 0 auto">
-
-                                  <tr >
-                        <td width="50%" >评级</td>
-                        <td width="50%" id="platform_rank"></td>
-                    </tr>
-
-                                  <tr>
-                    <td>人气指数</td>
-                    <td id="platform_index"></td>
+                        <td>人气指数</td>
+                        <td id="platform_index"></td>
                     </tr>
                     <tr>
                         <td>平均收益</td>
@@ -71,74 +67,69 @@
                         <td id="platform_need_return"></td>
                     </tr>
 
-                            </table>
-
-                         </td>
-
-                        <td   id="platform_comment_block" width="50%">
-                            <div id="comment_div" style="width:600px;height:400px;margin: 5px auto;"/>
+                    <tr style="text-align: left ">
+                        <td id="platform_comment_title" class="info" colspan="2"> <span
+                                class="glyphicon glyphicon-hand-right"></span>&nbsp&nbsp用户评论
                         </td>
-
+                    </tr>
+                    <tr>
+                        <td id="platform_comment_block" colspan="2">
+                            <div id="comment_div" style="width:100%;height:400px;"/>
+                        </td>
                     </tr>
 
 
-
-
-
-
-
-                    <tr class="info" style="text-align: left" >
+                    <tr class="info" style="text-align: left">
                         <td id="chart_ll_title" width="50%"> <span
                                 class="glyphicon glyphicon-hand-right"></span>&nbsp&nbsp利率信息
                         </td>
-                           <td id="chart_cjl_title" width="50%"> <span
+                        <td id="chart_cjl_title" width="50%"> <span
                                 class="glyphicon glyphicon-hand-right"></span>&nbsp&nbsp成交量信息
                         </td>
                     </tr>
-
-                    <tr >
+                    <tr>
                         <td id="chart_ll" width="50%">
                             <div id="chart_ll_div" style="width:100%;height:400px;margin: 5px auto;"/>
                         </td>
 
                         <td id="chart_cjl" width="50%">
-                         <div id="chart_cjl_div" style="width:100%;height:400px;margin: 5px auto;"/>
+                            <div id="chart_cjl_div" style="width:100%;height:400px;margin: 5px auto;"/>
                         </td>
                     </tr>
 
-                    <tr class="info" style="text-align: left" >
+
+                    <tr class="info" style="text-align: left">
                         <td id="chart_chart_dhk_title" width="50%"> <span
                                 class="glyphicon glyphicon-hand-right"></span>&nbsp&nbsp待还款
                         </td>
-                           <td id="chart_zjlr_title" width="50%"> <span
+                        <td id="chart_zjlr_title" width="50%"> <span
                                 class="glyphicon glyphicon-hand-right"></span>&nbsp&nbsp资金净流入
                         </td>
                     </tr>
                     <tr>
-                        <td  id="chart_dhk"   width="50%">
+                        <td id="chart_dhk" width="50%">
                             <div id="chart_dhk_div" style="width:100%;height:400px;margin: 5px auto;"/>
                         </td>
 
-                        <td  id="chart_dhk"   width="50%">
+                        <td id="chart_dhk" width="50%">
                             <div id="chart_zjlr_div" style="width:100%;height:400px;margin: 5px auto;"/>
                         </td>
                     </tr>
 
-
-                      <tr class="info" style="text-align: left" >
-                        <td id="chart_tzrs_title"  width="50%"> <span
+                    <tr class="info" style="text-align: left">
+                        <td id="chart_tzrs_title" width="50%"> <span
                                 class="glyphicon glyphicon-hand-right"></span>&nbsp&nbsp投资人数
                         </td>
-                        <td  id="chart_jkrs_title"  width="50%"> <span
+                        <td id="chart_jkrs_title" width="50%"> <span
                                 class="glyphicon glyphicon-hand-right"></span>&nbsp&nbsp借款人数
                         </td>
                     </tr>
-                    <tr >
+                    <tr>
                         <td id="chart_tzrs" width="50%">
                             <div id="chart_tzrs_div" style="width:100%;height:400px;margin: 5px auto;"/>
                         </td>
 
-                         <td  id="chart_jkrs"  width="50%">
+                        <td id="chart_jkrs" width="50%">
                             <div id="chart_jkrs_div" style="width:100%;height:400px;margin: 5px auto;"/>
                         </td>
                     </tr>
@@ -184,21 +175,20 @@
                 if (comment_data.length > 0) {
                     show_commnet(platform_name, comment_data)
                 } else {
-                   // $('#platform_comment_title').hide();
+                    // $('#platform_comment_title').hide();
                     $('#platform_comment_block').text("此平台无数据");
                 }
 
                 //alert(data['chart_json']['0']['x'])
-                if(data['chart_json']['0']==null){
-                   $("#chart_ll_div").text("此平台无数据");
+                if (data['chart_json']['0'] == null) {
+                    $("#chart_ll_div").text("此平台无数据");
                     $("#chart_cjl_div").text("此平台无数据");
-                     $("#chart_dhk_div").text("此平台无数据");
+                    $("#chart_dhk_div").text("此平台无数据");
                     $("#chart_zjlr_div").text("此平台无数据");
-                     $("#chart_tzrs_div").text("此平台无数据");
+                    $("#chart_tzrs_div").text("此平台无数据");
                     $("#chart_jkrs_div").text("此平台无数据");
 
-                }else
-                {
+                } else {
 
                     show_chart('chart_ll_div', '利率信息', data['chart_json']['0']['x'], data['chart_json']['0']['y1'], '百分比(%)');
                     show_chart('chart_cjl_div', '成交量信息', data['chart_json']['0']['x'], data['chart_json']['0']['y2'], '成交量(万)');
@@ -212,67 +202,53 @@
             });
 
 
-
-            function show_chart(div_id, data_text,data_x,data_y,y_name) {
+            function show_chart(div_id, data_text, data_x, data_y, y_name) {
 
                 var chart = echarts.init(document.getElementById(div_id));
                 var option = {
-                            title: {
-                                text: data_text
-                            },
-                            tooltip: {
-                                trigger: 'axis'
-                            },
-                            legend: {
-                                data: [data_text]
-                            },
-                            toolbox: {
-                                feature: {
-                                    saveAsImage: {}
+                    //title: {
+                     //   text: data_text
+                    //},
+                    tooltip: {
+                        trigger: 'axis'
+                    },
+                    //legend: {
+                    //    data: [data_text]
+                    //},
+                    xAxis: [
+                        {
+                            type: 'category',
+                            boundaryGap: false,
+                            data: data_x
+                        }
+                    ],
+                    yAxis: [
+                        {
+                            name: y_name,
+                            type: 'value'
+                        }
+                    ],
+                    series: [
+                        {
+                            name: data_text,
+                            type: 'line',
+                            stack: '总量',
+                            label: {
+                                normal: {
+                                    show: true,
+                                    position: 'top'
                                 }
                             },
-                            grid: {
-                                left: '3%',
-                                right: '4%',
-                                bottom: '3%',
-                                containLabel: true
-                            },
-                            xAxis: [
-                                {
-                                    type: 'category',
-                                    boundaryGap: false,
-                                    data: data_x
-                                }
-                            ],
-                            yAxis: [
-                                {
-                                    name: y_name,
-                                    type: 'value'
-                                }
-                            ],
-                            series: [
-                                {
-                                    name: data_text,
-                                    type: 'line',
-                                    stack: '总量',
-                                    label: {
-                                        normal: {
-                                            show: true,
-                                            position: 'top'
-                                        }
-                                    },
-                                    areaStyle: {normal: {}},
-                                    data: data_y
-                                }
-                            ]
-                        };
+                            areaStyle: {normal: {}},
+                            data: data_y
+                        }
+                    ]
+                };
 
-                        chart.setOption(option);
+                chart.setOption(option);
 
 
-                    }
-
-
+            }
 
 
             $.getJSON("/detail/platform/" + platform_name + "/news", function (data) {
@@ -322,14 +298,6 @@
                     trigger: 'item',
                     formatter: "{b} : {d}%"
                 },
-                toolbox: {
-                    show: true,
-                    feature: {
-
-                        saveAsImage: {show: true}
-                    }
-                },
-
                 series: [
                     {
                         name: '访问来源',
@@ -349,8 +317,6 @@
             };
             comment_chart.setOption(comment_option);
         }
-
-
 
 
     </script>
