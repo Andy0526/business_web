@@ -226,23 +226,13 @@ def news():
 # 获取平台信息
 @app.route('/detail/platforms', methods=['GET'])
 def detail_platforms():
-    platforms_json = json.load(open('static/data/platforms.json','r'))
+    platforms_json = json.load(open('static/data/platform_info.json','r'))
 
     platforms = []
-    for platform_json in platforms_json:
-        platform_dict = dict()
-        platform_dict['platform_name'] = platform_json[u'平台']
-        platform_dict['platform_rank'] = platform_json[u'评级']
-        platform_dict['platform_index'] = platform_json[u'人气指数']
-        platform_dict['platform_earn'] = platform_json[u'平均收益']
-        platform_dict['platform_background'] = platform_json[u'平台背景']
-        platform_dict['platform_time'] = platform_json[u'上线时间']
-        platform_dict['platform_rate'] = platform_json[u'平均利率']
-        platform_dict['platform_volume'] = platform_json[u'成交量']
-        platform_dict['platform_borrowing_period'] = platform_json[u'平均借款期限']
-        platform_dict['platform_need_return'] = platform_json[u'累计待还金额']
+    for platform_name in platforms_json:
+        platform_dict = platforms_json[platform_name];
+        platform_dict['platform_name'] = platform_name;
         platforms.append(platform_dict)
-
     data_info = {
         'platforms': platforms
     }
@@ -278,42 +268,28 @@ def detail_problem_platforms():
 # 获取某一平台信息
 @app.route('/detail/platform/<platform_name>/info', methods=['GET'])
 def detail_platform(platform_name):
-    # TODO platform_name 返回信息
-    platforms_json = json.load(open('static/data/platforms.json', 'r'))
-    for platform_json in platforms_json:
-        if platform_name == platform_json[u'平台']:
-            platform_dict = dict()
-            platform_dict['platform_name'] = platform_json[u'平台']
-            platform_dict['platform_rank'] = platform_json[u'评级']
-            platform_dict['platform_index'] = platform_json[u'人气指数']
-            platform_dict['platform_earn'] = platform_json[u'平均收益']
-            platform_dict['platform_background'] = platform_json[u'平台背景']
-            platform_dict['platform_time'] = platform_json[u'上线时间']
-            platform_dict['platform_rate'] = platform_json[u'平均利率']
-            platform_dict['platform_volume'] = platform_json[u'成交量']
-            platform_dict['platform_borrowing_period'] = platform_json[u'平均借款期限']
-            platform_dict['platform_need_return'] = platform_json[u'累计待还金额']
+    platforms_json = json.load(open('static/data/platform_info.json','r'))
 
-            # 评论标签
-            all_comment_json = json.load(open('static/data/plat_top_labels_sentiment.json', 'r'))
-            comment_json = all_comment_json.get(platform_name, {u'frequent_label': [], u'sentiment': 0})
-            comment_map_list = comment_json.get(u'frequent_label')
-            # 转换成 name value 形式
-            comment_list = list()
-            for comment_map in comment_map_list:
-                for (k, v) in comment_map.items():
-                    comment_list.append({'name': k, 'value': v})
-            platform_dict['frequent_label'] = comment_list
+    platform_dict = platforms_json[platform_name];
+    platform_dict['platform_name'] = platform_name;
 
+    # 评论标签
+    all_comment_json = json.load(open('static/data/plat_top_labels_sentiment.json', 'r'))
+    comment_json = all_comment_json.get(platform_name, {u'frequent_label': [], u'sentiment': 0})
+    comment_map_list = comment_json.get(u'frequent_label')
+    # 转换成 name value 形式
+    comment_list = list()
+    for comment_map in comment_map_list:
+        for (k, v) in comment_map.items():
+            comment_list.append({'name': k, 'value': v})
+    platform_dict['frequent_label'] = comment_list
 
-            # 相关图标
-            all_chart_json = json.load(open('static/data/charts_data.json', 'r'))
-            chart_json = all_chart_json.get(platform_name, {})
-            platform_dict['chart_json'] = chart_json
+    # 相关图表
+    all_chart_json = json.load(open('static/data/charts_data.json', 'r'))
+    chart_json = all_chart_json.get(platform_name, {})
+    platform_dict['chart_json'] = chart_json
 
-            return jsonify(platform_dict)
-
-    return jsonify({})
+    return jsonify(platform_dict)
 
 
 # 获取某一平台最新信息

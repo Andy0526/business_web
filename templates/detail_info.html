@@ -23,47 +23,45 @@
 
                         </td>
                     </tr>
+                       </tbody>
+                    </table>
 
-                    <!--tr style="text-align: left" class="bg-warning" >
-                        <td colspan="2"> <span
+                <table class="table table-bordered">
+
+                    <tbody style="text-align: center">
+
+                       <tr style="text-align: left " >
+                        <td id="platform_comment_title" class="info" colspan="2"> <span
                                 class="glyphicon glyphicon-hand-right"></span>&nbsp&nbsp基本信息
                         </td>
-                    </tr-->
+                    </tr>
+
 
                     <tr>
-                        <td>评级</td>
+                        <td>综合排名</td>
                         <td id="platform_rank"></td>
                     </tr>
+
                     <tr>
-                        <td>人气指数</td>
-                        <td id="platform_index"></td>
-                    </tr>
-                    <tr>
-                        <td>平均收益</td>
+                        <td>平均收益(%)</td>
                         <td id="platform_earn"></td>
                     </tr>
-                    <tr>
-                        <td>平台背景</td>
-                        <td id="platform_background"></td>
-                    </tr>
+
                     <tr>
                         <td>上线时间</td>
                         <td id="platform_time"></td>
                     </tr>
+
                     <tr>
-                        <td>平均利率</td>
-                        <td id="platform_rate"></td>
-                    </tr>
-                    <tr>
-                        <td> 成交量</td>
+                        <td> 注册资本(万)</td>
                         <td id="platform_volume"></td>
                     </tr>
                     <tr>
-                        <td>平均借款期限</td>
+                        <td>投资期限</td>
                         <td id="platform_borrowing_period"></td>
                     </tr>
                     <tr>
-                        <td>累计待还金额</td>
+                        <td>所在地区</td>
                         <td id="platform_need_return"></td>
                     </tr>
 
@@ -161,15 +159,20 @@
             // 显示
             $.getJSON("/detail/platform/" + platform_name + "/info", function (data) {
 
-                $('#platform_rank').text(data['platform_rank']);
-                $('#platform_index').text(data['platform_index']);
-                $('#platform_earn').text(data['platform_earn']);
+                $('#platform_rank').text(data['rank']);
+                $('#platform_earn').text(data['platEarnings']);
+                $('#platform_volume').text(data['registeredCapital']);
+   $('#platform_borrowing_period').text(data['term']);
+   $('#platform_time').text(data['onlineDate']);
+
+
                 $('#platform_background').text(data['platform_background']);
-                $('#platform_time').text(data['platform_time']);
+
                 $('#platform_rate').text(data['platform_rate']);
-                $('#platform_volume').text(data['platform_volume']);
-                $('#platform_borrowing_period').text(data['platform_borrowing_period']);
-                $('#platform_need_return').text(data['platform_need_return']);
+
+
+
+                $('#platform_need_return').text(data['locationAreaName']+data['locationCityName']);
 
                 var comment_data = data['frequent_label']
                 if (comment_data.length > 0) {

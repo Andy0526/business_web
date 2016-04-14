@@ -20,5 +20,18 @@ def insert_news_type(news_type):
 
 #insert_news_type("news")
 
-news_json = json.load(open('static/data/hot_topic/1/news.json', 'r'))
-print type(news_json['item_list'])
+#news_json = json.load(open('static/data/hot_topic/1/news.json', 'r'))
+#print type(news_json['item_list'])
+
+
+
+def detail_platforms():
+    platforms_json = json.load(open('static/data/platform_info.json','r'))
+
+    platforms = []
+    for platform_name in platforms_json:
+         platform_dict =  platforms_json[platform_name];
+         platform_dict['platform_name'] = platform_name;
+         print platform_dict
+
+detail_platforms()

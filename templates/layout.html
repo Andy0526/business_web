@@ -42,9 +42,9 @@
                 </ul>
                 <form class="navbar-form navbar-right">
                     <div class="input-group">
-                        <input type="text" class="form-control" placeholder="请输入搜索内容...">
+                        <input id="search_key" type="text" class="form-control" placeholder="请输入平台名称...">
                         <span class="input-group-btn">
-                             <button id="search_btn" class="btn btn-success" type="button">搜索</button>
+                             <button id="nav_search_btn" class="btn btn-success" type="button">搜索</button>
                         </span>
                     </div>
                 </form>
@@ -52,6 +52,17 @@
             </div>
         </div>
     </nav>
+
+    <script>
+            $(document).ready(function(){
+               $("#nav_search_btn").click(function(){
+                     var key_word = $("#search_key")[0].value;
+                 alert("搜索功能还在开发，敬请期待！")
+                   //  window.location.href="/search";
+                });
+            });
+    </script>
+
 {% endblock %}
 
 {% block body %}
