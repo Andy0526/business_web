@@ -133,14 +133,29 @@
                     </tr>
 
                     <tr class="info" style="text-align: left" id="news_title">
-                        <td colspan="2"> <span
-                                class="glyphicon glyphicon-hand-right"></span>&nbsp&nbsp相关新闻
+                        <td colspan="2">
+                            <span class="glyphicon glyphicon-hand-right"></span>&nbsp&nbsp相关新闻
                         </td>
                     </tr>
-                    <tr id="news_block" style="text-align: center;">
-                        <td colspan="2" style="padding: 0 0 0  0;">
-                            <div id="news_div" style="width: 100%"></div>
+                    <tr style="text-align: center;">
+                        <td colspan="2" style="padding: 0 0 0  0;" >
+                            <div id="news_div" ></div>
                         </td>
+                    </tr>
+
+
+                        <tr class="info" style="text-align: left;">
+                             <td  colspan="2" > <span
+                                class="glyphicon glyphicon-hand-right"></span>&nbsp&nbsp用户评论
+                             </td>
+                       </tr>
+
+
+                        <tr style="text-align: center;">
+<td colspan="2" style="padding: 0 0 0  0;" >
+                            <div id="comments_div" style='width:100%;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;'></div>
+                        </td>
+
                     </tr>
 
                     </tbody>
@@ -164,23 +179,28 @@
                 $('#platform_volume').text(data['registeredCapital']);
    $('#platform_borrowing_period').text(data['term']);
    $('#platform_time').text(data['onlineDate']);
-
-
-                $('#platform_background').text(data['platform_background']);
-
-                $('#platform_rate').text(data['platform_rate']);
-
-
-
                 $('#platform_need_return').text(data['locationAreaName']+data['locationCityName']);
 
-                var comment_data = data['frequent_label']
-                if (comment_data.length > 0) {
-                    show_commnet(platform_name, comment_data)
+                var frequent_label = data['frequent_label']
+                if (frequent_label.length > 0) {
+                    show_frequent_label(platform_name, frequent_label)
                 } else {
                     // $('#platform_comment_title').hide();
                     $('#platform_comment_block').text("此平台无数据");
                 }
+
+
+                 var comments_data_list = data['comments_data_list']
+
+                if (comments_data_list.length > 0) {
+                    show_comments_data_list(comments_data_list)
+                } else {
+                    // $('#platform_comment_title').hide();
+                    $('#comments_div').html("此平台无数据");
+                }
+
+
+
 
                 //alert(data['chart_json']['0']['x'])
                 if (data['chart_json']['0'] == null) {
@@ -200,6 +220,9 @@
                     show_chart('chart_tzrs_div', '投资人数', data['chart_json']['2']['x'], data['chart_json']['2']['y1'], '投资人数(个)');
                     show_chart('chart_jkrs_div', '借款人数', data['chart_json']['2']['x'], data['chart_json']['2']['y2'], '借款人数(个)');
                 }
+
+
+
 
 
             });
@@ -254,14 +277,32 @@
             }
 
 
+            function show_comments_data_list(comments_data_list){
+
+                    for (var i = 0; i < comments_data_list.length; ++i) {
+                        $('#comments_div').append(
+
+                                 "<a class='list-group-item' style='border-left: none;border-right: none;border-bottom: none'>" +
+                                "<div class='row' style='max-width:1147px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;'>" +
+                                "<div class='col-md-12' style='white-space:nowrap;overflow:hidden;text-overflow:ellipsis;'>" + comments_data_list[i].comment + "</div>" +
+                                "</div>" +
+                                "</a>"
+
+
+
+                        );
+                    }
+
+            }
+
             $.getJSON("/detail/platform/" + platform_name + "/news", function (data) {
                 var recent_news_list = data['recent_news_list'];
                 var related_news_list = data['related_news_list'];
                 var num = recent_news_list.length + related_news_list.length
 
                 if (num == 0) {
-                    $('#news_title').hide();
-                    $('#news_block').hide();
+                    //$('#news_title').hide();
+                    $('#news_div').text("此平台无数据");
                 } else {
                     for (var i = 0; i < recent_news_list.length; ++i) {
                         $('#news_div').append(
@@ -290,7 +331,7 @@
 
         });
 
-        function show_commnet(platform_name, comment_data) {
+        function show_frequent_label(platform_name, frequent_label) {
             var comment_chart = echarts.init(document.getElementById('comment_div'));
             var comment_option = {
                 title: {
@@ -307,7 +348,7 @@
                         type: 'pie',
                         radius: '70%',
                         center: ['50%', '60%'],
-                        data: comment_data,
+                        data: frequent_label,
                         itemStyle: {
                             emphasis: {
                                 shadowBlur: 10,

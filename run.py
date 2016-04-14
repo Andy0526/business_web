@@ -227,14 +227,16 @@ def news():
 @app.route('/detail/platforms', methods=['GET'])
 def detail_platforms():
     platforms_json = json.load(open('static/data/platform_info.json','r'))
-
     platforms = []
     for platform_name in platforms_json:
         platform_dict = platforms_json[platform_name];
         platform_dict['platform_name'] = platform_name;
         platforms.append(platform_dict)
+
+    recent_reviews_list = json.load(open('static/data/recent_reviews.json','r'))
     data_info = {
-        'platforms': platforms
+        'platforms': platforms,
+        'recent_reviews_list': recent_reviews_list
     }
     return jsonify(data_info)
 
@@ -288,6 +290,11 @@ def detail_platform(platform_name):
     all_chart_json = json.load(open('static/data/charts_data.json', 'r'))
     chart_json = all_chart_json.get(platform_name, {})
     platform_dict['chart_json'] = chart_json
+
+    # 评论列表
+    comments_data_map = json.load(open('static/data/comments_data.json','r'))
+    comments_data_list = comments_data_map.get(platform_name, [])
+    platform_dict['comments_data_list'] = comments_data_list
 
     return jsonify(platform_dict)
 

@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 import sqlite3
 import csv
 
@@ -34,4 +35,7 @@ def detail_platforms():
          platform_dict['platform_name'] = platform_name;
          print platform_dict
 
-detail_platforms()
+#detail_platforms()
+
+recent_reviews_json = json.load(open('static/data/comments_data.json','r'))
+print recent_reviews_json[u'投哪网']

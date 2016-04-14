@@ -5,10 +5,12 @@
 {% block body %}
 
     <div class="container" style="margin-top: 70px;">
-         <div class="row">
-<div class="col-md-10 col-md-offset-1">
-               <p ><strong>热门平台 Top<span id="platform_num">0</span>&nbsp;&nbsp;&nbsp;&nbsp;排序: <span id="sort_tag"></span>&nbsp;<span id="sort_updown"></span></strong> </p>
-</div>
+        <div class="row">
+            <div class="col-md-10 col-md-offset-1" style="margin-top: 10px;">
+
+                <p><strong>热门平台 Top<span id="platform_num">0</span>&nbsp;&nbsp;&nbsp;&nbsp;排序: <span
+                        id="sort_tag"></span>&nbsp;<span id="sort_updown"></span></strong></p>
+            </div>
             <div class="col-md-8 col-md-offset-1">
 
                 <table class="table table-hover">
@@ -32,7 +34,7 @@
                         </th>
                         <th>
                             <div class="dropdown">
-                                 平均收益
+                                平均收益
                            <span class="dropdown-toggle" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true"
                                  aria-expanded="true">
                                 <span class="caret"></span>
@@ -45,7 +47,7 @@
                         </th>
                         <th>
                             <div class="dropdown">
-                               注册资本
+                                注册资本
                            <span class="dropdown-toggle" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true"
                                  aria-expanded="true">
                                 <span class="caret"></span>
@@ -79,84 +81,101 @@
                 </table>
             </div>
 
-             <div class="col-md-3">
+            <div class="col-md-3">
 
-                    <div id="chart_platform_background" style="width:100%;height:330px;"></div>
-                    <script src="{{ url_for("static",filename='js/echarts-all-2.2.7.js') }}"></script>
-                    <script type="text/javascript">
+                 <script src="{{ url_for("static",filename='js/echarts-all-2.2.7.js') }}"></script>
+                <script type="text/javascript">
                     $(document).ready(function () {
                         show_chart_platform_background();
                     });
                     function show_chart_platform_background() {
                         var chart_platform_background_chart = echarts.init(document.getElementById('chart_platform_background'));
-                        chart_platform_background_option= {
-                              title: {
-                                  x:'left',
+                        chart_platform_background_option = {
+                            title: {
+                                x: 'left',
                                 text: '热门平台背景统计'
                             },
-    tooltip : {
-        trigger: 'item',
-        formatter: "{b}<br/>{d}%"
-    },
-    legend: {
-        orient : 'vertical',
-        x : 'right',
-         data: [ "无背景","上市公司", "VC/PE", "国资"]
-    },
-    calculable : true,
-    series : [
-        {
-            name:'背景',
-            type:'pie',
-            radius : ['55%', '70%'],
-            itemStyle : {
-                normal : {
-                    label : {
-                        show : false
-                    },
-                    labelLine : {
-                        show : false
-                    }
-                },
-                emphasis : {
-                    label : {
-                        show : true,
-                        position : 'center',
-                        textStyle : {
-                            fontSize : '30',
-                            fontWeight : 'bold'
-                        }
-                    }
-                }
-            },
-             data: [
+                            tooltip: {
+                                trigger: 'item',
+                                formatter: "{b}<br/>{d}%"
+                            },
+                            legend: {
+                                orient: 'vertical',
+                                x: 'right',
+                                data: ["无背景", "上市公司", "VC/PE", "国资"]
+                            },
+                            calculable: true,
+                            series: [
+                                {
+                                    name: '背景',
+                                    type: 'pie',
+                                    radius: ['55%', '70%'],
+                                    itemStyle: {
+                                        normal: {
+                                            label: {
+                                                show: false
+                                            },
+                                            labelLine: {
+                                                show: false
+                                            }
+                                        },
+                                        emphasis: {
+                                            label: {
+                                                show: true,
+                                                position: 'center',
+                                                textStyle: {
+                                                    fontSize: '30',
+                                                    fontWeight: 'bold'
+                                                }
+                                            }
+                                        }
+                                    },
+                                    data: [
                                         {name: "无背景", value: 41},
                                         {name: "上市公司", value: 22},
                                         {name: "VC/PE", value: 29},
                                         {name: "国资", value: 10},
                                     ]
-        }
-    ]
-};
+                                }
+                            ]
+                        };
 
 
-
-                       chart_platform_background_chart.setOption(chart_platform_background_option);
+                        chart_platform_background_chart.setOption(chart_platform_background_option);
                     }
                 </script>
 
-                <div id="rank_platform_earn" class="list-group" style="width: 100%;margin: 0 auto;">
-                     <a href="#" class="list-group-item list-group-item-warning">
-                        <span class="glyphicon glyphicon-hand-right"></span>&nbsp;&nbsp;收益较高
+                     <div class="list-group" style="width: 100%;">
+ <a href="#" class="list-group-item list-group-item-warning">
+                        <span class="glyphicon glyphicon-hand-right"></span>&nbsp;&nbsp;用户观点轮播(4s)
                     </a>
-  <img src="{{ url_for("static",filename='img/mh3.jpg') }}" style="width:100%;margin: 0 auto">
+
+                    <a  id="recent_reviews_good" href="#" class="list-group-item list-group-item list-group-item-success"
+                    style='white-space:nowrap;overflow:hidden;text-overflow:ellipsis;'>
+                         </a>
+
+  <a  id="recent_reviews_bad" href="#" class="list-group-item list-group-item list-group-item-danger"
+  style='white-space:nowrap;overflow:hidden;text-overflow:ellipsis;'>
+
+                    </a>
 
                 </div>
 
 
+                <div id="rank_platform_earn" class="list-group" style="width: 100%;margin: 0 auto;">
+                    <a href="#" class="list-group-item list-group-item-warning">
+                        <span class="glyphicon glyphicon-hand-right"></span>&nbsp;&nbsp;收益较高
+                    </a>
+                    <img src="{{ url_for("static",filename='img/mh3.jpg') }}" style="width:100%;margin: 0 auto">
+
+                </div>
+
+                 <div id="chart_platform_background" style="width:100%;height:330px;margin-top: 20px;"></div>
 
 
-             </div>
+
+
+            </div>
 
         </div>
     </div>
@@ -169,21 +188,21 @@
         function replace_data_info() {
             for (var i = 0; i < data_info.length; ++i) { // 逐个替换
                 var info = data_info[i];
-                if (info.rank==0) {
-                    info.rank="";
+                if (info.rank == 0) {
+                    info.rank = "";
                 }
             }
 
             // 去除无用数据
-             data_info.sort(
-                        function (d1, d2) {
-                            if (d1.rank.length == 0)
-                                return 1;
-                            if (d2.rank.length == 0)
-                                return -1;
-                            return (d1.rank - d2.rank) * 1;
-                        }
-                );
+            data_info.sort(
+                    function (d1, d2) {
+                        if (d1.rank.length == 0)
+                            return 1;
+                        if (d2.rank.length == 0)
+                            return -1;
+                        return (d1.rank - d2.rank) * 1;
+                    }
+            );
             var show_num = 100;
             t_data_info = []
             for (var i = 0; i < show_num; ++i) {
@@ -252,10 +271,10 @@
                 );
             }
             $("#sort_tag").text(tag);
-            if(updown>0)
+            if (updown > 0)
                 $("#sort_updown").text("递增");
             else
-                 $("#sort_updown").text("递减");
+                $("#sort_updown").text("递减");
             show_data(data_info);
 
             return;
@@ -273,22 +292,18 @@
                         "<td>" + info.platEarnings + "%</td>" +
                         "<td>" + info.registeredCapital + "万</td>" +
                         "<td>" + info.onlineDate + "</td>" +
-                                 "<td>" + info.locationAreaName + info.locationCityName +"</td>" +
+                        "<td>" + info.locationAreaName + info.locationCityName + "</td>" +
 
                         "<td style='text-align:center'> <a href= '/detail/platform/" + info.platform_name + "' target='_blank'>查看详情</a></td>" +
-                     "</tr>"
+                        "</tr>"
                 );
             }
         }
 
-        // 加载数据
-        $(document).ready(function () {
-            $.getJSON("/detail/platforms", function (data){
-                data_info = data.platforms
-                // 整理数据
-                replace_data_info();
 
-                  data_info.sort(
+
+        function show_syjg(){
+            data_info.sort(
                         function (d1, d2) {
                             if (d1.platEarnings.length == 0)
                                 return 1;
@@ -297,19 +312,91 @@
                             return (d1.platEarnings - d2.platEarnings) * -1;
                         }
                 );
-
                 var rank_num = 10;
-                    for (var i = 0; i < rank_num; ++i) { // 逐个渲染
-                var info = data_info[i];
-                $("#rank_platform_earn").append(
-                        "<a href= '/detail/platform/" + info.platform_name + "' target='_blank' class='list-group-item'><strong>"+(i+1)+"</strong>&nbsp;&nbsp;" + info.platform_name + "(" + info.platEarnings + "%)" + "</a>"
-                );
+                for (var i = 0; i < rank_num; ++i) { // 逐个渲染
+                    var info = data_info[i];
+                    $("#rank_platform_earn").append(
+                            "<a href= '/detail/platform/" + info.platform_name + "' target='_blank' class='list-group-item'><strong>" + (i + 1) + "</strong>&nbsp;&nbsp;" + info.platform_name + "(" + info.platEarnings + "%)" + "</a>"
+                    );
+                }
+        }
+
+        var recent_reviews_list_good =  [];
+        var recent_reviews_list_bad = [];
+        function  init_recent_reviews(recent_reviews_list){
+
+            for(var i=0;i<recent_reviews_list.length;++i){
+                  var recent_review = recent_reviews_list[i];
+                 if(recent_review.evaluation==0||recent_review.evaluation==1) {
+                        recent_reviews_list_bad.push(recent_review);
+                    }else{
+                     recent_reviews_list_good.push(recent_review);
+                    }
             }
+        }
+
+        var show_index_good = -1;
+        var show_index_bad = -1;
+         function show_recent_reviews() {
+
+            show_index_good++;
+             if (show_index_good >= recent_reviews_list_good.length) {
+                 show_index_good = 0;
+             }
+                show_index_bad++;
+            if (show_index_bad >= recent_reviews_list_bad.length) {
+                show_index_bad = 0;
+            }
+
+
+
+             var recent_review = recent_reviews_list_good[show_index_good];
+             var show_str = recent_review.reviewUserName +
+                     "&nbsp;" +
+                     "<strong>" + "推荐" + "</strong>" +
+                     "&nbsp;" +
+                     "<strong>" + recent_review.platName + "</strong>" +
+                     "<br>" +
+                     "<strong> 理由：</strong>" +
+                     recent_review.label
+             $("#recent_reviews_good").html(show_str);
+
+
+             recent_review = recent_reviews_list_bad[show_index_bad];
+             show_str = recent_review.reviewUserName +
+                     "&nbsp;" +
+                     "<strong>" + "不推荐" + "</strong>" +
+                     "&nbsp;" +
+                     "<strong>" + recent_review.platName + "</strong>" +
+                     "<br>" +
+                     "<strong> 理由：</strong>" +
+                     recent_review.label
+
+             $("#recent_reviews_bad").html(show_str);
+
+
+        }
+
+        // 加载数据
+        $(document).ready(function () {
+            $.getJSON("/detail/platforms", function (data) {
+                data_info = data.platforms
+                // 整理数据
+                replace_data_info();
+
+                // 显示收益较高列表
+                show_syjg();
+
+                // 显示网友最新评论
+                init_recent_reviews(data.recent_reviews_list);
+                show_recent_reviews()
+
+                setInterval(show_recent_reviews,4000);// 注意函数名没有引号和括弧！
 
                 // 显示平台内容
                 $("#platform_num").text(data_info.length);
-                platform_sort('综合排名','1');
-                 show_data(data_info);
+                platform_sort('综合排名', '1');
+                show_data(data_info);
             });
         });
     </script>
