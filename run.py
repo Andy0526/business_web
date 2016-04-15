@@ -229,11 +229,11 @@ def detail_platforms():
     platforms_json = json.load(open('static/data/platform_info.json','r'))
     platforms = []
     for platform_name in platforms_json:
-        platform_dict = platforms_json[platform_name];
-        platform_dict['platform_name'] = platform_name;
+        platform_dict = platforms_json[platform_name]
+        platform_dict['platform_name'] = platform_name
         platforms.append(platform_dict)
 
-    recent_reviews_list = json.load(open('static/data/recent_reviews.json','r'))
+    recent_reviews_list = json.load(open('static/data/recent_reviews.json', 'r'))
     data_info = {
         'platforms': platforms,
         'recent_reviews_list': recent_reviews_list
@@ -272,8 +272,8 @@ def detail_problem_platforms():
 def detail_platform(platform_name):
     platforms_json = json.load(open('static/data/platform_info.json','r'))
 
-    platform_dict = platforms_json[platform_name];
-    platform_dict['platform_name'] = platform_name;
+    platform_dict = platforms_json[platform_name]
+    platform_dict['platform_name'] = platform_name
 
     # 评论标签
     all_comment_json = json.load(open('static/data/plat_top_labels_sentiment.json', 'r'))
@@ -296,22 +296,16 @@ def detail_platform(platform_name):
     comments_data_list = comments_data_map.get(platform_name, [])
     platform_dict['comments_data_list'] = comments_data_list
 
+    # 新闻
+    recent_news_json = json.load(open('static/data/plat_recent_news.json', 'r'))
+    recent_news_list = recent_news_json.get(platform_name, [])
+    platform_dict['recent_news_list'] = recent_news_list
+
+    related_news_json = json.load(open('static/data/plat_related_news.json', 'r'))
+    related_news_list = related_news_json.get(platform_name, [])
+    platform_dict['related_news_list'] = related_news_list
+
     return jsonify(platform_dict)
-
-
-# 获取某一平台最新信息
-@app.route('/detail/platform/<platform_name>/news', methods=['GET'])
-def detail_platform_news(platform_name):
-        platform_dict = dict()
-        recent_news_json = json.load(open('static/data/plat_recent_news.json', 'r'))
-        recent_news_list = recent_news_json.get(platform_name, [])
-        platform_dict['recent_news_list'] = recent_news_list
-
-        related_news_json = json.load(open('static/data/plat_related_news.json', 'r'))
-        related_news_list = related_news_json.get(platform_name, [])
-        platform_dict['related_news_list'] = related_news_list
-
-        return jsonify(platform_dict)
 
 
 # 显示平台信息
