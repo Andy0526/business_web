@@ -83,8 +83,6 @@ def info_hot():
         num += 1
         if num > max_num:
             break
-
-
     num = 0
     week_hot_keywords = []
     for week_hot_keyword_str in platforms_json['week_hot_keywords'].split(';'):
@@ -116,28 +114,32 @@ def info_hot():
 
 # 获取指定个数新闻列表
 @app.route('/info/<type>/list/<int:size>', methods=['GET'])
-def info_type_list(type,size):
-
-    reader = csv.reader(file('static/data/'+type+'.csv', 'rb'))
+def info_type_list(type, size):
     type_list = list()
     max_num = size
     num = 0
-
-    for line in reader:
-        if reader.line_num == 1:
-            continue
-        type_item = dict()
-        type_item['item_id'] = reader.line_num
-        type_item['author'] = line[4].decode('utf-8')
-        type_item['title'] = line[5].decode('utf-8')
-        if type == 'ugc' or type == 'opinion':
+    if type == 'ugc':
+        reader = csv.reader(file('static/data/'+type+'.csv', 'rb'))
+        for line in reader:
+            if reader.line_num == 1:
+                continue
+            type_item = dict()
+            type_item['_id'] = line[0].decode('utf-8')
+            type_item['author'] = line[4].decode('utf-8')
+            type_item['title'] = line[5].decode('utf-8')
             type_item['content'] = line[6].decode('utf-8')
-        type_item['item_pub_time'] = line[7].decode('utf-8')
-        type_list.append(type_item)
-        num += 1
-        if num >= max_num:
-            break
-
+            type_item['item_pub_time'] = line[7].decode('utf-8')
+            type_list.append(type_item)
+            num += 1
+            if num >= max_num:
+                break
+    else:
+        reader = json.load(open('static/data/'+type+'.json', 'r'))
+        for line in reader:
+            type_list.append(line)
+            num += 1
+            if num >= max_num:
+                break
     data_info = {"type_list": type_list}
     return jsonify(data_info)
 
@@ -145,36 +147,50 @@ def info_type_list(type,size):
 # 分页获取 current=0&rowCount=15
 @app.route('/info/<type>/list/current=<int:cur>&rowCount=<int:rows>', methods=['GET'])
 def info_type_list_sub(type, cur, rows):
-    reader = csv.reader(file('static/data/'+type+'.csv', 'rb'))
+
     type_list = list()
     start_num = cur * rows
     end_num = (cur + 1) * rows
     num = 0
-    for line in reader:
-        if reader.line_num == 1:
-            continue
-        if (num >= start_num) and (num < end_num):
-            type_item = dict()
-            type_item['item_id'] = reader.line_num
-            type_item['author'] = line[4].decode('utf-8')
-            type_item['title'] = line[5].decode('utf-8')
-            if type == 'ugc' or type == 'opinion':
-                type_item['content'] = line[6].decode('utf-8')
-            type_item['item_pub_time'] = line[7].decode('utf-8')
-            type_list.append(type_item)
-        num += 1
-        if num > end_num:
-            break
 
-    data_info = {
-        "type_list": type_list
-    }
+    if type == 'ugc':
+        reader = csv.reader(file('static/data/'+type+'.csv', 'rb'))
+        for line in reader:
+            if reader.line_num == 1:
+                continue
+            if (num >= start_num) and (num < end_num):
+                type_item = dict()
+                type_item['_id'] = line[0].decode('utf-8')
+                type_item['author'] = line[4].decode('utf-8')
+                type_item['title'] = line[5].decode('utf-8')
+                if type == 'ugc' or type == 'opinion':
+                    type_item['content'] = line[6].decode('utf-8')
+                type_item['item_pub_time'] = line[7].decode('utf-8')
+                type_list.append(type_item)
+            num += 1
+            if num >= end_num:
+                break
+    else:
+        reader = json.load(open('static/data/'+type+'.json', 'r'))
+        for line in reader:
+            if (num >= start_num) and (num < end_num):
+                type_list.append(line)
+            num += 1
+            if num >= end_num:
+                break
+
+    data_info = {"type_list": type_list}
     return jsonify(data_info)
 
 
 # 获取指定个数新闻列表
 @app.route('/info/<type>/list/size', methods=['GET'])
 def info_type_list_size(type):
+    if type != 'ugc':
+        reader = json.load(open('static/data/'+type+'.json', 'r'))
+        data_info = {"list_size": len(reader)}
+        return jsonify(data_info)
+
     reader = csv.reader(file('static/data/'+type+'.csv', 'rb'))
     list_size = 0
     for line in reader:
@@ -186,26 +202,33 @@ def info_type_list_size(type):
 
 
 # 显示新闻详细的信息
-@app.route('/info/<type>/<int:id>', methods=['GET'])
+@app.route('/info/<type>/<id>', methods=['GET'])
 def info_news_detail(type,id):
+    if type != 'ugc':
+        reader = json.load(open('static/data/'+type+'.json', 'r'))
+        for line in reader:
+            if id == line['_id']:
+                line['type'] = type
+                return render_template('info_type_detail.html', data_info=line)
+
     reader = csv.reader(file('static/data/'+type+'.csv', 'rb'))
     for line in reader:
         if reader.line_num == 1:
             continue
-        if id == reader.line_num:
+        if id == line[0].decode('utf-8'):
             news_item = dict()
             news_item['type'] = type
-            news_item['item_id'] = line[0].decode('utf-8')
+            news_item['_id'] = line[0].decode('utf-8')
             news_item['url'] = line[3].decode('utf-8')
             news_item['author'] = line[4].decode('utf-8')
             news_item['title'] = line[5].decode('utf-8')
-            if type == 'opinion' :
-                 content = line[6].decode('utf-8')
-                 content = content.replace("#n#", "")
-                 content = content.replace("#r#", "")
-                 content = content.replace(" ", "")
-                 content = content[0:20]+"..."
-                 news_item['title'] = content
+            if type == 'opinion':
+                content = line[6].decode('utf-8')
+                content = content.replace("#n#", "")
+                content = content.replace("#r#", "")
+                content = content.replace(" ", "")
+                content = content[0:20]+"..."
+                news_item['title'] = content
             news_item['content'] = line[6].decode('utf-8')
             news_item['item_pub_time'] = line[7].decode('utf-8')
             return render_template('info_type_detail.html', data_info=news_item)

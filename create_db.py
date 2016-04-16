@@ -37,5 +37,9 @@ def detail_platforms():
 
 #detail_platforms()
 
-recent_reviews_json = json.load(open('static/data/comments_data.json','r'))
-print recent_reviews_json[u'投哪网']
+#recent_reviews_json = json.load(open('static/data/comments_data.json','r'))
+#print recent_reviews_json[u'投哪网']
+
+type = "news"
+reader = json.load(open('static/data/'+type+'.json', 'r'))
+print len(reader)
