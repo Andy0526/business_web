@@ -34,7 +34,7 @@
 
         <script>
 
-            var rowCount = 20;
+            var rowCount = 40;
             var current = 0;
             var type;
 
@@ -110,17 +110,29 @@
                     } else{
                             var title= item.title;
                                       if(title.length==0) {
-                                     var content = item.content
+                                     var content = item.content.substr(0,40)
                                           title = content;
                                  }
+
+                           var tags_str = "";
+                                      var tags = item.tags;
+                                      if(tags.length >0 ){
+                                          var tags_list = tags.split(',');
+                                          for(var j =0;j<tags_list.length;++j){
+                                              tag = tags_list[j]
+                                            tags_str += '&nbsp;&nbsp;<span class="badge">'+ tag+'</span>';
+                                          }
+
+                                    }
 
 
                         $('#show').append(
                                 "<a href='/info/" + type + "/" + item._id + "' class='list-group-item'>" +
                                 "<div class='row'>" +
-                                "<div class='col-md-8' style='white-space:nowrap;overflow:hidden;text-overflow:ellipsis;'>" + title + "</div>" +
+                                "<div class='col-md-8' style='white-space:nowrap;overflow:hidden;text-overflow:ellipsis;'>" + title + tags_str+"</div>" +
                                 "<div class='col-md-2' style='white-space:nowrap;overflow:hidden;text-overflow:ellipsis;'>" + item.author + "</div>" +
                                 "<div class='col-md-2' style='white-space:nowrap;overflow:hidden;text-overflow:ellipsis;'>" + item.item_pub_time + "</div>" +
+
                                 "</div>" +
                                 "</a>"
                         );

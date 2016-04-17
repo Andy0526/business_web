@@ -28,7 +28,7 @@
                            aria-expanded="false">舆情大盘 <span class="caret"></span></a>
                         <ul class="dropdown-menu">
                             <li><a href="/yqdp">行业洞察</a></li>
-                            <li><a href="/detail/platform/人人贷">平台剖析</a></li>
+                            <li><a href="/ptpx">平台剖析</a></li>
                         </ul>
                     </li>
 
@@ -71,8 +71,10 @@
         $(document).ready(function () {
             $("#nav_search_btn").click(function () {
                 var key_word = $("#search_key")[0].value;
-                alert("搜索功能还在开发，敬请期待！")
-                //  window.location.href="/search";
+                if(key_word.length==0)
+                    alert("平台名称不能为空！")
+                else
+                    window.location.href="/search/"+key_word;
             });
         });
     </script>

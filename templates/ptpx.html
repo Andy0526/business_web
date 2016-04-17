@@ -1,0 +1,192 @@
+{% extends "layout.html" %}
+
+{% block title %}平台剖析 {% endblock %}
+
+
+{% block body %}
+
+
+    <div class="container" style="margin-top: 80px">
+         <div class="row">
+
+             <div class="col-md-8 col-md-offset-1">
+                 <div> <a class="list-group-item list-group-item-heading list-group-item-info">关注的平台</a></div>
+                 <br>
+<div  id="seleced_platform_names"></div>
+             </div>
+
+
+             <div class="col-md-3" id="select_div">
+            <div class="input-group">
+        <input id="input_name" type="text" class="form-control" onKeyUp="update_show_list()" placeholder="请输入要添加的平台名称">
+                        <span class="input-group-btn">
+                             <button id="" class="btn btn-success" type="button" onclick="add_interested_platform()">
+                                 添加
+                             </button>
+                        </span>
+    </div>
+            <br>
+
+        <div id="platform_name_list" class="list-group">
+
+    </div>
+
+    </div>
+        </div>
+     </div>
+        <script>
+            var seleced_platform_names_list = ['拍拍贷'];
+            $(document).ready(function () {
+                        update_platform_names();
+                    });
+
+
+            var platform_name_list;
+            var last_str = "";
+            // 显示
+            $.getJSON("/ptpx/platform_name_list", function (data) {
+                platform_name_list = data.platform_name_list;
+                for (var i = 0; i < platform_name_list.length; ++i) {
+                    platform_name = platform_name_list[i];
+                    $("#platform_name_list").append("<a class='list-group-item'  onclick='slecet_name(this)'>" + platform_name + "</a>")
+                }
+            });
+
+            // 列表点击事件
+            function slecet_name(object) {
+                $("#input_name")[0].value = object.text;
+                update_show_list();
+            }
+
+            // 更新列表
+            function update_show_list() {
+                var input_name = $("#input_name")[0].value;
+                if (input_name == last_str)
+                    return;
+                last_str = input_name;
+
+                $("#platform_name_list").html("");
+                for (var i = 0; i < platform_name_list.length; ++i) {
+                    platform_name = platform_name_list[i];
+                    if (platform_name.indexOf(input_name) >= 0) {
+                        $("#platform_name_list").append("<a class='list-group-item' onclick='slecet_name(this)'>" + platform_name + "</a>")
+                    }
+                }
+            }
+
+            // 添加列表
+            function add_interested_platform() {
+                var input_name = $("#input_name")[0].value;
+                // 检查输入
+                if(input_name.length==0){
+                    alert("添加的平台名称不能为空！");
+                    return;
+                }
+                // 是否存在
+                var is_existed = false;
+                for (var i = 0; i < platform_name_list.length; ++i) {
+                    platform_name = platform_name_list[i];
+                    if (platform_name==input_name) {
+                       is_existed= true;
+                        break;
+                    }
+                }
+                if(!is_existed){
+                     alert("系统无该平台数据，请输入列表中的平台名称！");
+                    return;
+                }
+
+                // 进行添加
+                add_platform_name(input_name);
+            }
+
+            // 添加一个平台
+            function add_platform_name(name){
+
+                var index = seleced_platform_names_list.indexOf(name);
+                if(index<0) {
+                    seleced_platform_names_list.push(name);
+                    update_platform_names();
+                }else{
+                    alert("已经存在！")
+                }
+            }
+
+
+            // 删除一个平台
+            function remove_platform_name(object){
+            var name = object.title;
+             //seleced_platform_names_list.remove(name);
+                var index = seleced_platform_names_list.indexOf(name);
+               seleced_platform_names_list.splice(index,1)
+                update_platform_names();
+
+            }
+
+            // 刷新
+        function update_platform_names(){
+            $("#seleced_platform_names").html("");
+            for (var i = 0; i < seleced_platform_names_list.length; ++i) {
+                  platform_name = seleced_platform_names_list[i];
+                show_paltform(platform_name)
+            }
+        }
+
+            function show_paltform(platform_name){
+                  $("#seleced_platform_names").append(
+                      "<button class='btn btn-lg btn-warning' type='button'>"+
+                              platform_name+
+                      "<span title="+platform_name+" class='glyphicon glyphicon-minus' onclick='remove_platform_name(this)'> "+"</span></button><br><br>"
+                    )
+
+                $("#seleced_platform_names").append('<div id="recent_news_div_'+platform_name +'" class="list-group">' +
+                        '<a class="list-group-item list-group-item-success  list-group-item-heading">' +
+                        '<span class="glyphicon glyphicon-hand-right"></span>&nbsp&nbsp'+platform_name+'最新资讯</a>' +
+                        '</div>' +
+                        '<div id="related_news_div_'+platform_name+'" class="list-group">' +
+                        '<a class="list-group-item list-group-item-info  list-group-item-heading">' +
+                        '<span class="glyphicon glyphicon-hand-right"></span>&nbsp&nbsp'+platform_name+'相关资讯 ' +
+                        '</a> </div>')
+
+                // 显示
+                $.getJSON("/detail/platform/" + platform_name + "/info", function (data) {
+
+                    // 显示新闻
+                    var recent_news_list = data['recent_news_list'];
+                    var related_news_list = data['related_news_list'];
+
+                    for (var i = 0; i < recent_news_list.length; ++i) {
+                            $('#recent_news_div_'+platform_name).append(
+                                    "<a href='" + recent_news_list[i].url + "' target='_blank' class='list-group-item' style='white-space:nowrap;overflow:hidden;text-overflow:ellipsis;'>" +
+                                  recent_news_list[i].title +
+                                    "</a>"
+                            );
+                        }
+                        if(recent_news_list.length==0) {
+                            $('#recent_news_div_'+platform_name).hide();
+                        }
+
+                        for (var i = 0; i < related_news_list.length; ++i) {
+                            $('#related_news_div_'+platform_name).append(
+                                    "<a href='" + related_news_list[i].url + "' target='_blank' class='list-group-item' style='white-space:nowrap;overflow:hidden;text-overflow:ellipsis;'>"
+                                    + related_news_list[i].title + "</div>" +
+                                    "</a>"
+                            );
+                        }
+
+                      if(related_news_list.length==0) {
+                          $('#related_news_div_'+platform_name).hide();
+                      }
+
+                });
+
+            }
+
+
+
+
+
+        </script>
+
+
+{% endblock %}

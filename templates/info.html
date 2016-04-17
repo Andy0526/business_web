@@ -230,7 +230,7 @@
         <!-- 新闻部分 -->
         <div class="row"  style="margin-top: 10px;">
 <div class="col-md-12">
-             <img src="{{ url_for("static",filename='img/mh2.jpg') }}" style="width:100%;margin: 0 auto">
+             <img src="{{ url_for("static",filename='img/mh1.jpg') }}" style="width:100%;margin: 0 auto">
     <br> <br>
                   </div>
 
@@ -267,7 +267,7 @@
   </div>
 
               <div class="col-md-12">
-             <img src="{{ url_for("static",filename='img/mh1.jpg') }}" style="width:100%;margin: 0 auto">
+             <img src="{{ url_for("static",filename='img/mh2.jpg') }}" style="width:100%;margin: 0 auto">
                   <br> <br>
                   </div>
 
@@ -397,12 +397,25 @@
                                  }
 
 
+                                      var tags_str = "";
+                                      var tags = items[i].tags;
+                                      if(tags.length >0 ){
+                                          var tags_list = tags.split(',');
+                                          for(var j =0;j<tags_list.length;++j){
+                                              tag = tags_list[j]
+                                            tags_str += '&nbsp;&nbsp;<span class="badge">'+ tag+'</span>';
+                                          }
+
+                                    }
+
+
                                     $(div_id).append(
                                         "<a href='/info/" + type + "/" + items[i]._id + "' class='list-group-item '>" +
                                         "<div class='row'>" +
                                         "<div class='col-md-12'>"
                                         +"<div style='font-size: large;width:95%;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;'>"+ title + "</div>"
-                                       +"<div style='margin-top:2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;'>"+items[i].item_pub_time+"&nbsp;&nbsp;&nbsp;&nbsp; 作者：" +items[i].author+"</div>"+
+                                       +"<div style='margin-top:2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;'>"+items[i].item_pub_time+"&nbsp;&nbsp;&nbsp;&nbsp;" +items[i].author+tags_str+"</div>"+
+
                                         "</div>" +
                                         "</div>" +
                                         "</a>"

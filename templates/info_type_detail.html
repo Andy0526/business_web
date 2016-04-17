@@ -14,6 +14,10 @@
             content = content.replace(new RegExp(" ","gm"),"&nbsp;")
             $("#content").html(content);
 
+            if($("#title").text().length==0)
+                $("#title").html(content.substr(0,20)+"...")
+
+
             type = $("#type").text();
             if (type == 'news')
                 $("#type").text("新闻")

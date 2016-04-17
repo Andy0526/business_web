@@ -51,9 +51,22 @@ def info_hot_topic_preview(topic_id):
         if num > max_num:
             break
 
+    # 热度变化
+    hot_dict_json = json.load(open('static/data/hot_topic/'+topic_id+'/hot.json', 'r'))
+    hot_dict = dict()
+    hot_x = sorted(hot_dict_json)
+    hot_y = list()
+    for key in hot_x:
+        hot_y.append(hot_dict_json[key])
+    hot_dict = {
+        'x': hot_x,
+        'y': hot_y
+    }
+
     data_info = {
         "item_list": item_list,
-        "keyword_list": keyword_list
+        "keyword_list": keyword_list,
+        "hot_map": hot_dict
     }
     return jsonify(data_info)
 
@@ -293,7 +306,14 @@ def detail_problem_platforms():
 # 获取某一平台信息
 @app.route('/detail/platform/<platform_name>/info', methods=['GET'])
 def detail_platform(platform_name):
+    platform_dict = get_platform_detail_info(platform_name)
+    return jsonify(platform_dict)
+
+
+def get_platform_detail_info(platform_name):
     platforms_json = json.load(open('static/data/platform_info.json','r'))
+    if not (platform_name in platforms_json):
+        return {}
 
     platform_dict = platforms_json[platform_name]
     platform_dict['platform_name'] = platform_name
@@ -328,7 +348,22 @@ def detail_platform(platform_name):
     related_news_list = related_news_json.get(platform_name, [])
     platform_dict['related_news_list'] = related_news_list
 
-    return jsonify(platform_dict)
+    # 新闻关键词
+    platform_news_keywords = json.load(open('static/data/platform_news_keywords.json', 'r'))
+    max_num = 60
+    num = 0
+    keyword = []
+    keywords_list = platform_news_keywords.get(platform_name, [])
+    for item_list in keywords_list:
+        keyword_map = dict()
+        keyword_map['name'] = item_list[0]
+        keyword_map['value'] = item_list[1]
+        keyword.append(keyword_map)
+        num += 1
+        if num > max_num:
+            break
+    platform_dict['keyword'] = keyword
+    return platform_dict
 
 
 # 显示平台信息
@@ -357,12 +392,27 @@ def detail_problem_analyze():
     return render_template("detail_problem_analyze.html")
 
 
-@app.route('/search/<key_word>', methods=['GET'])
-def search_info(key_word):
-    data_info = {
-        'key_word': key_word
-    }
-    return render_template("search_info.html", data_info=data_info)
+@app.route('/search/<platform_name>', methods=['GET'])
+def search_info(platform_name):
+    platforms_json = json.load(open('static/data/platform_info.json','r'))
+    if not (platform_name in platforms_json):
+        return render_template("search_not_found.html")
+    return render_template("search_detail_info.html", platform_name=platform_name)
+
+
+@app.route('/ptpx', methods=['GET'])
+def ptpx():
+    return render_template("ptpx.html")
+
+
+@app.route('/ptpx/platform_name_list', methods=['GET'])
+def ptpx_platform_name_list():
+    platforms_json = json.load(open('static/data/platform_info.json','r'))
+    platform_name_list = list()
+    for platform_name in platforms_json:
+        platform_name_list.append(platform_name)
+    platform_dict = {"platform_name_list":platform_name_list}
+    return jsonify(platform_dict)
 
 
 @app.route('/search')

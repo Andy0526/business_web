@@ -19,13 +19,24 @@
                  <a href="#" class="list-group-item list-group-item-heading list-group-item-info">
                      <strong><h3>话题：<span id="title"> </span></h3></strong>
                  </a>
+                      <a href="#" class="list-group-item list-group-item-info">
+                       <span class="glyphicon glyphicon-hand-right"></span>&nbsp;&nbsp;话题热度变化
+                 </a>
+                    <a  >
+                         <div id="hot_trend" style="width:100%;border:1px solid lightgrey"></div>
+
+                    </a>
+
                     <a href="#" class="list-group-item list-group-item-info">
                        <span class="glyphicon glyphicon-hand-right"></span>&nbsp;&nbsp;话题相关新闻
                  </a>
                 </div>
 
             </div>
-              <div class="col-md-3" >
+              <div class="col-md-4" >
+
+                <div id="hot_trend" style="width:100%;margin: 0 auto"></div>
+
 
                     <div id="show" class="list-group" >
                     <a href="#" class="list-group-item list-group-item-info " style="width:298px;margin-left: 1px;">
@@ -107,10 +118,56 @@
 
             }
 
+                    // 显示热点趋势
+                    function show_hot_trend(hot_map){
+  div_object = $("#hot_trend");
+                        div_object.height(Math.round(div_object.width() * 0.6))
+                        var hot_trend_chart = echarts.init(document.getElementById('hot_trend'));
+                        hot_trend_option = {
+                            tooltip: {
+                                trigger: 'axis'
+                            },
+                            grid: {
+                                left: '3%',
+                                right: '4%',
+                                bottom: '3%',
+                                containLabel: true
+                            },
+                            xAxis: [
+                                {
+                                    type: 'category',
+                                    boundaryGap: false,
+                                    data: hot_map.x
+                                }
+                            ],
+                            yAxis: [
+                                {
+                                    name: '热度值',
+                                    type: 'value'
+                                }
+                            ],
+                            series: [
+                                {
+                                    name: '热度',
+                                    type: 'line',
+                                    label: {
+                                        normal: {
+                                            show: true,
+                                            position: 'top'
+                                        }
+                                    },
+                                    areaStyle: {normal: {}},
+                                    data: hot_map.y
+                                }
+                            ]
+                        };
+                        hot_trend_chart.setOption(hot_trend_option);
+                    }
+
                     // 加载数据
                     $(document).ready(function () {
 
-                          var topic_id = $("#topic_id").text();
+                        var topic_id = $("#topic_id").text();
                         if(topic_id==1){
                              $("#title").text("e租宝涉嫌违法经营分崩离析");
                         }else if(topic_id==2){
@@ -126,6 +183,8 @@
                          $.getJSON("/info/hot/topic/preview/"+topic_id, function (data) {
                               show_hot_word(data.keyword_list);
                               append_info(topic_id,data.item_list);
+                              show_hot_trend(data.hot_map)
+
                          });
 
                     });
