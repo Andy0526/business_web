@@ -9,8 +9,10 @@
     <div class="container" style="margin-top: 80px">
          <div class="row">
 
-             <div class="col-md-8 col-md-offset-1">
-                 <div> <a class="list-group-item list-group-item-heading list-group-item-info">关注的平台</a></div>
+             <div class="col-md-7 col-md-offset-1">
+                 <div> <a class="list-group-item list-group-item-heading list-group-item-info">
+                     <strong>友情提示 : </strong> 最多可关注三个，点击平台名称可以切换，点击 <span class='glyphicon glyphicon-minus'></span> 可删除，右侧输入框可以添加平台。
+                 </a></div>
                  <br>
 <div  id="seleced_platform_names"></div>
              </div>
@@ -18,7 +20,7 @@
 
              <div class="col-md-3" id="select_div">
             <div class="input-group">
-        <input id="input_name" type="text" class="form-control" onKeyUp="update_show_list()" placeholder="请输入要添加的平台名称">
+        <input id="input_name" type="text" class="form-control" onKeyUp="update_show_list()" placeholder="请输入要关注的平台名称">
                         <span class="input-group-btn">
                              <button id="" class="btn btn-success" type="button" onclick="add_interested_platform()">
                                  添加
@@ -34,37 +36,28 @@
     </div>
         </div>
      </div>
+
+
+
+    <script src="{{ url_for("static",filename='js/echarts-all-2.2.7.js') }}"></script>
+
         <script>
-            var seleced_platform_names_list = ['拍拍贷'];
-            $(document).ready(function () {
-                        update_platform_names();
-                    });
-
-
-            var platform_name_list;
+            // 列表相关 -----------------------------------------------
+            var platform_name_list; // 全局的
             var last_str = "";
-            // 显示
-            $.getJSON("/ptpx/platform_name_list", function (data) {
-                platform_name_list = data.platform_name_list;
-                for (var i = 0; i < platform_name_list.length; ++i) {
-                    platform_name = platform_name_list[i];
-                    $("#platform_name_list").append("<a class='list-group-item'  onclick='slecet_name(this)'>" + platform_name + "</a>")
-                }
-            });
-
             // 列表点击事件
             function slecet_name(object) {
                 $("#input_name")[0].value = object.text;
                 update_show_list();
             }
-
             // 更新列表
             function update_show_list() {
                 var input_name = $("#input_name")[0].value;
+                // 字符串相同不更新列表
                 if (input_name == last_str)
                     return;
                 last_str = input_name;
-
+                // 更新列表
                 $("#platform_name_list").html("");
                 for (var i = 0; i < platform_name_list.length; ++i) {
                     platform_name = platform_name_list[i];
@@ -73,9 +66,13 @@
                     }
                 }
             }
-
             // 添加列表
             function add_interested_platform() {
+                if(seleced_platform_names_list.length>=3){
+                    alert("最多只能添加三个！")
+                    return;
+                }
+
                 var input_name = $("#input_name")[0].value;
                 // 检查输入
                 if(input_name.length==0){
@@ -96,97 +93,272 @@
                     return;
                 }
 
-                // 进行添加
-                add_platform_name(input_name);
-            }
-
-            // 添加一个平台
-            function add_platform_name(name){
-
-                var index = seleced_platform_names_list.indexOf(name);
+                var index = seleced_platform_names_list.indexOf(input_name);
                 if(index<0) {
-                    seleced_platform_names_list.push(name);
-                    update_platform_names();
+                    seleced_platform_names_list.push(input_name);
+                    show_name = input_name;
+                    show_platform();
                 }else{
                     alert("已经存在！")
                 }
             }
 
+            // 列表显示相关 ----------------------------------------------
+
+            // 点击事件
+            function btn_click(name){
+                show_name = name;
+                show_platform();
+            }
+
+             // 刷新
+            function show_platform(){
+                $("#seleced_platform_names").html("");
+                for (var i = 0; i < seleced_platform_names_list.length; ++i) {
+                  platform_name = seleced_platform_names_list[i];
+                     $("#seleced_platform_names").append(
+                            "<button value=" + platform_name + " class='btn btn-lg btn-warning' type='button' onclick='btn_click(this.value)'>" +
+                                platform_name +
+                            "</button>&nbsp;" +
+                            "<button class='btn btn-lg btn-warning' type='button'>" +
+                            "<span title=" + platform_name + " class='glyphicon glyphicon-minus' onclick='remove_platform_name(this)'> " + "</span>" +
+                            "</button>&nbsp;&nbsp;&nbsp;&nbsp;"
+                    )
+                }
+                if(show_name!=""){
+                    $("#seleced_platform_names").append("<br><br>")
+                    show_paltform_info(show_name)
+                }
+            }
 
             // 删除一个平台
             function remove_platform_name(object){
-            var name = object.title;
-             //seleced_platform_names_list.remove(name);
+                var name = object.title;
                 var index = seleced_platform_names_list.indexOf(name);
-               seleced_platform_names_list.splice(index,1)
-                update_platform_names();
+                seleced_platform_names_list.splice(index,1)
 
+                if(seleced_platform_names_list.length==0){
+                    show_name=""
+                    $("#seleced_platform_names").html("");
+                }else {
+                    show_name = seleced_platform_names_list[0];
+                    show_platform();
+                }
             }
 
-            // 刷新
-        function update_platform_names(){
-            $("#seleced_platform_names").html("");
-            for (var i = 0; i < seleced_platform_names_list.length; ++i) {
-                  platform_name = seleced_platform_names_list[i];
-                show_paltform(platform_name)
-            }
-        }
+            var seleced_platform_names_list = ['拍拍贷','陆金所'];
+            var show_name = '拍拍贷';
 
-            function show_paltform(platform_name){
-                  $("#seleced_platform_names").append(
-                      "<button class='btn btn-lg btn-warning' type='button'>"+
-                              platform_name+
-                      "<span title="+platform_name+" class='glyphicon glyphicon-minus' onclick='remove_platform_name(this)'> "+"</span></button><br><br>"
-                    )
+            $(document).ready(function () {
+                show_platform();
+                 $.getJSON("/ptpx/platform_name_list", function (data) {
+                    platform_name_list = data.platform_name_list;
+                    for (var i = 0; i < platform_name_list.length; ++i) {
+                        platform_name = platform_name_list[i];
+                        $("#platform_name_list").append("<a class='list-group-item'  onclick='slecet_name(this)'>" + platform_name + "</a>")
+                    }
+                });
+            });
 
-                $("#seleced_platform_names").append('<div id="recent_news_div_'+platform_name +'" class="list-group">' +
-                        '<a class="list-group-item list-group-item-success  list-group-item-heading">' +
-                        '<span class="glyphicon glyphicon-hand-right"></span>&nbsp&nbsp'+platform_name+'最新资讯</a>' +
+            function show_paltform_info(platform_name) {
+
+                $("#seleced_platform_names").append(
+                        '<a  id ="comment_div_title"class="list-group-item list-group-item-success list-group-item-heading">' +
+                        '<span class="glyphicon glyphicon-hand-right"></span>&nbsp&nbsp' + platform_name + '用户评价 </a>' +
+                        '<div id="comment_div" style="width:100%;height:350px;margin: 0 auto;">' +
                         '</div>' +
-                        '<div id="related_news_div_'+platform_name+'" class="list-group">' +
+                        '<a id="chart_ll_div_title" class="list-group-item list-group-item-warning list-group-item-heading"> ' +
+                        '<span class="glyphicon glyphicon-hand-right"></span>&nbsp&nbsp' + platform_name + '利率信息</a>' +
+                        '<div id="chart_ll_div" style="width:100%;height:350px;margin: 0 auto;">' +
+                        '</div>'+
+                        '<div id="comments_div_' + platform_name + '" class="list-group">' +
+                        '<a class="list-group-item list-group-item-danger list-group-item-heading">' +
+                        '<span class="glyphicon glyphicon-hand-right"></span>&nbsp&nbsp' + platform_name + '最新点评</a>' +
+                        '</div>' +
+                        '<div id="recent_news_div_' + platform_name + '" class="list-group">' +
+                        '<a class="list-group-item list-group-item-success  list-group-item-heading">' +
+                        '<span class="glyphicon glyphicon-hand-right"></span>&nbsp&nbsp' + platform_name + '最新资讯</a>' +
+                        '</div>' +
+                        '<div id="related_news_div_' + platform_name + '" class="list-group">' +
                         '<a class="list-group-item list-group-item-info  list-group-item-heading">' +
-                        '<span class="glyphicon glyphicon-hand-right"></span>&nbsp&nbsp'+platform_name+'相关资讯 ' +
+                        '<span class="glyphicon glyphicon-hand-right"></span>&nbsp&nbsp' + platform_name + '相关资讯 ' +
                         '</a> </div>')
 
                 // 显示
                 $.getJSON("/detail/platform/" + platform_name + "/info", function (data) {
 
+
+                       var frequent_label = data['frequent_label']
+                    if (frequent_label.length > 0) {
+                        show_frequent_label(platform_name, frequent_label)
+                           // show_hot_word(frequent_label,'pl_keyword')
+                    } else {
+                         $('#comment_div_title').hide();
+                        $('#comment_div').hide();
+                    }
+
+
+                    if (data['chart_json']['0'] == null) {
+                        $("#chart_ll_div").hide();
+
+                         $("#chart_ll_div_title").hide();
+
+                    } else {
+
+                        show_chart('chart_ll_div', '利率信息', data['chart_json']['0']['x'], data['chart_json']['0']['y1'], '百分比(%)');
+                           }
+
+
+                    var comments_data_list = data['comments_data_list']
+                    var comments_data_div = '#comments_div_' + platform_name;
+                    if (comments_data_list.length > 0) {
+                        show_comments_data_list(comments_data_div,comments_data_list)
+                    } else {
+                        $(comments_data_div).hide();
+                    }
+
+
                     // 显示新闻
                     var recent_news_list = data['recent_news_list'];
                     var related_news_list = data['related_news_list'];
 
-                    for (var i = 0; i < recent_news_list.length; ++i) {
-                            $('#recent_news_div_'+platform_name).append(
-                                    "<a href='" + recent_news_list[i].url + "' target='_blank' class='list-group-item' style='white-space:nowrap;overflow:hidden;text-overflow:ellipsis;'>" +
-                                  recent_news_list[i].title +
-                                    "</a>"
-                            );
-                        }
-                        if(recent_news_list.length==0) {
-                            $('#recent_news_div_'+platform_name).hide();
-                        }
+                      var show_num = Math.min(recent_news_list.length,5);
+                    for (var i = 0; i < show_num; ++i) {
+                        $('#recent_news_div_' + platform_name).append(
+                                "<a href='" + recent_news_list[i].url + "' target='_blank' class='list-group-item' style='white-space:nowrap;overflow:hidden;text-overflow:ellipsis;'>" +
+                                recent_news_list[i].title +
+                                "</a>"
+                        );
+                    }
+                    if (recent_news_list.length == 0) {
+                        $('#recent_news_div_' + platform_name).hide();
+                    }
 
-                        for (var i = 0; i < related_news_list.length; ++i) {
-                            $('#related_news_div_'+platform_name).append(
-                                    "<a href='" + related_news_list[i].url + "' target='_blank' class='list-group-item' style='white-space:nowrap;overflow:hidden;text-overflow:ellipsis;'>"
-                                    + related_news_list[i].title + "</div>" +
-                                    "</a>"
-                            );
-                        }
+                     var show_num = Math.min(related_news_list.length,5);
+                    for (var i = 0; i < show_num; ++i) {
+                        $('#related_news_div_' + platform_name).append(
+                                "<a href='" + related_news_list[i].url + "' target='_blank' class='list-group-item' style='white-space:nowrap;overflow:hidden;text-overflow:ellipsis;'>"
+                                + related_news_list[i].title + "</div>" +
+                                "</a>"
+                        );
+                    }
 
-                      if(related_news_list.length==0) {
-                          $('#related_news_div_'+platform_name).hide();
-                      }
+                    if (related_news_list.length == 0) {
+                        $('#related_news_div_' + platform_name).hide();
+                    }
 
                 });
-
             }
 
+            function show_comments_data_list(comments_data_div,comments_data_list) {
+
+                    comments_data_list.sort(
+                     function (d1, d2) {
+                            if (d1.time.length == 0)
+                                return 1;
+                            if (d2.time.length == 0)
+                                return -1;
+                            str1 = d1.time.replace(/-/g, "/");
+                            str2 = d2.time.replace(/-/g, "/");
+                            var date1 = new Date(str1);
+                            var date2 = new Date(str2);
+                            var value = 1;
+                            if (date1 < date2)
+                                value = -1;
+                            return value * -1;
+
+                        }
+                   );
 
 
+                    var show_num = Math.min(comments_data_list.length,6);
+                    for (var i = 1; i < show_num; ++i) {
 
+                        $(comments_data_div).append(
+                                "<a class='list-group-item'  >"
+                                + "<strong>"+comments_data_list[i].time +"</strong><br>"
+                                  + comments_data_list[i].comment +
+                                "</a>"
+                        );
+                    }
+
+                }
+
+            function show_chart(div_id, data_text, data_x, data_y, y_name) {
+
+                    var chart = echarts.init(document.getElementById(div_id));
+                    var option = {
+                        //title: {
+                        //   text: data_text
+                        //},
+                        tooltip: {
+                            trigger: 'axis'
+                        },
+                        //legend: {
+                        //    data: [data_text]
+                        //},
+                        xAxis: [
+                            {
+                                type: 'category',
+                                boundaryGap: false,
+                                data: data_x
+                            }
+                        ],
+                        yAxis: [
+                            {
+                                name: y_name,
+                                type: 'value'
+                            }
+                        ],
+                        series: [
+                            {
+                                name: data_text,
+                                type: 'line',
+                                stack: '总量',
+                                label: {
+                                    normal: {
+                                        show: true,
+                                        position: 'top'
+                                    }
+                                },
+                                areaStyle: {normal: {}},
+                                data: data_y
+                            }
+                        ]
+                    };
+
+                    chart.setOption(option);
+
+
+                }
+
+            function show_frequent_label(platform_name, frequent_label) {
+                var comment_chart = echarts.init(document.getElementById('comment_div'));
+                var comment_option = {
+                    tooltip: {
+                        trigger: 'item',
+                        formatter: "{b} : {d}%"
+                    },
+                    series: [
+                        {
+                            name: '访问来源',
+                            type: 'pie',
+                            radius: '60%',
+                            center: ['50%', '50%'],
+                            data: frequent_label,
+                            itemStyle: {
+                                emphasis: {
+                                    shadowBlur: 10,
+                                    shadowOffsetX: 0,
+                                    shadowColor: 'rgba(0, 0, 0, 0.5)'
+                                }
+                            }
+                        }
+                    ]
+                };
+                comment_chart.setOption(comment_option);
+            }
 
         </script>
-
 
 {% endblock %}
