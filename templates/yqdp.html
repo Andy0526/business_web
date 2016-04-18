@@ -8,16 +8,16 @@
         <div class="row col-md-offset">
 
             <!--年度舆情热度分析 开始 -->
-            <div class="col-md-6">
+            <div class="col-md-12">
                 <ol class="breadcrumb">
                     <li class="active">年度舆情热度分析</li>
                 </ol>
-                <div id="month_summary" style="width:100%;margin: 0 auto"></div>
+                <div id="month_summary" style="width:90%;margin: 0 auto"></div>
                 <script type="text/javascript">
                     var rate = 0.7;
                     $(document).ready(function () {
                         div_object = $("#month_summary");
-                        div_object.height(Math.round(div_object.width() * rate))
+                        div_object.height(Math.round(div_object.width() * 0.4))
                         show_month_summary();
                     });
                     function show_month_summary() {
@@ -87,25 +87,21 @@
                         month_summary_chart.setOption(month_summary_option);
                     }
                 </script>
-                <div class="well">
-                    <span class="glyphicon glyphicon-hand-right"></span>&nbsp;
-                    《年度舆情热度变化》解析:&nbsp;用户评论和新闻逐渐增多，可见行业热度逐渐增加。
-                    <strong>预计：之后的月份，政策平稳增加，相关新闻持续增加, 用户评论略有下降。</strong>
-                </div>
+
             </div>
             <!--年度舆情热度分析 结束 -->
 
             <!--网贷平台分布分析 开始 -->
-            <div class="col-md-6">
+            <div class="col-md-12">
                 <ol class="breadcrumb">
                     <li class="active">网贷平台分布分析</li>
                 </ol>
-                <div id="industry_areas" style="width:100%;margin: 0 auto"></div>
+                <div id="industry_areas" style="width:80%;margin: 0 auto"></div>
                 <script src="{{ url_for("static",filename='js/china.js') }}"></script>
                 <script type="text/javascript">
                     $(document).ready(function () {
                         div_object = $("#industry_areas");
-                        div_object.height(Math.round(div_object.width() * rate))
+                        div_object.height(Math.round(div_object.width() * 0.5))
                         industry_areas();
                     });
                     function industry_areas() {
@@ -209,11 +205,7 @@
                         industry_areas_chart.setOption(industry_areas_option);
                     }
                 </script>
-                <div class="well">
-                    <span class="glyphicon glyphicon-hand-right"></span>&nbsp;
-                    《网贷平台分布》解析:&nbsp;行业平台主要分布在沿海发达城市。但是内陆地区的潜力也是很大的。
-                    <strong>预计：内陆地区的平台数也会迎头赶上。</strong>
-                </div>
+
             </div>
             <!--网贷平台分布分析 结束 -->
 
@@ -297,11 +289,7 @@
                         industry_hot_people_chart.setOption(industry_hot_people_option);
                     }
                 </script>
-                <div class="well">
-                    <span class="glyphicon glyphicon-hand-right"></span>&nbsp;
-                    《投资借款人数》解析:&nbsp;投资人数与借款人数都在增加，投资人数增加的更快一些。
-                    <strong>预计：之后一个月，借款人数将增加至 83.22 万人，投资人数回升至 299.32 万人。 </strong>
-                </div>
+
             </div>
             <!--投资借款人数状况分析 结束 -->
 
@@ -387,11 +375,7 @@
                         industry_hot_money_chart.setOption(industry_hot_money_option);
                     }
                 </script>
-                <div class="well">
-                    <span class="glyphicon glyphicon-hand-right"></span>&nbsp;
-                    《投资借款金额》解析:&nbsp;人均投资保持稳定，人均借款波动较大。
-                    <strong>预计：之后一个月，人均投资金额小幅回落至 44580 元 ，人均借款金额将继续回落至 167726 元。 </strong>
-                </div>
+
             </div>
             <!-- 人均投资借款金额走势图 结束 -->
 
@@ -461,11 +445,7 @@
                         industry_interest_chart.setOption(industry_interest_option);
                     }
                 </script>
-                <div class="well">
-                    <span class="glyphicon glyphicon-hand-right"></span>&nbsp;
-                    《综合利率》解析:&nbsp;综合利率逐渐在下降，表明随着平台和投资者的增多，用户借钱的成本逐渐下降。
-                    <strong>预计：之后一个月，综合利率继续回落至 11.67 %。 </strong>
-                </div>
+
             </div>
             <!-- 综合利率走势图 结束-->
 
