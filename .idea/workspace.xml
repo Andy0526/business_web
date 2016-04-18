@@ -2,10 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="a7944e78-2a64-49bf-b411-de33439d3aa1" name="默认的" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/static/data/plat_related_news.json" afterPath="$PROJECT_DIR$/static/data/plat_related_news.json" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/static/data/platform_info.json" afterPath="$PROJECT_DIR$/static/data/platform_info.json" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/templates/detail_info.html" afterPath="$PROJECT_DIR$/templates/detail_info.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/templates/ptpx.html" afterPath="$PROJECT_DIR$/templates/ptpx.html" />
     </list>
     <ignored path="p2p.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -52,11 +49,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="ptpx.html" pinned="false" current-in-tab="false">
+      <file leaf-file-name="ptpx.html" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/templates/ptpx.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-7.1875">
-              <caret line="157" column="90" selection-start-line="157" selection-start-column="85" selection-end-line="157" selection-end-column="90" />
+            <state vertical-scroll-proportion="0.664042">
+              <caret line="122" column="63" selection-start-line="122" selection-start-column="63" selection-end-line="122" selection-end-column="63" />
               <folding />
             </state>
           </provider>
@@ -92,10 +89,10 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="detail_info.html" pinned="false" current-in-tab="true">
+      <file leaf-file-name="detail_info.html" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/templates/detail_info.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.3988604">
+            <state vertical-scroll-proportion="-2.2580645">
               <caret line="22" column="64" selection-start-line="22" selection-start-column="64" selection-end-line="22" selection-end-column="64" />
               <folding>
                 <element signature="n#style#0;n#div#0;n#!!top" expanded="true" />
@@ -210,7 +207,6 @@
         <option value="$PROJECT_DIR$/templates/info_type.html" />
         <option value="$PROJECT_DIR$/templates/info_type_detail.html" />
         <option value="$PROJECT_DIR$/templates/info_hot_topic.html" />
-        <option value="$PROJECT_DIR$/templates/ptpx.html" />
         <option value="$PROJECT_DIR$/templates/yqdp.html" />
         <option value="$PROJECT_DIR$/templates/info.html" />
         <option value="$PROJECT_DIR$/templates/detail_navigation.html" />
@@ -219,6 +215,7 @@
         <option value="$PROJECT_DIR$/run.py" />
         <option value="$PROJECT_DIR$/templates/detail_rank.html" />
         <option value="$PROJECT_DIR$/templates/detail_info.html" />
+        <option value="$PROJECT_DIR$/templates/ptpx.html" />
       </list>
     </option>
   </component>
@@ -1087,14 +1084,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/templates/ptpx.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-7.1875">
-          <caret line="157" column="90" selection-start-line="157" selection-start-column="85" selection-end-line="157" selection-end-column="90" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/run.py">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
@@ -1128,7 +1117,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/templates/detail_info.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.3988604">
+        <state vertical-scroll-proportion="-2.2580645">
           <caret line="22" column="64" selection-start-line="22" selection-start-column="64" selection-end-line="22" selection-end-column="64" />
           <folding>
             <element signature="n#style#0;n#div#0;n#!!top" expanded="true" />
@@ -1146,6 +1135,14 @@
             <element signature="n#style#0;n#ul#0;n#div#4;n#div#0;n#div#0;n#div#0;n#div#0;n#!!top" expanded="true" />
             <element signature="n#style#0;n#div#0;n#div#0;n#div#1;n#div#0;n#div#0;n#!!top" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/ptpx.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.664042">
+          <caret line="122" column="63" selection-start-line="122" selection-start-column="63" selection-end-line="122" selection-end-column="63" />
+          <folding />
         </state>
       </provider>
     </entry>

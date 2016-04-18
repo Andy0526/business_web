@@ -117,10 +117,10 @@
                 for (var i = 0; i < seleced_platform_names_list.length; ++i) {
                   platform_name = seleced_platform_names_list[i];
                      $("#seleced_platform_names").append(
-                            "<button value=" + platform_name + " class='btn btn-lg btn-warning' type='button' onclick='btn_click(this.value)'>" +
+                            "<button value=" + platform_name + " class='btn btn-lg btn-info' type='button' onclick='btn_click(this.value)'>" +
                                 platform_name +
                             "</button>&nbsp;" +
-                            "<button class='btn btn-lg btn-warning' type='button'>" +
+                            "<button class='btn btn-lg btn-info' type='button'>" +
                             "<span title=" + platform_name + " class='glyphicon glyphicon-minus' onclick='remove_platform_name(this)'> " + "</span>" +
                             "</button>&nbsp;&nbsp;&nbsp;&nbsp;"
                     )
@@ -163,20 +163,20 @@
             function show_paltform_info(platform_name) {
 
                 $("#seleced_platform_names").append(
-                        '<a  id ="comment_div_title"class="list-group-item list-group-item-success list-group-item-heading">' +
+                        '<a  id ="comment_div_title"class="list-group-item list-group-item-info list-group-item-heading">' +
                         '<span class="glyphicon glyphicon-hand-right"></span>&nbsp&nbsp' + platform_name + '用户评价 </a>' +
                         '<div id="comment_div" style="width:100%;height:350px;margin: 0 auto;">' +
                         '</div>' +
-                        '<a id="chart_ll_div_title" class="list-group-item list-group-item-warning list-group-item-heading"> ' +
+                        '<a id="chart_ll_div_title" class="list-group-item list-group-item-info list-group-item-heading"> ' +
                         '<span class="glyphicon glyphicon-hand-right"></span>&nbsp&nbsp' + platform_name + '利率信息</a>' +
                         '<div id="chart_ll_div" style="width:100%;height:350px;margin: 0 auto;">' +
                         '</div>'+
                         '<div id="comments_div_' + platform_name + '" class="list-group">' +
-                        '<a class="list-group-item list-group-item-danger list-group-item-heading">' +
+                        '<a class="list-group-item list-group-item-info list-group-item-heading">' +
                         '<span class="glyphicon glyphicon-hand-right"></span>&nbsp&nbsp' + platform_name + '最新点评</a>' +
                         '</div>' +
                         '<div id="recent_news_div_' + platform_name + '" class="list-group">' +
-                        '<a class="list-group-item list-group-item-success  list-group-item-heading">' +
+                        '<a class="list-group-item list-group-item-info  list-group-item-heading">' +
                         '<span class="glyphicon glyphicon-hand-right"></span>&nbsp&nbsp' + platform_name + '最新资讯</a>' +
                         '</div>' +
                         '<div id="related_news_div_' + platform_name + '" class="list-group">' +
