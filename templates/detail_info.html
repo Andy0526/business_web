@@ -19,8 +19,8 @@
                         <div class="row ">
 
                             <div class="col-md-10 ">
-                                <img class="img-responsive" src="{{ url_for("static",filename='img/detail.png') }}"
-                                     style="width:42px;height:42px;float:left">
+                                <img id="platLogo" class="img-responsive" src="{{ url_for("static",filename='img/detail.png') }}"
+                                     style="width:48px;height:48px;float:left">
 
                                 <span id="platform_name"
                                       style="font-size:32px;float:left;margin-left: 10px;">{{ platform_name }}</span>
@@ -176,6 +176,8 @@
 
         // 显示基本数据
         function show_basic_info(data) {
+            $('#platLogo').attr("src",data['platLogoUrl']);
+
             $('#platform_rank').text(data['rank']);
             $('#platform_earn').text(data['platEarnings']);
             $('#platform_volume').text(data['registeredCapital']);
