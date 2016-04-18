@@ -139,35 +139,26 @@
                                 }
                             ]
                         };
-
-
                         chart_platform_background_chart.setOption(chart_platform_background_option);
                     }
                 </script>
 
-                     <div class="list-group" style="width: 100%;">
- <a href="#" class="list-group-item list-group-item-warning">
-                        <span class="glyphicon glyphicon-hand-right"></span>&nbsp;&nbsp;用户观点轮播
+                <a href="#" class="list-group-item list-group-item-info">
+                        <span class="glyphicon glyphicon-hand-right"></span>&nbsp;&nbsp;用户观点向上轮播
                     </a>
-
-                    <a  id="recent_reviews_good" href="#" class="list-group-item list-group-item list-group-item-success"
-                    style='white-space:nowrap;overflow:hidden;text-overflow:ellipsis;'>
-                         </a>
-
-  <a  id="recent_reviews_bad" href="#" class="list-group-item list-group-item list-group-item-danger" style='white-space:nowrap;overflow:hidden;text-overflow:ellipsis;'></a>
-
+                     <div id ="recent_reviews" class="list-group" style="width: 100%;">
                 </div>
 
 
                 <div id="rank_platform_earn" class="list-group" style="width: 100%;margin: 0 auto;">
-                    <a href="#" class="list-group-item list-group-item-warning">
+                    <a href="#" class="list-group-item list-group-item-info">
                         <span class="glyphicon glyphicon-hand-right"></span>&nbsp;&nbsp;收益较高
                     </a>
                     <img src="{{ url_for("static",filename='img/mh3.jpg') }}" style="width:100%;margin: 0 auto;border: 1px lightgrey solid">
 
                 </div>
 
-                 <div id="chart_platform_background" style="width:100%;height:330px;margin-top: 20px;"></div>
+                 <div id="chart_platform_background" style="width:100%;height:330px;margin-top: 20px;color:lightcoral;"></div>
 
 
 
@@ -318,58 +309,55 @@
                 }
         }
 
-        var recent_reviews_list_good =  [];
-        var recent_reviews_list_bad = [];
-        function  init_recent_reviews(recent_reviews_list){
-
-            for(var i=0;i<recent_reviews_list.length;++i){
-                  var recent_review = recent_reviews_list[i];
-                 if(recent_review.evaluation==0||recent_review.evaluation==1) {
-                        recent_reviews_list_bad.push(recent_review);
-                    }else{
-                     recent_reviews_list_good.push(recent_review);
-                    }
-            }
+        var recent_reviews_list;
+        function  init_recent_reviews(in_recent_reviews_list){
+            recent_reviews_list = in_recent_reviews_list;
         }
 
-        var show_index_good = -1;
-        var show_index_bad = -1;
+        var show_index = -1;
          function show_recent_reviews() {
 
-            show_index_good++;
-             if (show_index_good >= recent_reviews_list_good.length) {
-                 show_index_good = 0;
+            show_index++;
+             if (show_index >= recent_reviews_list.length) {
+                 show_index = 0;
              }
-                show_index_bad++;
-            if (show_index_bad >= recent_reviews_list_bad.length) {
-                show_index_bad = 0;
+             var show_num = 5;
+             $("#recent_reviews").html("");
+             for(var i=0;i<show_num;++i){
+                  var index = (show_index+i) % recent_reviews_list.length ;
+                  var recent_review = recent_reviews_list[index];
+
+                 var attitude = "";
+                 var head_str ="";
+                   if(recent_review.evaluation==0||recent_review.evaluation==1) {
+                       attitude="不推荐"
+                       head_str=  "<div class='panel-body' style='background-color:lightcoral'>"
+
+                    }else{
+                     attitude="推荐"
+                       head_str=  "<div class='panel-body' style='background-color:lightgreen'>"
+                    }
+
+                  var labels_list =  recent_review.label;
+            var tags_str = "";
+            for(var j=0;j<labels_list.length;++j){
+                tags_str += '<span class="badge">'+ labels_list[j]+'</span>&nbsp;';
             }
 
-
-
-             var recent_review = recent_reviews_list_good[show_index_good];
-             var show_str = recent_review.reviewUserName +
+                 var show_str =
+head_str+
+                         recent_review.reviewUserName +
                      "&nbsp;" +
-                     "<strong>" + "推荐" + "</strong>" +
+                     "<strong>" + attitude + "</strong>" +
                      "&nbsp;" +
-                     "<strong>" + recent_review.platName + "</strong>" +
+                     "<span>" + recent_review.platName + "</span>" +
                      "<br>" +
-                     "<strong> 理由：</strong>" +
-                     recent_review.label
-             $("#recent_reviews_good").html(show_str);
+                     tags_str+
+                                  "</div>";
+                $("#recent_reviews").append(show_str);
+             }
 
 
-             recent_review = recent_reviews_list_bad[show_index_bad];
-             show_str = recent_review.reviewUserName +
-                     "&nbsp;" +
-                     "<strong>" + "不推荐" + "</strong>" +
-                     "&nbsp;" +
-                     "<strong>" + recent_review.platName + "</strong>" +
-                     "<br>" +
-                     "<strong> 理由：</strong>" +
-                     recent_review.label
-
-             $("#recent_reviews_bad").html(show_str);
 
 
         }
@@ -388,7 +376,7 @@
                 init_recent_reviews(data.recent_reviews_list);
                 show_recent_reviews()
 
-                setInterval(show_recent_reviews,4000);// 注意函数名没有引号和括弧！
+                setInterval(show_recent_reviews,2500);// 注意函数名没有引号和括弧！
 
                 // 显示平台内容
                 $("#platform_num").text(data_info.length);
