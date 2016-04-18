@@ -331,21 +331,22 @@
                  var head_str ="";
                    if(recent_review.evaluation==0||recent_review.evaluation==1) {
                        attitude="不推荐"
-                       head_str=  "<div class='panel-body' style='background-color:lightcoral'>"
+                       head_str=  '&nbsp;<span class="label label-danger">'
 
                     }else{
                      attitude="推荐"
-                       head_str=  "<div class='panel-body' style='background-color:lightgreen'>"
+                       head_str= '&nbsp;<span class="label label-success">'
+                               //"<div class='panel-body' style='border:1px solid lightgrey;border-top:none;border-bottom:none'>"
                     }
 
                   var labels_list =  recent_review.label;
             var tags_str = "";
             for(var j=0;j<labels_list.length;++j){
-                tags_str += '<span class="badge">'+ labels_list[j]+'</span>&nbsp;';
+                tags_str += head_str+ labels_list[j]+'</span>';
             }
 
                  var show_str =
-head_str+
+"<div class='panel-body'>"+
                          recent_review.reviewUserName +
                      "&nbsp;" +
                      "<strong>" + attitude + "</strong>" +
