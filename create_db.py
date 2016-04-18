@@ -38,20 +38,9 @@ def detail_platforms():
 #detail_platforms()
 
 
-platform_news_keywords = json.load(open('static/data/platform_news_keywords.json','r'))
-max_num = 60
-num = 0
-keyword = []
-keywords_list = platform_news_keywords.get(u'拍拍贷',[])
-for item_list in keywords_list:
-    keyword_map = dict()
-    keyword_map['name'] = item_list[0]
-    keyword_map['value'] = item_list[1]
-    keyword.append(keyword_map)
-    num += 1
-    if num > max_num:
-        break
-print keyword
-
+platform_reviews_v2 = json.load(open('static/data/platform_reviews_v2.json','r'))
+reviews_map = platform_reviews_v2.get(u"陆金所",{"reviews": {}})
+reviews = reviews_map.get("reviews")
+print reviews
 
 

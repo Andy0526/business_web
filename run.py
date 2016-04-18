@@ -363,6 +363,13 @@ def get_platform_detail_info(platform_name):
         if num > max_num:
             break
     platform_dict['keyword'] = keyword
+
+    # 评论
+    platform_reviews_v2 = json.load(open('static/data/platform_reviews_v4.json', 'r'))
+    reviews_map = platform_reviews_v2.get(platform_name, {"reviews": {}})
+    reviews = reviews_map.get("reviews")
+    platform_dict['reviews'] = reviews
+
     return platform_dict
 
 
