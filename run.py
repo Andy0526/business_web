@@ -416,8 +416,13 @@ def ptpx():
 def ptpx_platform_name_list():
     platforms_json = json.load(open('static/data/platform_info.json','r'))
     platform_name_list = list()
+    show_num = 30
+    platform_name_list.append(u'拍拍贷')
     for platform_name in platforms_json:
         platform_name_list.append(platform_name)
+        show_num -= 1
+        if show_num == 0:
+            break
     platform_dict = {"platform_name_list":platform_name_list}
     return jsonify(platform_dict)
 
