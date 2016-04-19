@@ -12,12 +12,11 @@
                 <ol class="breadcrumb">
                     <li class="active">年度舆情热度分析</li>
                 </ol>
-                <div id="month_summary" style="width:90%;margin: 0 auto"></div>
+                <div id="month_summary" style="width:100%;height:350px;margin: 0 auto"></div>
                 <script type="text/javascript">
                     var rate = 0.7;
                     $(document).ready(function () {
-                        div_object = $("#month_summary");
-                        div_object.height(Math.round(div_object.width() * 0.45))
+
                         show_month_summary();
                     });
                     function show_month_summary() {
