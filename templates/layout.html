@@ -2,32 +2,28 @@
 
 <title>{% block title %} 昆仑镜 {% endblock %} </title>
 
-<!-- 新 Bootstrap 核心 CSS 文件 -->
 <link type="text/css" rel="stylesheet" href="{{ url_for("static",filename='css/bootstrap.min.css') }}">
-<!-- 可选的Bootstrap主题文件（一般不用引入） -->
 <link type="text/css" rel="stylesheet" href="{{ url_for("static",filename='css/bootstrap-theme.min.css') }}">
-<!-- jQuery文件。务必在bootstrap.min.js 之前引入 -->
+<!-- jQuery在bootstrap.min.js -->
 <script src="{{ url_for("static",filename='js/jquery-1.12.1.min.js') }}"></script>
-<!-- 最新的 Bootstrap 核心 JavaScript 文件 -->
 <script src="{{ url_for("static",filename='js/bootstrap.min.js') }}"></script>
+<script src="{{ url_for("static",filename='js/jquery.cookie.js') }}"></script>
 
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-
 </head>
 
 {% block head %}
     <nav class="navbar navbar-inverse navbar-fixed-top">
         <div class="container">
             <div id="navbar" class="navbar-collapse collapse">
-                <a class="navbar-brand"><p style="font-weight: 900;color:white;">昆仑镜</p></a>
+                <a class="navbar-brand">
+                    <p style="font-weight: 900;color:white;float: left">昆仑镜</p>
+                </a>
                 <ul class="nav navbar-nav">
                     <li id="navbar_home"><a href="/home">首页</a></li>
-
-                     <li id="navbar_home"><a href="/yqdp">舆情大盘</a></li>
-
+                    <li id="navbar_home"><a href="/yqdp">舆情大盘</a></li>
                     <li><a href="/info">全网资讯</a></li>
-
                     <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
                            aria-expanded="false">舆情防雷 <span class="caret"></span></a>
@@ -36,14 +32,15 @@
                             <li><a href="/detail/problem">雷区</a></li>
                         </ul>
                     </li>
-
                     <li><a href="/detail/rank">平台档案</a></li>
                     <li><a href="/detail/navigation">投资顾问</a></li>
+                    <li id="grzx" class="hidden"><a href="/grzx">个人中心</a></li>
                 </ul>
-
+                 <ul class="nav navbar-nav navbar-right">
+                    <li><a id='sign_in_out'></a></li>
+                 </ul>
                 <ul class="nav navbar-nav navbar-right">
-                    <li><a href="#">注册</a></li>
-                    <li><a href="#">登录</a></li>
+                    <li id='register'><a href="/register">注册</a></li>
                 </ul>
                 <form class="navbar-form navbar-right">
                     <div class="input-group">
@@ -53,39 +50,28 @@
                         </span>
                     </div>
                 </form>
-
             </div>
         </div>
     </nav>
-
-     <script>
-      document.onkeydown = function (event) {
-                var e = event || window.event || arguments.callee.caller.arguments[0];
-                if (e && e.keyCode == 13) { // enter 键
-                    $("#nav_search_btn").click();
-                }
-            };
-
-        $(document).ready(function () {
-            $("#nav_search_btn").click(function () {
-                var key_word = $("#search_key")[0].value;
-                if(key_word.length==0)
-                    alert("平台名称不能为空！")
-                else
-                    window.location.href="/search/"+key_word;
-            });
-        });
-
-
-    </script>
-
-
+    <div id='myModal' class="modal fade">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                            <h4 class="modal-title">友情提示</h4>
+                        </div>
+                        <div class="modal-body">
+                            <div class="alert alert-warning " role="alert" id="modal-alert"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+    <script src="{{ url_for("static",filename='js/p2p/layout.js') }}"></script>
 
 {% endblock %}
 
 {% block body %}
 {% endblock %}
-
 
 {% block footer %}
 {% endblock %}

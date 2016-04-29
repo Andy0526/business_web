@@ -1,13 +1,19 @@
 # -*- coding: utf-8 -*-
 from flask import Flask, render_template, request, jsonify
+from pymongo import MongoClient
 import json
 import csv
 import sys
+
 reload(sys)
 sys.setdefaultencoding('utf-8')
 csv.field_size_limit(sys.maxsize)
 
 app = Flask(__name__)
+
+# 数据库连接
+conn = MongoClient('localhost', 27017)
+db = conn.p2p
 
 
 # 主页
@@ -24,12 +30,12 @@ def yqdp():
 
 @app.route('/info/hot/topic/<int:topic_id>')
 def info_hot_topic(topic_id):
-    return render_template("info_hot_topic.html",topic_id = topic_id)
+    return render_template("info_hot_topic.html", topic_id=topic_id)
 
 
 @app.route('/info/hot/topic/preview/<topic_id>')
 def info_hot_topic_preview(topic_id):
-    news_json = json.load(open('static/data/hot_topic/'+topic_id+'/news.json', 'r'))
+    news_json = json.load(open('static/data/hot_topic/' + topic_id + '/news.json', 'r'))
     item_list = []
     for json_item in news_json['item_list']:
         item = dict()
@@ -38,7 +44,7 @@ def info_hot_topic_preview(topic_id):
         item['item_pub_time'] = json_item['item_pub_time']
         item_list.append(item)
 
-    keywords_json = json.load(open('static/data/hot_topic/'+topic_id+'/keywords.json', 'r'))
+    keywords_json = json.load(open('static/data/hot_topic/' + topic_id + '/keywords.json', 'r'))
     max_num = 60
     num = 0
     keyword_list = []
@@ -52,7 +58,7 @@ def info_hot_topic_preview(topic_id):
             break
 
     # 热度变化
-    hot_dict_json = json.load(open('static/data/hot_topic/'+topic_id+'/hot.json', 'r'))
+    hot_dict_json = json.load(open('static/data/hot_topic/' + topic_id + '/hot.json', 'r'))
     hot_dict = dict()
     hot_x = sorted(hot_dict_json)
     hot_y = list()
@@ -72,8 +78,8 @@ def info_hot_topic_preview(topic_id):
 
 
 @app.route('/info/hot/topic/news/detail/<topic_id>/<news_id>')
-def info_hot_topic_news_detail(topic_id,news_id):
-    news_json = json.load(open('static/data/hot_topic/'+topic_id+'/news.json', 'r'))
+def info_hot_topic_news_detail(topic_id, news_id):
+    news_json = json.load(open('static/data/hot_topic/' + topic_id + '/news.json', 'r'))
     for json_item in news_json['item_list']:
         if json_item['_id'] == news_id:
             return render_template('info_hot_topic_news_detail.html', data_info=json_item)
@@ -129,30 +135,10 @@ def info_hot():
 @app.route('/info/<type>/list/<int:size>', methods=['GET'])
 def info_type_list(type, size):
     type_list = list()
-    max_num = size
-    num = 0
-    if type == 'ugc':
-        reader = csv.reader(file('static/data/'+type+'.csv', 'rb'))
-        for line in reader:
-            if reader.line_num == 1:
-                continue
-            type_item = dict()
-            type_item['_id'] = line[0].decode('utf-8')
-            type_item['author'] = line[4].decode('utf-8')
-            type_item['title'] = line[5].decode('utf-8')
-            type_item['content'] = line[6].decode('utf-8')
-            type_item['item_pub_time'] = line[7].decode('utf-8')
-            type_list.append(type_item)
-            num += 1
-            if num >= max_num:
-                break
-    else:
-        reader = json.load(open('static/data/'+type+'.json', 'r'))
-        for line in reader:
-            type_list.append(line)
-            num += 1
-            if num >= max_num:
-                break
+    for line in db[type].find():
+        type_list.append(line)
+        if len(type_list) >= size:
+            break
     data_info = {"type_list": type_list}
     return jsonify(data_info)
 
@@ -160,38 +146,16 @@ def info_type_list(type, size):
 # 分页获取 current=0&rowCount=15
 @app.route('/info/<type>/list/current=<int:cur>&rowCount=<int:rows>', methods=['GET'])
 def info_type_list_sub(type, cur, rows):
-
     type_list = list()
     start_num = cur * rows
     end_num = (cur + 1) * rows
     num = 0
-
-    if type == 'ugc':
-        reader = csv.reader(file('static/data/'+type+'.csv', 'rb'))
-        for line in reader:
-            if reader.line_num == 1:
-                continue
-            if (num >= start_num) and (num < end_num):
-                type_item = dict()
-                type_item['_id'] = line[0].decode('utf-8')
-                type_item['author'] = line[4].decode('utf-8')
-                type_item['title'] = line[5].decode('utf-8')
-                if type == 'ugc' or type == 'opinion':
-                    type_item['content'] = line[6].decode('utf-8')
-                type_item['item_pub_time'] = line[7].decode('utf-8')
-                type_list.append(type_item)
-            num += 1
-            if num >= end_num:
-                break
-    else:
-        reader = json.load(open('static/data/'+type+'.json', 'r'))
-        for line in reader:
-            if (num >= start_num) and (num < end_num):
-                type_list.append(line)
-            num += 1
-            if num >= end_num:
-                break
-
+    for line in db[type].find():
+        if (num >= start_num) and (num < end_num):
+            type_list.append(line)
+        num += 1
+        if num >= end_num:
+            break
     data_info = {"type_list": type_list}
     return jsonify(data_info)
 
@@ -199,53 +163,16 @@ def info_type_list_sub(type, cur, rows):
 # 获取指定个数新闻列表
 @app.route('/info/<type>/list/size', methods=['GET'])
 def info_type_list_size(type):
-    if type != 'ugc':
-        reader = json.load(open('static/data/'+type+'.json', 'r'))
-        data_info = {"list_size": len(reader)}
-        return jsonify(data_info)
-
-    reader = csv.reader(file('static/data/'+type+'.csv', 'rb'))
-    list_size = 0
-    for line in reader:
-        if reader.line_num == 1:
-            continue
-        list_size += 1
-    data_info = {"list_size": list_size}
+    data_info = {"list_size": db[type].count()}
     return jsonify(data_info)
 
 
 # 显示新闻详细的信息
 @app.route('/info/<type>/<id>', methods=['GET'])
-def info_news_detail(type,id):
-    if type != 'ugc':
-        reader = json.load(open('static/data/'+type+'.json', 'r'))
-        for line in reader:
-            if id == line['_id']:
-                line['type'] = type
-                return render_template('info_type_detail.html', data_info=line)
-
-    reader = csv.reader(file('static/data/'+type+'.csv', 'rb'))
-    for line in reader:
-        if reader.line_num == 1:
-            continue
-        if id == line[0].decode('utf-8'):
-            news_item = dict()
-            news_item['type'] = type
-            news_item['_id'] = line[0].decode('utf-8')
-            news_item['url'] = line[3].decode('utf-8')
-            news_item['author'] = line[4].decode('utf-8')
-            news_item['title'] = line[5].decode('utf-8')
-            if type == 'opinion':
-                content = line[6].decode('utf-8')
-                content = content.replace("#n#", "")
-                content = content.replace("#r#", "")
-                content = content.replace(" ", "")
-                content = content[0:20]+"..."
-                news_item['title'] = content
-            news_item['content'] = line[6].decode('utf-8')
-            news_item['item_pub_time'] = line[7].decode('utf-8')
-            return render_template('info_type_detail.html', data_info=news_item)
-    return jsonify({})
+def info_news_detail(type, id):
+    line = db[type].find_one({'_id': id})
+    line['type'] = type
+    return render_template('info_type_detail.html', data_info=line)
 
 
 # 显示新闻详细的信息，p2p_news_type是新闻类型，p2p_news_source是来源
@@ -262,7 +189,7 @@ def news():
 # 获取平台信息
 @app.route('/detail/platforms', methods=['GET'])
 def detail_platforms():
-    platforms_json = json.load(open('static/data/platform_info.json','r'))
+    platforms_json = json.load(open('static/data/platform_info.json', 'r'))
     platforms = []
     for platform_name in platforms_json:
         platform_dict = platforms_json[platform_name]
@@ -280,7 +207,7 @@ def detail_platforms():
 # 获取问题平台信息
 @app.route('/detail/problem_platforms', methods=['GET'])
 def detail_problem_platforms():
-    platforms_json = json.load(open('static/data/problem_platform.json','r'))
+    platforms_json = json.load(open('static/data/problem_platform.json', 'r'))
 
     platforms = []
     num = 0
@@ -311,7 +238,7 @@ def detail_platform(platform_name):
 
 
 def get_platform_detail_info(platform_name):
-    platforms_json = json.load(open('static/data/platform_info.json','r'))
+    platforms_json = json.load(open('static/data/platform_info.json', 'r'))
     if not (platform_name in platforms_json):
         return {}
 
@@ -333,11 +260,6 @@ def get_platform_detail_info(platform_name):
     all_chart_json = json.load(open('static/data/charts_data.json', 'r'))
     chart_json = all_chart_json.get(platform_name, {})
     platform_dict['chart_json'] = chart_json
-
-    # 评论列表
-    comments_data_map = json.load(open('static/data/comments_data.json','r'))
-    comments_data_list = comments_data_map.get(platform_name, [])
-    platform_dict['comments_data_list'] = comments_data_list
 
     # 新闻
     recent_news_json = json.load(open('static/data/plat_recent_news.json', 'r'))
@@ -401,7 +323,7 @@ def detail_problem_analyze():
 
 @app.route('/search/<platform_name>', methods=['GET'])
 def search_info(platform_name):
-    platforms_json = json.load(open('static/data/platform_info.json','r'))
+    platforms_json = json.load(open('static/data/platform_info.json', 'r'))
     if not (platform_name in platforms_json):
         return render_template("search_not_found.html")
     return render_template("search_detail_info.html", platform_name=platform_name)
@@ -414,7 +336,7 @@ def ptpx():
 
 @app.route('/ptpx/platform_name_list', methods=['GET'])
 def ptpx_platform_name_list():
-    platforms_json = json.load(open('static/data/platform_info.json','r'))
+    platforms_json = json.load(open('static/data/platform_info.json', 'r'))
     platform_name_list = list()
     show_num = 30
     platform_name_list.append(u'拍拍贷')
@@ -423,7 +345,7 @@ def ptpx_platform_name_list():
         show_num -= 1
         if show_num == 0:
             break
-    platform_dict = {"platform_name_list":platform_name_list}
+    platform_dict = {"platform_name_list": platform_name_list}
     return jsonify(platform_dict)
 
 
@@ -435,6 +357,75 @@ def search():
 @app.route('/invest')
 def invest():
     return render_template("invest.html")
+
+
+@app.route('/sign_in')
+def sign_in():
+    return render_template("sign_in.html")
+
+
+# 登录验证
+@app.route('/sign_in/username=<username>&password=<password>', methods=['GET'])
+def sign_in_valid(username, password):
+    result = db.user.find_one({'username': username, 'password': password})
+    if result is None:
+        return jsonify({'result': '0'})
+    else:
+        return jsonify({'result': '1'})
+
+
+# 获得用户信息
+@app.route('/user/<username>', methods=['GET'])
+def uesr_info(username):
+    result = db.user.find_one({'username': username})
+    user_info = {
+        'platform_names': result['platform_names']
+    }
+    return jsonify(user_info)
+
+
+# 添加平台
+@app.route('/user/platform/add/username=<username>&platform_name=<platform_name>', methods=['GET'])
+def user_platform_add(username,platform_name):
+    result = db.user.find_one({'username': username})
+    result['platform_names'].append(platform_name)
+    db.user.update({'username': username}, result)
+    return jsonify({
+        'result': '1',
+        'platform_names': result['platform_names']
+    })
+
+
+# 添加平台
+@app.route('/user/platform/remove/username=<username>&platform_name=<platform_name>', methods=['GET'])
+def user_platform_remove(username, platform_name):
+    result = db.user.find_one({'username': username})
+    result['platform_names'].remove(platform_name)
+    db.user.update({'username': username}, result)
+    return jsonify({
+        'result': '1',
+        'platform_names': result['platform_names']
+    })
+
+
+@app.route('/register')
+def register():
+    return render_template("register.html")
+
+
+@app.route('/register/username=<username>&password=<password>&platform_name=<platform_name>', methods=['GET'])
+def register_valid(username, password, platform_name):
+    result = db.user.find_one({'username': username})
+    if result is None:
+        db.user.insert({'username': username, 'password': password, 'platform_names': [platform_name]})
+        return jsonify({'result': '1'})
+    else:
+        return jsonify({'result': '0'})
+
+
+@app.route('/grzx')
+def grzx():
+    return render_template("grzx.html")
 
 
 if __name__ == '__main__':
