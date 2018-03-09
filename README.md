@@ -30,15 +30,17 @@
 1. 在 mongodb 目录的 bin 目录中执行 mongod.exe 文件。<br>
 `C:\software\mongdb3.6.3\bin>mongod --dbpath C:\software\mongdb3.6.3\db`
 
-2. 运行项目目录下的 `data_to_mongodb.py` 文件，将数据导入到 mongodb 数据库汇中。<br>
-`python data_to_mongodb.py`
+2. 将数据导入到 mongodb 数据库中。<br>
+项目目录下运行 `data_to_mongodb.py` 文件， 命令行输入 `python data_to_mongodb.py`。
 
-3. 运行项目目录下的 `run.py` 文件，启动项目。<br>
-运行 `python run.py`
+3. 启动项目。<br>
+项目目录下运行 `run.py` 文件, 命令行输入 `python run.py`。
 
-2. 访问项目<br>
-输入 `http://localhost:8086` 进行访问
+4. 访问项目<br>
+输入 `http://localhost:8086` 进行访问。
 
 # 3 效果展示
 访问地址： http://119.29.100.53:8086/
+
+一个测试账号 用户名：test  密码： 123
 
