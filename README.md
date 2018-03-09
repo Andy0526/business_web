@@ -5,3 +5,6 @@
 * 前端：HTML5 + CSS + JavaScript+JSON<br>
 * 后台：Python轻量级Web应用框架Flask<br>
 * 服务器：阿里云ECS<br>
+
+
+访问地址： http://119.29.100.53:8086/
