@@ -1,4 +1,4 @@
-一个基于python的flask框架的资讯网站
+一个基于 python 的 flask 框架的资讯网站
 ----
 
 # 1 背景介绍
@@ -7,9 +7,10 @@
 * 后台：Python轻量级Web应用框架Flask<br>
 
 # 2 项目基本介绍
+* [项目介绍PPT](https://github.com/mindawei/p2p/blob/master/doc/klj.pdf)。
 * 本项目主要是一个展示数据的网站。
-* 数据来源是其它三位队友爬取数据后处理得到的，他们的项目在[others](https://github.com/mindawei/p2p/tree/master/others)目录中。
-* 本项目数据源在[static/data](https://github.com/mindawei/p2p/tree/master/static/data)目录中，项目启动前需要将它们导入到 mongodb 数据库中。
+* 数据来源是其它三位队友爬取数据后处理得到的，他们的项目在[ others ](https://github.com/mindawei/p2p/tree/master/others)目录中。
+* 本项目数据源在[ static/data ](https://github.com/mindawei/p2p/tree/master/static/data)目录中，项目启动前需要将它们导入到 mongodb 数据库中。
 
 # 3 QuickStart
 ## 3.1 安装环境
@@ -61,4 +62,7 @@
 ![](https://github.com/mindawei/p2p/blob/master/doc/imgs/08.png)
 
 ![](https://github.com/mindawei/p2p/blob/master/doc/imgs/09.png)
+
+# 5 后续项目
+[zsw](https://github.com/mindawei/zsw) 是基于该项目的一个简化版本，但是增加了一些帖子评论等功能。
 
