@@ -29,12 +29,15 @@
 ## 2.2 启动项目
 1. 在 mongodb 目录的 bin 目录中执行 mongod.exe 文件。<br>
 `C:\software\mongdb3.6.3\bin>mongod --dbpath C:\software\mongdb3.6.3\db`
+![](https://github.com/mindawei/p2p/blob/master/doc/imgs/01.png)
 
 2. 将数据导入到 mongodb 数据库中。<br>
 项目目录下运行 `data_to_mongodb.py` 文件， 命令行输入 `python data_to_mongodb.py`。
+![](https://github.com/mindawei/p2p/blob/master/doc/imgs/02.png)
 
 3. 启动项目。<br>
 项目目录下运行 `run.py` 文件, 命令行输入 `python run.py`。
+![](https://github.com/mindawei/p2p/blob/master/doc/imgs/03.png)
 
 4. 访问项目<br>
 输入 `http://localhost:8086` 进行访问。
@@ -43,4 +46,16 @@
 访问地址： http://119.29.100.53:8086/
 
 一个测试账号 用户名：test  密码： 123
+
+![](https://github.com/mindawei/p2p/blob/master/doc/imgs/04.png)
+
+![](https://github.com/mindawei/p2p/blob/master/doc/imgs/05.png)
+
+![](https://github.com/mindawei/p2p/blob/master/doc/imgs/06.png)
+
+![](https://github.com/mindawei/p2p/blob/master/doc/imgs/07.png)
+
+![](https://github.com/mindawei/p2p/blob/master/doc/imgs/08.png)
+
+![](https://github.com/mindawei/p2p/blob/master/doc/imgs/09.png)
 
