@@ -1,0 +1,102 @@
+爬虫文档
+
+基本爬取方法
+========
+1. 订制列表界面爬虫
+	该界面包含信息实体的概述信息，包括标题，作者，发表时间等，订制爬虫专门爬取对应详细界面的url
+2. 订制详细信息界面爬虫
+	该界面包含信息实体的详细信息，包括标题，作者，发表时间，内容正文，评论信息，订制详细信息界面爬虫爬取对应的详细信息
+
+进阶爬虫方法
+========
+1. 抓取网站app后台获取数据API
+	下载要爬取网站的app版本，试用并对网络流进行抓包，分析出网站后台获取数据API
+2. 模拟网站app进行API请求获取数据
+	根据分析出来的API和相应的数据请求格式模拟网站app进行数据请求抓包，获取数据
+
+代码框架
+========
+scrapy + xpath + beautifulsoup
+
+爬取主要字段
+========
+新闻类每条新闻一行记录，保存格式：
+	item_id string or int, 资讯id
+	Item_type string, “news”、”industry”、”policy”、”opinion”、”reply”
+	source string, 网站名称，包括金融之家、和讯网、P2P观察网
+	url string, 新闻链接
+	author string,
+	title string,
+	content string,
+	item_pub_time datetime, 发布时间 yyyy-mm-dd
+	tags sring, 新闻在页面的标签，用’,’分隔
+	cmt_cnt int, 评论数
+	fav_cnt int, 点赞或者收藏数
+	gmt_create datetime, 该记录创建时间,yyyy-mm-dd mm:ss
+	exinfo1 string, 保留字段，如果是reply的话，保留被回复的id
+	exinfo2 string
+
+平台&公司类每个平台一行记录，保存格式：
+	platform_id string or int, 平台id
+	platform_name string, 平台名字
+	platform_type string, 平台类型”信用贷、企业贷车贷 、房贷 、债权流转、优选理财、票据抵押、其他”
+	platform_status string, 平台状态”runing、close、issue” 
+	company string, 所属公司
+	need_invest double, 最少需要投资的金额
+	prospect_earn string, 预期收益,格式”xx%~xx%”，四舍五入
+	Risk_weight int, 风险系数1,2,3,4,5
+	source string, 来源
+	Source_url string, 来源链接
+	gmt_create datetime, 该记录创建时间,yyyy-mm-dd mm:ss
+	exinfo1 string, 保留字段
+	exinfo2 string
+
+爬取网站列表
+========
+新闻类
+	http://news.jrzj.com/p2p
+	金融之家
+	http://www.wdzj.com/news/hangye
+	网贷之家-行业(3300篇)
+	http://www.wdzj.com/news/pingtai
+	网贷之家-平台(1100篇)
+	http://p2p.hexun.com
+	和讯网
+	http://www.p2pguancha.com
+	P2P观察网
+	http://www.caixin.com/
+	财新网（作为预料参与NLP模型的训练）
+
+
+国家政策
+	http://p2p.hexun.com/zc
+	和讯网政策版块
+	http://www.wdzj.com/news/zhengce
+	网贷之家政策版块(340篇)
+
+P2P平台&公司
+	http://shuju.wdzj.com/platdata-1.html
+	网贷之家平台数据，按平台数据格式保存，不按文档里的格式
+	http://www.rong360.com/licai-p2p/pingtai/rating
+	融360，P2P平台评级 
+	http://caifu.baidu.com/wealth
+	百度财富 有300左右个P2P公司信息
+	http://licai.p2peye.com/lcdt
+	p2p理财
+	http://www.p2peye.com/platform/search/h0i0c0x0r0t0s0b0p1.html
+	网贷天眼网贷平台汇总 (4189个) 
+
+用户评论、观点类
+	http://licai.p2peye.com/investshare
+	用户分享
+	http://bbs.wdzj.com
+	网贷人论坛
+	http://zhihu.com
+	知乎，相对专业的评论，应该较长
+	http://bbs.rong360.com/forum-55-1.html
+	融360 P2P论坛，整个版块抓取
+
+爬虫代码
+========
+附件
+
