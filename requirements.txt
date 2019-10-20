@@ -1,4 +1,11 @@
 --index-url=https://pypi.douban.com/simple/
+# productions
+Flask
+Flask-Script
+Flask-Migrate
 
-flask
-pymongo
+psycopg2
+SQLAlchemy
+
+gevent
+gunicorn
