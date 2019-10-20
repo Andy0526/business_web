@@ -1,0 +1,162 @@
+{% extends "layout.html" %}
+
+{% block title %} 全网资讯 {% endblock %}
+
+{% block body %}
+
+    <div class="container" style="margin-top: 60px">
+        <div class="row">
+
+            <div class="col-md-8">
+
+                <ul class="nav nav-tabs" role="tablist">
+                    <li role="presentation">
+                        <a style="font-size: large"> 热点话题</a>
+                    </li>
+                </ul>
+                <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
+                    <ol class="carousel-indicators">
+                        <li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
+                        <li data-target="#carousel-example-generic" data-slide-to="1"></li>
+                        <li data-target="#carousel-example-generic" data-slide-to="2"></li>
+                        <li data-target="#carousel-example-generic" data-slide-to="3"></li>
+                    </ol>
+                    <div class="carousel-inner" role="listbox"
+                         style="width:100%; height:340px;background-color: #1b6d85">
+                        <div class="item active" style="width:100%; height:100%">
+                            <img src="{{ url_for("static",filename='img/hot_topic_1.jpg') }}" style="margin: 0 auto">
+                            <div class="container">
+                                <div class="carousel-caption">
+                                    <strong>
+                                        <h1>e租宝涉嫌违法经营分崩离析</h1>
+                                        <h4>e租宝网站以及关联公司在开展互联网金融业务中涉嫌违法经营活动，正接受有关部门调查。</h4>
+                                        <p><a class="btn btn-lg btn-primary" href="/info/hot/topic/1" target='_blank'
+                                              role="button">查看详情</a></p>
+                                    </strong>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="item" style="width:100%; height:100%">
+                            <img src="{{ url_for("static",filename='img/hot_topic_2.jpg') }}" style="margin: 0 auto">
+                            <div class="container">
+                                <div class="carousel-caption">
+                                    <strong>
+                                        <h1>P2P监管办法征求意见稿发布</h1>
+                                        <h4>12月28日，国务院法制办发布银监会关于《网络借贷信息中介机构业务活动管理暂行办法(征求意见稿)》。</h4>
+                                        <p><a class="btn btn-lg btn-primary" href="/info/hot/topic/2" target='_blank'
+                                              role="button">查看详情</a></p>
+                                    </strong>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="item" style="width:100%; height:100%">
+                            <img src="{{ url_for("static",filename='img/hot_topic_3.jpg') }}" style="margin: 0 auto">
+                            <div class="container">
+                                <div class="carousel-caption">
+                                    <strong>
+                                        <h1>宜人贷上市</h1>
+                                        <h4>宜人贷纽交所挂牌成P2P网贷上市第一股</h4>
+                                        <p><a class="btn btn-lg btn-primary" href="/info/hot/topic/3" target='_blank'
+                                              role="button">查看详情</a></p>
+                                    </strong>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="item" style="width:100%; height:100%">
+                            <img src="{{ url_for("static",filename='img/hot_topic_4.jpg') }}" style="margin: 0 auto">
+                            <div class="container">
+                                <div class="carousel-caption">
+                                    <strong>
+                                        <h1>翼龙贷3.7亿豪夺央视标王</h1>
+                                        <h4>翼龙贷夺得央视《新闻联播》后黄金时段广告位,互联网金融正式迈入主流行业，进一步获得了权威媒体认可</h4>
+                                        <p><a class="btn btn-lg btn-primary" href="/info/hot/topic/4" target='_blank'
+                                              role="button">查看详情</a></p>
+                                    </strong>
+                                </div>
+                            </div>
+                        </div>
+
+                        <a class="left carousel-control" href="#carousel-example-generic" role="button"
+                           data-slide="prev">
+                            <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+                            <span class="sr-only">Previous</span>
+                        </a>
+                        <a class="right carousel-control" href="#carousel-example-generic" role="button"
+                           data-slide="next">
+                            <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+                            <span class="sr-only">Next</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <ul class="nav nav-tabs ">
+                    <li role="presentation">
+                        <a style="font-size: large"> 热点词汇 </a>
+                    </li>
+                    <li id="hot_day" role="presentation" class="active"><a>今日</a></li>
+                    <li id="hot_week" role="presentation"><a>本周</a></li>
+                    <li id="hot_month" role="presentation"><a>本月</a></li>
+                </ul>
+                <div id="hot_content"
+                     style="width:100%;height:350px;">
+                </div>
+            </div>
+        </div>
+
+
+        <div class="row" style="margin-top: 10px;">
+
+            <div class="col-md-4">
+                <div id="show_xw" class="list-group">
+                    <a class="list-group-item list-group-item-heading list-group-item-danger">
+                        <span class="glyphicon glyphicon-hand-right"></span>&nbsp&nbsp新闻
+                    </a>
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <div id="show_zc" class="list-group">
+                    <a class="list-group-item list-group-item-heading list-group-item-warning">
+                        <span class="glyphicon glyphicon-hand-right"></span>&nbsp&nbsp政策
+                    </a>
+                </div>
+            </div>
+
+
+            <div class="col-md-4">
+                <div id="show_gd" class="list-group">
+                    <a class="list-group-item list-group-item-heading list-group-item-success">
+                        <span class="glyphicon glyphicon-hand-right"></span>&nbsp&nbsp观点
+                    </a>
+                </div>
+            </div>
+
+
+            <div class="col-md-8">
+                <div id="show_dp" class="list-group">
+                    <a class="list-group-item list-group-item-heading list-group-item-info">
+                        <span class="glyphicon glyphicon-hand-right"></span>&nbsp&nbsp问答
+                    </a>
+                </div>
+            </div>
+
+            <div class="col-md-4 ">
+                <a class="list-group-item list-group-item-heading list-group-item-info">
+                    <span class="glyphicon glyphicon-hand-right"></span>&nbsp&nbsp资讯来源
+                </a>
+                <div id="source_summary" style="width:100%;height:400px;margin: 0 auto"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+    <script src="{{ url_for("static",filename='js/echarts-all-2.2.7.js') }}"></script>
+    <script src="{{ url_for("static",filename='js/p2p/qwzx.js') }}"></script>
+
+{% endblock %}

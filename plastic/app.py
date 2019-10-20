@@ -8,7 +8,8 @@ from werkzeug.utils import import_string
 blueprints = [
 
     # api
-    'ctdcxy.views.api.layouts:bp',
+    # 'plastic.views.api.layouts:bp',
+    'plastic.views.home:bp',
 
 ]
 
@@ -16,7 +17,7 @@ blueprints = [
 def create_app(config=None):
     app = Flask(__name__)
     # CORS(app, supports_credentials=True, resources=r'*')
-    app.config.from_object('ctdcxy.config')
+    app.config.from_object('plastic.config')
     app.config.from_object(config)
 
     for blueprint in blueprints:

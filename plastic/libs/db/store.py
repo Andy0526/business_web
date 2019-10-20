@@ -2,7 +2,7 @@
 
 from sqlalchemy import create_engine
 
-from ctdcxy.config import SQLALCHEMY_DATABASE_URI
+from plastic.config import SQLALCHEMY_DATABASE_URI
 
 engine = create_engine(
     SQLALCHEMY_DATABASE_URI, max_overflow=80, pool_size=100, pool_recycle=3600,

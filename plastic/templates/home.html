@@ -1,0 +1,16 @@
+{% extends "layout.html" %}
+
+{% block title %}首页 {% endblock %}
+
+
+{% block body %}
+
+    <div class="container-fluid" style="width:100%;padding:0 0 0 0px;">
+        <img src="{{ url_for("static",filename='img/bg.jpg') }}" style="max-width:100%;margin: 0 auto">
+        <div class="jumbotron" style="margin-top: 0px;padding-top: 5px;">
+            <h1>昆仑镜</h1>
+            <p class="lead"> 昆仑镜为您提供全面的网贷行业资讯，为您的决策提供支持。</p>
+        </div>
+    </div>
+
+{% endblock %}

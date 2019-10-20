@@ -1,0 +1,40 @@
+{% extends "layout.html" %}
+
+{% block title %} 热点话题 {% endblock %}
+
+{% block body %}
+    <div class="container" style="margin-top: 70px">
+        <div class="row">
+
+            <div class="col-md-7 col-md-offset-1">
+                <span class="hidden" id="topic_id">{{ topic_id }}</span>
+                <div id="show" class="list-group">
+                    <a href="#" class="list-group-item list-group-item-heading list-group-item-info">
+                        <strong><h3>话题：<span id="title"> </span></h3></strong>
+                    </a>
+                    <a href="#" class="list-group-item list-group-item-info">
+                        <span class="glyphicon glyphicon-hand-right"></span>&nbsp;&nbsp;话题热度变化
+                    </a>
+                    <div id="hot_trend" style="width:100%;border:1px solid lightgrey"></div>
+                    <a href="#" class="list-group-item list-group-item-info">
+                        <span class="glyphicon glyphicon-hand-right"></span>&nbsp;&nbsp;话题相关新闻
+                    </a>
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <div id="hot_trend" style="width:100%;margin: 0 auto"></div>
+                <div id="show">
+                    <a class="list-group-item list-group-item-info list-group-item-heading " style="width:300px;">
+                        <span class="glyphicon glyphicon-hand-right"></span>&nbsp;&nbsp;话题热点词汇
+                    </a>
+                    <div id="hot_content" style="width:300px;height:280px;"></div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <script src="{{ url_for("static",filename='js/echarts-all-2.2.7.js') }}"></script>
+    <script src="{{ url_for("static",filename='js/p2p/qwzx_hot_topic.js') }}"></script>
+{% endblock %}
