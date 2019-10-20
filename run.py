@@ -1,12 +1,13 @@
 # -*- coding: utf-8 -*-
-from flask import Flask, render_template, request, jsonify
-from pymongo import MongoClient
+
 import json
 import csv
 import sys
 
-reload(sys)
-sys.setdefaultencoding('utf-8')
+
+from flask import Flask, render_template, jsonify
+from pymongo import MongoClient
+
 csv.field_size_limit(sys.maxsize)
 
 app = Flask(__name__)

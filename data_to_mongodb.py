@@ -1,7 +1,9 @@
 # -*- coding: utf-8 -*-
-from pymongo import MongoClient
+
 import json
 import csv
+
+from pymongo import MongoClient
 
 # 连接
 conn = MongoClient('localhost', 27017)
