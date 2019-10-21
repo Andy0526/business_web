@@ -8,8 +8,12 @@ from werkzeug.utils import import_string
 blueprints = [
 
     # api
-    # 'plastic.views.api.layouts:bp',
     'plastic.views.home:bp',
+    'plastic.views.api.nav1:bp',
+    'plastic.views.api.nav2:bp',
+    'plastic.views.api.nav3:bp',
+    'plastic.views.api.nav4:bp',
+    'plastic.views.api.nav5:bp',
 
 ]
 

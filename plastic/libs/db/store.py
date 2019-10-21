@@ -8,4 +8,5 @@ engine = create_engine(
     SQLALCHEMY_DATABASE_URI, max_overflow=80, pool_size=100, pool_recycle=3600,
     isolation_level="AUTOCOMMIT"
 )
-db = engine.connect()
+# db = engine.connect()
+db = None
