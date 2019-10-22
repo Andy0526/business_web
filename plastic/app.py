@@ -9,11 +9,11 @@ blueprints = [
 
     # api
     'plastic.views.home:bp',
+    'plastic.views.api.info:bp',
     'plastic.views.api.products:bp',
-    'plastic.views.api.news:bp',
     'plastic.views.api.devices:bp',
     'plastic.views.api.support:bp',
-    'plastic.views.api.info:bp',
+    'plastic.views.api.contact:bp',
 
 ]
 
