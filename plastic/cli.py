@@ -5,10 +5,11 @@ from __future__ import absolute_import
 
 from flask_migrate import MigrateCommand
 from flask_script import Manager
-from gunicorn.app.wsgiapp import WSGIApplication
 
 from plastic.libs.db.store import db
 from .wsgi import app
+
+# from gunicorn.app.wsgiapp import WSGIApplication
 
 manager = Manager(app)
 
@@ -28,21 +29,22 @@ def runserver(host=None, port=None, workers=None):
     port = port or app.config.get('HTTP_PORT') or 5000
     workers = workers or app.config.get('HTTP_WORKERS') or 1
     use_evalex = app.config.get('USE_EVALEX', app.debug)
+    app.run(host, int(port), use_evalex=use_evalex)
 
-    if app.debug:
-        app.run(host, int(port), use_evalex=use_evalex)
-    else:
-        gunicorn = WSGIApplication()
-        gunicorn.load_wsgiapp = lambda: app
-        gunicorn.cfg.set('bind', '%s:%s' % (host, port))
-        gunicorn.cfg.set('workers', workers)
-        gunicorn.cfg.set('pidfile', None)
-        gunicorn.cfg.set('worker_class', 'gunicorn.workers.ggevent.GeventWorker')
-        gunicorn.cfg.set('accesslog', '-')
-        gunicorn.cfg.set('errorlog', '-')
-        gunicorn.cfg.set('timeout', 300)
-        gunicorn.chdir()
-        gunicorn.run()
+    # if app.debug:
+    #     app.run(host, int(port), use_evalex=use_evalex)
+    # else:
+    #     gunicorn = WSGIApplication()
+    #     gunicorn.load_wsgiapp = lambda: app
+    #     gunicorn.cfg.set('bind', '%s:%s' % (host, port))
+    #     gunicorn.cfg.set('workers', workers)
+    #     gunicorn.cfg.set('pidfile', None)
+    #     gunicorn.cfg.set('worker_class', 'gunicorn.workers.ggevent.GeventWorker')
+    #     gunicorn.cfg.set('accesslog', '-')
+    #     gunicorn.cfg.set('errorlog', '-')
+    #     gunicorn.cfg.set('timeout', 300)
+    #     gunicorn.chdir()
+    #     gunicorn.run()
 
 
 def main():
