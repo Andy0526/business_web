@@ -4,10 +4,13 @@
 
 <link type="text/css" rel="stylesheet" href="{{ url_for("static",filename='css/bootstrap.min.css') }}">
 <link type="text/css" rel="stylesheet" href="{{ url_for("static",filename='css/bootstrap-theme.min.css') }}">
+<link type="text/css" rel="stylesheet" href="{{ url_for("static",filename='css/swiper.min.css') }}">
+<link type="text/css" rel="stylesheet" href="{{ url_for("static",filename='css/css.css') }}">
 <!-- jQuery在bootstrap.min.js -->
 <script src="{{ url_for("static",filename='js/jquery-1.12.1.min.js') }}"></script>
 <script src="{{ url_for("static",filename='js/bootstrap.min.js') }}"></script>
 <script src="{{ url_for("static",filename='js/jquery.cookie.js') }}"></script>
+<script src="{{ url_for("static",filename='js/swiper.min.js') }}"></script>
 
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
@@ -92,4 +95,7 @@
 {% endblock %}
 
 {% block footer %}
+<div class="layout_footer">
+<P>鲁</P>
+</div>
 {% endblock %}

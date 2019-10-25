@@ -3,7 +3,62 @@
 {% block title %} 企业文化 {% endblock %}
 
 {% block body %}
-
-    <div class="container" style="margin-top: 70px;">
+<div class="container" style="margin-top: 70px;">
+    <div class="jumbotron">
+        <div class="swiper-container">
+            <div class="swiper-wrapper">
+                <div class="swiper-slide"><img width="100%" src="{{ url_for("static",filename='img/Capture1.PNG') }}" /></div>
+                <div class="swiper-slide"><img width="100%" src="{{ url_for("static",filename='img/bg.jpg') }}" /></div>
+                <div class="swiper-slide"><img width="100%" src="{{ url_for("static",filename='img/dl.jpg') }}" /></div>
+                <div class="swiper-slide"><img width="100%" src="{{ url_for("static",filename='img/Capture1.PNG') }}" /></div>
+                <div class="swiper-slide"><img width="100%" src="{{ url_for("static",filename='img/Capture1.PNG') }}" /></div>
+            </div>
+        </div>
+        <div class="col-md-3 left">
+            <ul class=""><span style="font-size: 25px;">企业文化</span>
+                <li><a href="#" class="list-group-item list-group-item-heading list-group-item-info">公司简介</a></li>
+                <li><a href="#" class="list-group-item list-group-item-heading list-group-item-info">业务介绍</a></li>
+            </ul>
+        </div>
+        <!-- <div class="col-md-9 right">
+                <p style="font-size: 30px;"> 公司简介</p>
+                <p class="lead"> 本公司成立于成立于成立于成立于成立于</p>
+                <p class="lead"> 本公司成立于成立于成立于成立于成立于成立于成立于成立于成立于成立于</p>
+                <p class="lead"> 本公司成立于成立于成立于成成立于成立于成立于</p>
+                <p class="lead"> 本公司成立于成立于成立于成立于成立于成立于成立于成立于成立于成立于</p>
+                <p class="lead"> 本公司成立于</p>
+                <p class="lead"> 本公司成立于成立于成立于成立于成立于成立于成于成立于成立于成立于</p>
+                <p class="lead"> 本公司成立于成立于成立于成立于成立于成立于成立于成立于成立于成立于</p>
+                <p class="lead"> 本公司成立于成立于成立于成立于成立于成立于成立于成于成立于成立于</p>
+                <p class="lead"> 本公司成立于成立于成立于成立于成立于成立于成立于成立于成立于成立于</p>
+                <p class="lead"> 本公司成立于成立于成立于成立于成立于成立于成立于成立于成立于成立于</p>
+        </div> -->
+        <div class="col-md-3 right">
+            <div class="detail_image"><img width="100%" src="{{ url_for("static",filename='img/bg.jpg') }}"></div>
+            <div class="detail_image"><img width="100%" src="{{ url_for("static",filename='img/bg.jpg') }}"></div>
+            <div class="detail_image"><img width="100%" src="{{ url_for("static",filename='img/bg.jpg') }}"></div>
+        </div>
+        <div class="col-md-3 right">
+            <div class="detail_image"><img width="100%" src="{{ url_for("static",filename='img/dl.jpg') }}"></div>
+            <div class="detail_image"><img width="100%" src="{{ url_for("static",filename='img/dl.jpg') }}"></div>
+            <div class="detail_image"><img width="100%" src="{{ url_for("static",filename='img/dl.jpg') }}"></div>
+        </div>
+        <div class="col-md-3 right">
+            <div class="detail_image"><img width="100%" src="{{ url_for("static",filename='img/bg.jpg') }}"></div>
+            <div class="detail_image"><img width="100%" src="{{ url_for("static",filename='img/bg.jpg') }}"></div>
+            <div class="detail_image"><img width="100%" src="{{ url_for("static",filename='img/bg.jpg') }}"></div>
+        </div>
     </div>
+</div>
+<script>
+    var mySwiper = new Swiper('.swiper-container', {
+        loop: true, // 循环模式选项
+        autoplay: true,
+        // 如果需要滚动条
+        scrollbar: {
+            el: '.swiper-scrollbar',
+            hide: true
+        }
+    }) 
+</script>
 {% endblock %}
