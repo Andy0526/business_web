@@ -1,11 +1,11 @@
 <!DOCTYPE html>
 
-<title>{% block title %} 塑料厂 {% endblock %} </title>
+<title>{% block title %} 广恩达 {% endblock %} </title>
 
 <link type="text/css" rel="stylesheet" href="{{ url_for("static",filename='css/bootstrap.min.css') }}">
 <link type="text/css" rel="stylesheet" href="{{ url_for("static",filename='css/bootstrap-theme.min.css') }}">
 <link type="text/css" rel="stylesheet" href="{{ url_for("static",filename='css/swiper.min.css') }}">
-<link type="text/css" rel="stylesheet" href="{{ url_for("static",filename='css/css.css') }}">
+<link type="text/css" rel="stylesheet" href="{{ url_for("static",filename='css/basic.css') }}">
 <!-- jQuery在bootstrap.min.js -->
 <script src="{{ url_for("static",filename='js/jquery-1.12.1.min.js') }}"></script>
 <script src="{{ url_for("static",filename='js/bootstrap.min.js') }}"></script>
@@ -21,7 +21,7 @@
         <div class="container">
             <div id="navbar" class="navbar-collapse collapse">
                 <a class="navbar-brand" href="/">
-                    <p style="font-weight: 900;color:white;float: left">Plastic Bag Business</p>
+                    <p style="font-weight: 900;color:white;float: left">烟台广恩达包装材料有限公司</p>
                 </a>
                 <ul class="nav navbar-nav">
                     <li id="navbar_home"><a href="/home">首页</a></li>
@@ -95,7 +95,7 @@
 {% endblock %}
 
 {% block footer %}
-<div class="layout_footer">
-<P>鲁</P>
-</div>
+    <footer>
+        <P>烟台广恩达包装材料有限公司</P>
+    </footer>
 {% endblock %}
