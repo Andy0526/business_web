@@ -3,40 +3,222 @@
 {% block title %} 产品系列 {% endblock %}
 
 {% block body %}
-    <div class="container" style="margin-top: 70px">
-        <div class="col-md-3 left">
-            <ul class="qw"><span style="font-size: 25px;">产品介绍</span>
-                <li><a href="#" id="" class="list-group-item list-group-item-heading list-group-item-info">垃圾袋</a></li>
-                <li><a href="#" id="" class="list-group-item list-group-item-heading list-group-item-info">食品袋</a></li>
-                <li><a href="#" id="" class="list-group-item list-group-item-heading list-group-item-info">打孔水切袋</a></li>
-            </ul>
-        </div>
-        <span id="product1">
-            <div class="col-md-3 right">
-                <div class="detail_image"><img width="100%" height="200px" src="{{ url_for("static",filename='img/车间1.jpg') }}" alt=""></div>
-                <div class="detail_image"><img width="100%" height="200px" src="{{ url_for("static",filename='img/车间4.jpg') }}"></div>
-                <div class="detail_image"><img width="100%" height="200px" src="{{ url_for("static",filename='img/车间7.jpg') }}"></div>
-            </div>
-            <div class="col-md-3 right">
-                <div class="detail_image"><img width="100%" height="200px" src="{{ url_for("static",filename='img/车间2.jpg') }}"></div>
-                <div class="detail_image"><img width="100%" height="200px" src="{{ url_for("static",filename='img/车间5.jpg') }}"></div>
-            </div>
-            <div class="col-md-3 right">
-                <div class="detail_image"><img width="100%" height="200px" src="{{ url_for("static",filename='img/车间3.jpg') }}"></div>
-                <div class="detail_image"><img width="100%" height="200px" src="{{ url_for("static",filename='img/车间6.jpg') }}"></div>
-            </div>
-        </span>
-        <span id="product2" style="display: none;">
-            <div class="col-md-3 right">
-                <div class="detail_image"><img width="100%" height="200px" src="{{ url_for("static",filename='img/厂房1.jpg') }}" alt=""></div>
-            </div>
-            <div class="col-md-3 right">
-                <div class="detail_image"><img width="100%" height="200px" src="{{ url_for("static",filename='img/厂房2.jpg') }}"></div>
-            </div>
-            <div class="col-md-3 right">
-            </div>
-        </span>
+<div class="container" style="margin-top: 70px">
+    <img src="{{ url_for("static",filename='img/bg.jpg') }}" style="max-width:100%;height:350px;margin: 0 auto">
+    <div class="col-md-3 left">
+        <ul class="qw"><span style="font-size: 25px;">产品介绍</span>
+            <li><a href="#" id="1" class="list-group-item list-group-item-heading list-group-item-info">垃圾袋</a></li>
+            <li><a href="#" id="2" class="list-group-item list-group-item-heading list-group-item-info">彩盒食品袋</a></li>
+            <li><a href="#" id="3" class="list-group-item list-group-item-heading list-group-item-info">打孔水切袋</a></li>
+            <li><a href="#" id="4" class="list-group-item list-group-item-heading list-group-item-info">规格袋</a></li>
+            <li><a href="#" id="5" class="list-group-item list-group-item-heading list-group-item-info">湿巾</a></li>
+        </ul>
     </div>
-
-
+    <div class="col-md-9">
+    <span id="product1" class="prod">
+        <div class="col-md-4 right">
+            <div class="detail_image"><img width="100%" height="200px" name="ljd_1"
+                    src="{{ url_for("static",filename='img/prod/ljd_1.jpg') }}" alt=""></div>
+        </div>
+        <div class="col-md-4 right">
+            <div class="detail_image"><img width="100%" height="200px"
+                    src="{{ url_for("static",filename='img/prod/ljd_2.jpg') }}" alt=""></div>
+        </div>
+        <div class="col-md-4 right">
+            <div class="detail_image"><img width="100%" height="200px"
+                    src="{{ url_for("static",filename='img/prod/ljd_3.jpg') }}" alt=""></div>
+        </div>
+        <div class="col-md-4 right">
+            <div class="detail_image"><img width="100%" height="200px" name="ljd_4"
+                    src="{{ url_for("static",filename='img/prod/ljd_4.jpg') }}" alt=""></div>
+        </div>
+        <div class="col-md-4 right">
+            <div class="detail_image"><img width="100%" height="200px" name="ljd_5"
+                    src="{{ url_for("static",filename='img/prod/ljd_5.jpg') }}" alt=""></div>
+        </div>
+        <div class="col-md-4 right">
+            <div class="detail_image"><img width="100%" height="200px" name="ljd_6"
+                    src="{{ url_for("static",filename='img/prod/ljd_6.jpg') }}" alt=""></div>
+        </div>
+        <div class="col-md-4 right">
+            <div class="detail_image"><img width="100%" height="200px" name="ljd_7"
+                    src="{{ url_for("static",filename='img/prod/ljd_7.jpg') }}" alt=""></div>
+        </div>
+        <div class="col-md-4 right">
+            <div class="detail_image"><img width="100%" height="200px" name="ljd_8"
+                    src="{{ url_for("static",filename='img/prod/ljd_8.jpg') }}" alt=""></div>
+        </div>
+        <div class="col-md-4 right">
+            <div class="detail_image"><img width="100%" height="200px" name="ljd_9"
+                    src="{{ url_for("static",filename='img/prod/ljd_9.jpg') }}" alt=""></div>
+        </div>
+        <div class="col-md-4 right">
+            <div class="detail_image"><img width="100%" height="200px" name="ljd_10"
+                    src="{{ url_for("static",filename='img/prod/ljd_10.jpg') }}" alt=""></div>
+        </div>
+        <div class="col-md-4 right">
+            <div class="detail_image"><img width="100%" height="200px" name="ljd_11"
+                    src="{{ url_for("static",filename='img/prod/ljd_11.jpg') }}" alt=""></div>
+        </div>
+        <div class="col-md-4 right">
+            <div class="detail_image"><img width="100%" height="200px" name="ljd_12"
+                    src="{{ url_for("static",filename='img/prod/ljd_12.jpg') }}" alt=""></div>
+        </div>
+        <div class="col-md-4 right">
+            <div class="detail_image"><img width="100%" height="200px" name="ljd_13"
+                    src="{{ url_for("static",filename='img/prod/ljd_13.jpg') }}" alt=""></div>
+        </div>
+        <div class="col-md-4 right">
+            <div class="detail_image"><img width="100%" height="200px" name="ljd_14"
+                    src="{{ url_for("static",filename='img/prod/ljd_14.jpg') }}" alt=""></div>
+        </div>
+        <div class="col-md-4 right">
+            <div class="detail_image"><img width="100%" height="200px" name="ljd_15"
+                    src="{{ url_for("static",filename='img/prod/ljd_15.jpg') }}" alt=""></div>
+        </div>
+    </span>
+    <span id="product2" class="prod" style="display: none;">
+        <div class="col-md-4 right">
+            <div class="detail_image"><img width="100%" height="200px"
+                    src="{{ url_for("static",filename='img/prod/ch_1.jpg') }}" alt=""></div>
+        </div>
+        <div class="col-md-4 right">
+            <div class="detail_image"><img width="100%" height="200px"
+                    src="{{ url_for("static",filename='img/prod/ch_2.jpg') }}" alt=""></div>
+        </div>
+        <div class="col-md-4 right">
+            <div class="detail_image"><img width="100%" height="200px"
+                    src="{{ url_for("static",filename='img/prod/ch_3.jpg') }}" alt=""></div>
+        </div>
+        <div class="col-md-4 right">
+            <div class="detail_image"><img width="100%" height="200px"
+                    src="{{ url_for("static",filename='img/prod/ch_4.jpg') }}" alt=""></div>
+        </div>
+        <div class="col-md-4 right">
+            <div class="detail_image"><img width="100%" height="200px"
+                    src="{{ url_for("static",filename='img/prod/ch_5.jpg') }}" alt=""></div>
+        </div>
+        <div class="col-md-4 right">
+            <div class="detail_image"><img width="100%" height="200px"
+                    src="{{ url_for("static",filename='img/prod/ch_6.jpg') }}" alt=""></div>
+        </div>
+        <div class="col-md-4 right">
+            <div class="detail_image"><img width="100%" height="200px"
+                    src="{{ url_for("static",filename='img/prod/ch_7.jpg') }}" alt=""></div>
+        </div>
+    </span>
+    <span id="product3" class="prod" style="display: none;">
+        <div class="col-md-4 right">
+            <div class="detail_image"><img width="100%" height="200px"
+                    src="{{ url_for("static",filename='img/prod/dkqsd_1.jpg') }}" alt=""></div>
+        </div>
+        <div class="col-md-4 right">
+            <div class="detail_image"><img width="100%" height="200px"
+                    src="{{ url_for("static",filename='img/prod/dkqsd_2.jpg') }}" alt=""></div>
+        </div>
+        <div class="col-md-4 right">
+            <div class="detail_image"><img width="100%" height="200px"
+                    src="{{ url_for("static",filename='img/prod/dkqsd_3.jpg') }}" alt=""></div>
+        </div>
+        <div class="col-md-4 right">
+            <div class="detail_image"><img width="100%" height="200px"
+                    src="{{ url_for("static",filename='img/prod/dkqsd_4.jpg') }}" alt=""></div>
+        </div>
+        <div class="col-md-4 right">
+            <div class="detail_image"><img width="100%" height="200px"
+                    src="{{ url_for("static",filename='img/prod/dkqsd_5.jpg') }}" alt=""></div>
+        </div>
+    </span>
+    <span id="product4" class="prod" style="display: none;">
+        <div class="col-md-4 right">
+            <div class="detail_image"><img width="100%" height="200px"
+                    src="{{ url_for("static",filename='img/prod/bdd_1.jpg') }}" alt=""></div>
+        </div>
+        <div class="col-md-4 right">
+            <div class="detail_image"><img width="100%" height="200px"
+                    src="{{ url_for("static",filename='img/prod/bdd_2.jpg') }}" alt=""></div>
+        </div>
+        <div class="col-md-4 right">
+            <div class="detail_image"><img width="100%" height="200px"
+                    src="{{ url_for("static",filename='img/prod/bdd_3.jpg') }}" alt=""></div>
+        </div>
+        <div class="col-md-4 right">
+            <div class="detail_image"><img width="100%" height="200px"
+                    src="{{ url_for("static",filename='img/prod/spd_1.jpg') }}" alt="">
+            </div>
+        </div>
+        <div class="col-md-4 right">
+            <div class="detail_image"><img width="100%" height="200px"
+                    src="{{ url_for("static",filename='img/prod/spd_2.jpg') }}" alt="">
+            </div>
+        </div>
+        <div class="col-md-4 right">
+            <div class="detail_image"><img width="100%" height="200px"
+                    src="{{ url_for("static",filename='img/prod/spd_3.jpg') }}" alt="">
+            </div>
+        </div>
+        <div class="col-md-4 right">
+            <div class="detail_image"><img width="100%" height="200px"
+                    src="{{ url_for("static",filename='img/prod/spd_4.jpg') }}" alt="">
+            </div>
+        </div>
+        <div class="col-md-4 right">
+            <div class="detail_image"><img width="100%" height="200px"
+                    src="{{ url_for("static",filename='img/prod/spd_5.jpg') }}" alt="">
+            </div>
+        </div>
+        <div class="col-md-4 right">
+            <div class="detail_image"><img width="100%" height="200px"
+                    src="{{ url_for("static",filename='img/prod/spd_6.jpg') }}" alt="">
+            </div>
+        </div>
+        <div class="col-md-4 right">
+            <div class="detail_image"><img width="100%" height="200px"
+                    src="{{ url_for("static",filename='img/prod/spd_7.jpg') }}" alt="">
+            </div>
+        </div>
+    
+    </span>
+    <span id="product5" class="prod" style="display: none;">
+        <div class="col-md-4 right">
+            <div class="detail_image"><img width="100%" height="200px"
+                    src="{{ url_for("static",filename='img/prod/sj_1.jpg') }}" alt=""></div>
+        </div>
+        <div class="col-md-4 right">
+            <div class="detail_image"><img width="100%" height="200px"
+                    src="{{ url_for("static",filename='img/prod/sj_2.jpg') }}" alt=""></div>
+        </div>
+        <div class="col-md-4 right">
+            <div class="detail_image"><img width="100%" height="200px"
+                    src="{{ url_for("static",filename='img/prod/sj_3.jpg') }}" alt=""></div>
+        </div>
+        <div class="col-md-4 right">
+            <div class="detail_image"><img width="100%" height="200px"
+                    src="{{ url_for("static",filename='img/prod/sj_4.jpg') }}" alt=""></div>
+        </div>
+    </span>
+</div>
+</div>
+<div class="mask"></div>
+<div class="detail">
+    <span></span>
+    <img id="qqq" width="400px" height="400px" src="{{ url_for("static",filename='img/prod/sj_2.jpg') }}" />
+</div>
+<script>
+    $(".qw li a").click(function () {
+        var type = $(this).attr('id');
+        $('.prod').hide();
+        $('#product' + type).show();
+    });
+    $(".prod div").click(openBag)
+    $(".mask").click(closeBag);
+    function openBag() {
+        var src = $(this).children('img').attr('src');
+        $('.detail').children('img').attr('src',src);
+        $('.mask,.detail').show();
+    }
+    function closeBag() {
+        $('.mask,.detail').hide();
+    }
+</script>
 {% endblock %}
