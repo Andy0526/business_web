@@ -203,14 +203,22 @@
 <div class="mask"></div>
 <div class="detail">
     <span></span>
-    <img id="qqq" width="400px" height="400px" src="{{ url_for("static",filename='img/prod/sj_2.jpg') }}" />
+    <img width="400px" height="400px" src="{{ url_for("static",filename='img/prod/sj_2.jpg') }}" />
 </div>
 <script>
+    $().ready(function() {
+        var type = {{item_id}};
+        prodShow(type);
+    });
     $(".qw li a").click(function () {
         var type = $(this).attr('id');
+        prodShow(type);
+    });
+    function prodShow(type)
+    {
         $('.prod').hide();
         $('#product' + type).show();
-    });
+    }
     $(".prod div").click(openBag)
     $(".mask").click(closeBag);
     function openBag() {
