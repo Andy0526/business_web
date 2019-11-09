@@ -4,17 +4,16 @@
 
 
 {% block body %}
-
-    <div class="container-fluid" style="width:100%;padding:0 0 0 0px;">
-        <div class="col-md-12" style="height: 500px;">
+<div class="container-fluid" style="width:100%;padding:0 0 0 0px;">
+    <div class="col-md-12" style="height: 500px; padding-left: 0;padding-right: 0;">
         <div class="swiper-container">
             <div class="swiper-wrapper">
                 <div class="swiper-slide" style="position: relative;">
-                    <img width="100%" height="500px" src="{{ url_for("static",filename='img/bg.jpg') }}" />
+                    <img width="100%" height="500px" src="{{ url_for("static",filename='img/盐湖.jpg') }}" />
                     <p style="position :absolute; left:30%; top:30%;font-size:45px;">质量求生存，开拓谋发展</p>
                 </div>
                 <div class="swiper-slide" style="position: relative;">
-                    <img width="100%" height="500px" src="{{ url_for("static",filename='img/盐湖.jpg') }}" />
+                    <img width="100%" height="500px" src="{{ url_for("static",filename='img/bg.jpg') }}" />
                     <p style="position :absolute; left:30%; top:30%;font-size:45px;">质量求生存，开拓谋发展</p>
                 </div>
                 <div class="swiper-slide" style="position: relative;">
@@ -24,19 +23,19 @@
             </div>
         </div>
     </div>
-        <div class="jumbotron" style="margin-top: 0px;padding-top: 5px;">
-            <h1>烟台广恩达包装材料有限公司</h1>
-        </div>
+    <div class="jumbotron" style="margin-top: 0px;padding-top: 5px;">
+        <h1>烟台广恩达包装材料有限公司</h1>
     </div>
-    <script>
-        var mySwiper = new Swiper('.swiper-container', {
-            loop: true, // 循环模式选项
-            autoplay: true,
-            // 如果需要滚动条
-            scrollbar: {
-                el: '.swiper-scrollbar',
-                hide: true
-            }
-        }) 
-    </script>
+</div>
+<script>
+    var mySwiper = new Swiper('.swiper-container', {
+        loop: true, // 循环模式选项
+        autoplay: true,
+        // 如果需要滚动条
+        scrollbar: {
+            el: '.swiper-scrollbar',
+            hide: true
+        }
+    }) 
+</script>
 {% endblock %}
