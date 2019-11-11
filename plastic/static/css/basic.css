@@ -1,5 +1,5 @@
 footer {
-    /* position: absolute; */
+    position: fixed;
     bottom: 0;
     text-align: center;
     width: 100%;
@@ -27,6 +27,7 @@ footer p {
 
 .right {
     padding-top: 50px;
+    padding-bottom: 120px;
 }
 
 .detail_image {

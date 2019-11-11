@@ -6,5 +6,6 @@ bp = Blueprint('support', __name__, url_prefix='')
 
 
 @bp.route('/support', methods=['GET'])
-def gets_nav4():
-    return render_template('support.html')
+@bp.route('/support/<int:id>', methods=['GET'])
+def get_support(id=1):
+    return render_template('support.html',id=id)
