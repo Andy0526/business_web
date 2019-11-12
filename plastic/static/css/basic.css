@@ -1,5 +1,5 @@
 footer {
-    position: fixed;
+    position: relative;
     bottom: 0;
     text-align: center;
     width: 100%;
@@ -27,11 +27,15 @@ footer p {
 
 .right {
     padding-top: 50px;
-    padding-bottom: 120px;
+    /* padding-bottom: 120px; */
 }
 
-.detail_image {
+.detail_image{
     padding-top: 10px;
+}
+
+.page_menu li{
+    list-style-type:none;
 }
 
 .mask
