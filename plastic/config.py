@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
-DEBUG = True
-HTTP_PORT = 5000
+DEBUG = False
+HTTP_PORT = 80
 SECRET_KEY = "business_web-secret"
 SQLALCHEMY_TRACK_MODIFICATIONS = False
 SESSION_COOKIE_HTTPONLY = False

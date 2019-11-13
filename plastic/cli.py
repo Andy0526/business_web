@@ -9,8 +9,6 @@ from flask_script import Manager
 from plastic.libs.db.store import db
 from .wsgi import app
 
-# from gunicorn.app.wsgiapp import WSGIApplication
-
 manager = Manager(app)
 
 manager.add_command('db', MigrateCommand)
@@ -31,20 +29,21 @@ def runserver(host=None, port=None, workers=None):
     use_evalex = app.config.get('USE_EVALEX', app.debug)
     app.run(host, int(port), use_evalex=use_evalex)
 
-    # if app.debug:
-    #     app.run(host, int(port), use_evalex=use_evalex)
-    # else:
-    #     gunicorn = WSGIApplication()
-    #     gunicorn.load_wsgiapp = lambda: app
-    #     gunicorn.cfg.set('bind', '%s:%s' % (host, port))
-    #     gunicorn.cfg.set('workers', workers)
-    #     gunicorn.cfg.set('pidfile', None)
-    #     gunicorn.cfg.set('worker_class', 'gunicorn.workers.ggevent.GeventWorker')
-    #     gunicorn.cfg.set('accesslog', '-')
-    #     gunicorn.cfg.set('errorlog', '-')
-    #     gunicorn.cfg.set('timeout', 300)
-    #     gunicorn.chdir()
-    #     gunicorn.run()
+    if app.debug:
+        app.run(host, int(port), use_evalex=use_evalex)
+    else:
+        from gunicorn.app.wsgiapp import WSGIApplication
+        gunicorn = WSGIApplication()
+        gunicorn.load_wsgiapp = lambda: app
+        gunicorn.cfg.set('bind', '%s:%s' % (host, port))
+        gunicorn.cfg.set('workers', workers)
+        gunicorn.cfg.set('pidfile', None)
+        gunicorn.cfg.set('worker_class', 'gunicorn.workers.ggevent.GeventWorker')
+        gunicorn.cfg.set('accesslog', '-')
+        gunicorn.cfg.set('errorlog', '-')
+        gunicorn.cfg.set('timeout', 300)
+        gunicorn.chdir()
+        gunicorn.run()
 
 
 def main():
