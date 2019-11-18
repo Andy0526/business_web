@@ -7,5 +7,5 @@ Flask-Migrate
 # psycopg2
 SQLAlchemy
 
-gevent
-gunicorn
+# gevent
+# gunicorn
