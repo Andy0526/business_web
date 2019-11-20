@@ -3,14 +3,16 @@ footer {
     bottom: 0;
     text-align: center;
     width: 100%;
-    height: 100px;
+    height: 140px;
     background-color: #3c3c3c;
     color: white;
     margin-top: 20px;
 }
-
 footer p {
     text-align: center;
+}
+footer a {
+    color: #fff !important;
 }
 .dropdown ul {
     background-color: #6b6b6b;
